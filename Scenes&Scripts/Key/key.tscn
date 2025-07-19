@@ -1,0 +1,63 @@
+[gd_scene load_steps=12 format=3 uid="uid://brm5uchn5sauw"]
+
+[ext_resource type="Texture2D" uid="uid://bhug06ui5xyfn" path="res://Sprites/Key/key01.png" id="1_irnog"]
+[ext_resource type="Script" uid="uid://pdb4s2trt4xn" path="res://Scenes&Scripts/Key/key.gd" id="1_plmwr"]
+[ext_resource type="Texture2D" uid="uid://bwa2j2j3afsc0" path="res://Sprites/Key/key02.png" id="2_plmwr"]
+[ext_resource type="Texture2D" uid="uid://bw5vxd1eqg574" path="res://Sprites/Key/key03.png" id="3_unbx1"]
+[ext_resource type="Texture2D" uid="uid://c013aknvyab0t" path="res://Sprites/Key/key04.png" id="4_o08m4"]
+[ext_resource type="Texture2D" uid="uid://bbwac8x46dp8h" path="res://Sprites/Key/key05.png" id="5_eg3jd"]
+[ext_resource type="Texture2D" uid="uid://ccvcm2kt1lw3c" path="res://Sprites/Key/key06.png" id="6_itajv"]
+[ext_resource type="Texture2D" uid="uid://dedhn3iohgn2e" path="res://Sprites/Key/key07.png" id="7_xgah7"]
+[ext_resource type="Texture2D" uid="uid://pwiuo53o5ina" path="res://Sprites/Key/key08.png" id="8_dlfkf"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qay1x"]
+radius = 6.0
+height = 18.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pi5mp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_irnog")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_plmwr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_unbx1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_o08m4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_eg3jd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_itajv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_xgah7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_dlfkf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]
+
+[node name="Key" type="Area2D" groups=["pickup"]]
+texture_filter = 1
+collision_layer = 128
+collision_mask = 128
+script = ExtResource("1_plmwr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_qay1x")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_pi5mp")
+autoplay = "default"
+frame_progress = 0.946642

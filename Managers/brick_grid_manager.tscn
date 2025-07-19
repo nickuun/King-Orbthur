@@ -1,0 +1,16 @@
+[gd_scene load_steps=6 format=3 uid="uid://dikdtfgtdq853"]
+
+[ext_resource type="Script" uid="uid://bxpwud1bel1iv" path="res://Scenes&Scripts/brick_grid_manager.gd" id="1_k4qtw"]
+[ext_resource type="PackedScene" uid="uid://xy7grwjb4w4o" path="res://Bricks/brick.tscn" id="2_2skns"]
+[ext_resource type="PackedScene" uid="uid://c3rgpgeru5032" path="res://Scenes&Scripts/Chest/chest.tscn" id="3_8cfnf"]
+[ext_resource type="PackedScene" uid="uid://bj7kpvnfvl28x" path="res://Scenes&Scripts/Doors/LockedDoor/locked_door_column.tscn" id="4_jyeae"]
+[ext_resource type="PackedScene" uid="uid://brm5uchn5sauw" path="res://Scenes&Scripts/Key/key.tscn" id="5_jvq76"]
+
+[node name="BrickGridManager" type="Node2D"]
+script = ExtResource("1_k4qtw")
+bricks = ExtResource("2_2skns")
+chest_bricks = ExtResource("3_8cfnf")
+locked_door_scene = ExtResource("4_jyeae")
+key_scene = ExtResource("5_jvq76")
+
+[node name="LevelContainer" type="Node2D" parent="."]

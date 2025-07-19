@@ -1,0 +1,98 @@
+[gd_scene load_steps=12 format=3 uid="uid://chnfkcosmplfx"]
+
+[ext_resource type="Texture2D" uid="uid://bu1xm7xmqhs4v" path="res://Sprites/camelot_ [version 1.0]/camelot_ [version 1.0]/excalibur_.png" id="1_vcm4g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8gd5u"]
+atlas = ExtResource("1_vcm4g")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xr33b"]
+atlas = ExtResource("1_vcm4g")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ms0e"]
+atlas = ExtResource("1_vcm4g")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gmybd"]
+atlas = ExtResource("1_vcm4g")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_baxth"]
+atlas = ExtResource("1_vcm4g")
+region = Rect2(96, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gluec"]
+atlas = ExtResource("1_vcm4g")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dl01q"]
+atlas = ExtResource("1_vcm4g")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tim8u"]
+atlas = ExtResource("1_vcm4g")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cp513"]
+atlas = ExtResource("1_vcm4g")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b0dqd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8gd5u")
+}],
+"loop": true,
+"name": &"Default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xr33b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ms0e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gmybd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_baxth")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8gd5u")
+}],
+"loop": false,
+"name": &"SwingLeft",
+"speed": 16.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gluec")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dl01q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tim8u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cp513")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8gd5u")
+}],
+"loop": false,
+"name": &"SwingRight",
+"speed": 16.0
+}]
+
+[node name="Sword" type="Node2D"]
+texture_filter = 1
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -13)
+sprite_frames = SubResource("SpriteFrames_b0dqd")
+animation = &"Default"

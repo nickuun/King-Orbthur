@@ -1,0 +1,179 @@
+[gd_scene load_steps=17 format=3 uid="uid://dpqkxlaa6c4o3"]
+
+[ext_resource type="Script" uid="uid://b054o1j18drrq" path="res://Scenes&Scripts/World/world.gd" id="1_1eef5"]
+[ext_resource type="PackedScene" uid="uid://ni1fdvifit6o" path="res://Scenes&Scripts/Player/player.tscn" id="1_3mgr3"]
+[ext_resource type="PackedScene" uid="uid://c62fikdpk3nl6" path="res://Scenes&Scripts/Ball/ball.tscn" id="2_lo3b5"]
+[ext_resource type="Script" uid="uid://p04n620wdjmb" path="res://Scenes&Scripts/Ball/BallStartPos/ball_start_pos.gd" id="3_cehqr"]
+[ext_resource type="PackedScene" uid="uid://b3e0j2mnr5tpy" path="res://Scenes&Scripts/Wall/wall.tscn" id="3_senvn"]
+[ext_resource type="PackedScene" uid="uid://bpm76d0d2pyqt" path="res://Scenes&Scripts/Wall/playerboundry.tscn" id="5_qhwu4"]
+[ext_resource type="PackedScene" uid="uid://dikdtfgtdq853" path="res://Managers/brick_grid_manager.tscn" id="5_r6fjf"]
+[ext_resource type="Texture2D" uid="uid://c83wg2su386px" path="res://Sprites/Walls/EdgeContainers/DottedLine.png" id="6_dfhr7"]
+[ext_resource type="Script" uid="uid://b014s4dhbqfjp" path="res://UI/score_label.gd" id="7_4r4ay"]
+[ext_resource type="FontFile" uid="uid://c8x1ul0g5boh8" path="res://Assets/Fonts/Kenney Mini.ttf" id="7_q0lgp"]
+[ext_resource type="PackedScene" uid="uid://by4di14icoly0" path="res://UI/lifebar.tscn" id="7_qhwu4"]
+[ext_resource type="PackedScene" uid="uid://gl0bfm437qih" path="res://Scenes&Scripts/Wall/freeze_area.tscn" id="7_u0km0"]
+[ext_resource type="PackedScene" uid="uid://df1s48lmtbsn1" path="res://Scenes&Scripts/Tilemaps/BaseTerrainTilemap.tscn" id="10_h8k3j"]
+[ext_resource type="Texture2D" uid="uid://swg7857q0bhs" path="res://Sprites/Coins/Coin Sheet.png" id="12_poia6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4r4ay"]
+radius = 14.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tsomi"]
+size = Vector2(20, 183)
+
+[node name="World" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_1eef5")
+
+[node name="BaseTerrainTilemap" parent="." instance=ExtResource("10_h8k3j")]
+
+[node name="EdgeContainers" type="Node2D" parent="." groups=["EdgeContainers"]]
+
+[node name="BallStartPos" type="Area2D" parent="EdgeContainers" groups=["BallStartPos"]]
+position = Vector2(83, 88)
+collision_layer = 256
+collision_mask = 2
+script = ExtResource("3_cehqr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EdgeContainers/BallStartPos"]
+shape = SubResource("CircleShape2D_4r4ay")
+
+[node name="Wall" parent="EdgeContainers" instance=ExtResource("3_senvn")]
+position = Vector2(0, -5)
+
+[node name="Wall2" parent="EdgeContainers" instance=ExtResource("3_senvn")]
+position = Vector2(2, 190)
+
+[node name="Wall3" parent="EdgeContainers" instance=ExtResource("3_senvn")]
+position = Vector2(322.5, 8)
+rotation = 1.57079
+
+[node name="Camera2D" type="Camera2D" parent="EdgeContainers"]
+position = Vector2(159, 92)
+
+[node name="BackWall" type="Area2D" parent="EdgeContainers"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EdgeContainers/BackWall"]
+position = Vector2(-13, 90)
+shape = SubResource("RectangleShape2D_tsomi")
+debug_color = Color(0.886326, 0.330618, 0, 0.42)
+
+[node name="PlayerBoundry" parent="EdgeContainers" instance=ExtResource("5_qhwu4")]
+position = Vector2(-73, 5)
+
+[node name="PlayerBoundry2" parent="EdgeContainers" instance=ExtResource("5_qhwu4")]
+position = Vector2(231, 179)
+rotation = 3.14159
+
+[node name="PlayerBoundry3" parent="EdgeContainers" instance=ExtResource("5_qhwu4")]
+position = Vector2(0, 243)
+rotation = 4.71238
+
+[node name="PlayerBoundry4" parent="EdgeContainers" groups=["MiddleBoundry"] instance=ExtResource("5_qhwu4")]
+position = Vector2(159, -61)
+rotation = 7.85397
+
+[node name="DottedLine2" type="Sprite2D" parent="EdgeContainers"]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(239, 179)
+texture = ExtResource("6_dfhr7")
+region_enabled = true
+region_rect = Rect2(0, 0, 160, 3)
+
+[node name="DottedLine3" type="Sprite2D" parent="EdgeContainers"]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(312.5, 91)
+rotation = 1.57079
+texture = ExtResource("6_dfhr7")
+region_enabled = true
+region_rect = Rect2(0, 0, 160, 3)
+
+[node name="DottedLine" type="Sprite2D" parent="EdgeContainers"]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(239, 5)
+texture = ExtResource("6_dfhr7")
+region_enabled = true
+region_rect = Rect2(0, 0, 160, 3)
+
+[node name="FreezeArea" parent="EdgeContainers" instance=ExtResource("7_u0km0")]
+
+[node name="Player" parent="." instance=ExtResource("1_3mgr3")]
+position = Vector2(42, 88)
+
+[node name="Ball" parent="." instance=ExtResource("2_lo3b5")]
+position = Vector2(83, 88)
+
+[node name="BrickGridManager" parent="." instance=ExtResource("5_r6fjf")]
+position = Vector2(301, 28)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Lifebar" parent="CanvasLayer" instance=ExtResource("7_qhwu4")]
+offset_left = 3.0
+offset_top = 5.0
+offset_right = 33.0
+offset_bottom = 13.0
+
+[node name="ScoreUI" type="Node" parent="CanvasLayer"]
+
+[node name="ScoreValue" type="Label" parent="CanvasLayer/ScoreUI" node_paths=PackedStringArray("score_label") groups=["ScoreLabel"]]
+modulate = Color(1, 1, 1, 0.517647)
+texture_filter = 1
+offset_left = 276.0
+offset_top = 169.0
+offset_right = 312.0
+offset_bottom = 182.0
+pivot_offset = Vector2(18, 8)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_q0lgp")
+theme_override_font_sizes/font_size = 8
+text = "100"
+horizontal_alignment = 1
+script = ExtResource("7_4r4ay")
+score_label = NodePath(".")
+metadata/_edit_use_anchors_ = true
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer/ScoreUI"]
+modulate = Color(1, 1, 1, 0.517647)
+texture_filter = 1
+offset_left = 252.0
+offset_top = 169.0
+offset_right = 288.0
+offset_bottom = 182.0
+pivot_offset = Vector2(18, 8)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_q0lgp")
+theme_override_font_sizes/font_size = 8
+text = "Score: "
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="CoinUI" type="Node" parent="CanvasLayer"]
+
+[node name="Coin" type="Sprite2D" parent="CanvasLayer/CoinUI"]
+texture_filter = 1
+position = Vector2(12, 174)
+texture = ExtResource("12_poia6")
+region_enabled = true
+region_rect = Rect2(3, 1, 10, 10)
+
+[node name="CoinLabel" type="Label" parent="CanvasLayer/CoinUI" groups=["CoinLabel"]]
+modulate = Color(0.968627, 0.462745, 0.133333, 1)
+texture_filter = 1
+offset_left = 18.0
+offset_top = 169.0
+offset_right = 37.0
+offset_bottom = 182.0
+pivot_offset = Vector2(18, 8)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_q0lgp")
+theme_override_font_sizes/font_size = 8
+text = "0"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[connection signal="body_exited" from="EdgeContainers/BallStartPos" to="Ball" method="_on_ball_start_pos_body_exited"]
+[connection signal="body_entered" from="EdgeContainers/BackWall" to="Ball" method="_on_back_wall_body_entered"]

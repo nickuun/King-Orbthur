@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bf32jq4f2uw7y"]
+
+[ext_resource type="Script" uid="uid://bbhabyc220sei" path="res://Scenes&Scripts/Tools/FloatingText/floating_text.gd" id="1_kqcsr"]
+[ext_resource type="FontFile" uid="uid://bjddxdhc0x2vt" path="res://Assets/Fonts/Kenney Future.ttf" id="1_odyd0"]
+
+[node name="FloatingText" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_kqcsr")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("1_odyd0")

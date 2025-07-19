@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=3 uid="uid://xegjltac8qmm"]
+
+[ext_resource type="Script" uid="uid://csikbw4edtgb2" path="res://Scenes&Scripts/Player/Dust/dust_trail.gd" id="1_ectlk"]
+[ext_resource type="Texture2D" uid="uid://bea5rcjbukmfl" path="res://Sprites/camelot_ [version 1.0]/camelot_ [version 1.0]/dust_.png" id="1_eo188"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ectlk"]
+atlas = ExtResource("1_eo188")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sr744"]
+atlas = ExtResource("1_eo188")
+region = Rect2(16, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wewgi"]
+atlas = ExtResource("1_eo188")
+region = Rect2(24, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_isokg"]
+atlas = ExtResource("1_eo188")
+region = Rect2(32, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5yurk"]
+atlas = ExtResource("1_eo188")
+region = Rect2(40, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_asntu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ectlk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sr744")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wewgi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_isokg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5yurk")
+}],
+"loop": false,
+"name": &"default",
+"speed": 9.0
+}]
+
+[node name="DustTrail" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_ectlk")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_asntu")
+autoplay = "default"
+frame = 4
+frame_progress = 1.0

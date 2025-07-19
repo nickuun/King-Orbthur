@@ -1,0 +1,142 @@
+[gd_scene load_steps=19 format=3 uid="uid://ni1fdvifit6o"]
+
+[ext_resource type="Texture2D" uid="uid://xac2cbttqn2v" path="res://Sprites/camelot_ [version 1.0]/camelot_ [version 1.0]/arthurPendragon_.png" id="1_i5wxm"]
+[ext_resource type="Script" uid="uid://c1rshh02kg0ip" path="res://Scenes&Scripts/Player/player.gd" id="1_y7hhy"]
+[ext_resource type="PackedScene" uid="uid://chnfkcosmplfx" path="res://Scenes&Scripts/Player/Sword/sword.tscn" id="2_endnh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dyp4l"]
+atlas = ExtResource("1_i5wxm")
+region = Rect2(0, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c7ob3"]
+atlas = ExtResource("1_i5wxm")
+region = Rect2(32, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_udk76"]
+atlas = ExtResource("1_i5wxm")
+region = Rect2(64, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bq281"]
+atlas = ExtResource("1_i5wxm")
+region = Rect2(96, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y7hhy"]
+atlas = ExtResource("1_i5wxm")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_endnh"]
+atlas = ExtResource("1_i5wxm")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xrpci"]
+atlas = ExtResource("1_i5wxm")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6rw8v"]
+atlas = ExtResource("1_i5wxm")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sbqqg"]
+atlas = ExtResource("1_i5wxm")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ox6o1"]
+atlas = ExtResource("1_i5wxm")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_is4q6"]
+atlas = ExtResource("1_i5wxm")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pcvr6"]
+atlas = ExtResource("1_i5wxm")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sbqqg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dyp4l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c7ob3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_udk76")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bq281")
+}],
+"loop": false,
+"name": &"hurt",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y7hhy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_endnh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xrpci")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6rw8v")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sbqqg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ox6o1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_is4q6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pcvr6")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 7.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i5wxm"]
+radius = 7.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y7hhy"]
+radius = 13.0384
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+collision_layer = 128
+collision_mask = 128
+motion_mode = 1
+script = ExtResource("1_y7hhy")
+
+[node name="Sword" parent="." instance=ExtResource("2_endnh")]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -4)
+sprite_frames = SubResource("SpriteFrames_sbqqg")
+animation = &"hurt"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_i5wxm")
+
+[node name="BallHit" type="CharacterBody2D" parent="." groups=["Player"]]
+collision_layer = 258
+collision_mask = 258
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BallHit"]
+shape = SubResource("CircleShape2D_y7hhy")
+debug_color = Color(0.980592, 0, 0.378362, 0.42)
+
+[node name="DustMarker" type="Node2D" parent="."]
+position = Vector2(-2, 2)

@@ -1,0 +1,23 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+.import/
+.export/
+*.import
+*.tmp
+
+#Aseprite
+**/SteamEmu*
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
+
+# Godot build artifacts
+*.godot-export
+
+# Optional: Logs or crash dumps
+*.log

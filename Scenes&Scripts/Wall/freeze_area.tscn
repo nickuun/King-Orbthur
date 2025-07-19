@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://gl0bfm437qih"]
+
+[ext_resource type="Script" uid="uid://5yf1w6tax7d" path="res://Scenes&Scripts/Wall/freeze_area.gd" id="1_qjb2p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2fetr"]
+size = Vector2(150, 170)
+
+[node name="FreezeArea" type="Area2D"]
+collision_layer = 128
+collision_mask = 128
+script = ExtResource("1_qjb2p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(236, 92)
+shape = SubResource("RectangleShape2D_2fetr")
+debug_color = Color(0.676511, 0.483234, 0.415485, 0.42)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

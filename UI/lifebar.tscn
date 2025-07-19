@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://by4di14icoly0"]
+
+[ext_resource type="Texture2D" uid="uid://drplp4oui8lq1" path="res://Sprites/Healthbar/Under.png" id="1_q2t0c"]
+[ext_resource type="Texture2D" uid="uid://b21q3yfh74uyh" path="res://Sprites/Healthbar/Over.png" id="2_77eho"]
+[ext_resource type="Texture2D" uid="uid://cmp7up2rbtoti" path="res://Sprites/Healthbar/GreenUnder.png" id="3_f0lf6"]
+[ext_resource type="Script" uid="uid://pqksau7fhlr3" path="res://UI/lifebar.gd" id="4_77eho"]
+
+[node name="Lifebar" type="TextureProgressBar" groups=["LifeBar"]]
+texture_filter = 1
+offset_left = 12.0
+offset_top = 14.0
+offset_right = 42.0
+offset_bottom = 22.0
+value = 100.0
+texture_under = ExtResource("1_q2t0c")
+texture_over = ExtResource("2_77eho")
+texture_progress = ExtResource("3_f0lf6")
+script = ExtResource("4_77eho")

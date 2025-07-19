@@ -1,0 +1,78 @@
+[gd_scene load_steps=14 format=3 uid="uid://bj7kpvnfvl28x"]
+
+[ext_resource type="Texture2D" uid="uid://cvpoycb5wti7o" path="res://icon.svg" id="1_0bqku"]
+[ext_resource type="Script" uid="uid://ccdm6md3udow6" path="res://Scenes&Scripts/Doors/LockedDoor/locked_door_column.gd" id="1_ca5qd"]
+[ext_resource type="Texture2D" uid="uid://cgdwqeqoyutgm" path="res://Sprites/Door/door01.png" id="2_87kmx"]
+[ext_resource type="Texture2D" uid="uid://c22q721tcnrva" path="res://Sprites/Door/door02.png" id="3_ca5qd"]
+[ext_resource type="Texture2D" uid="uid://bn2rsge5r0465" path="res://Sprites/Door/door03.png" id="4_8pjam"]
+[ext_resource type="Texture2D" uid="uid://br4k6rbcu6y4x" path="res://Sprites/Door/door04.png" id="5_wb5ol"]
+[ext_resource type="Texture2D" uid="uid://be77e3osj8ly4" path="res://Sprites/Door/door05.png" id="6_73aao"]
+[ext_resource type="Texture2D" uid="uid://5s2njhn2447j" path="res://Sprites/Door/door06.png" id="7_vi5ut"]
+[ext_resource type="Texture2D" uid="uid://53p3r4xey4aj" path="res://Sprites/Door/door07.png" id="8_c76io"]
+[ext_resource type="Texture2D" uid="uid://dhx5hhtv5xmah" path="res://Sprites/Door/door08.png" id="9_ljf2a"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1pwxv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_87kmx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ca5qd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_8pjam")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_wb5ol")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_73aao")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_vi5ut")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_c76io")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ljf2a")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_87kmx"]
+size = Vector2(20, 180)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8pjam"]
+size = Vector2(30, 30)
+
+[node name="Locked Door Column" type="StaticBody2D"]
+texture_filter = 1
+script = ExtResource("1_ca5qd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(10, 64.2502)
+scale = Vector2(0.15625, 1.41016)
+texture = ExtResource("1_0bqku")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(8, 48)
+sprite_frames = SubResource("SpriteFrames_1pwxv")
+frame_progress = 0.00969738
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(10, 64.2502)
+shape = SubResource("RectangleShape2D_87kmx")
+
+[node name="UnlockArea" type="Area2D" parent="."]
+position = Vector2(0, 5.25024)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UnlockArea"]
+position = Vector2(10, 57)
+shape = SubResource("RectangleShape2D_8pjam")
+debug_color = Color(0.691467, 0.445382, 0.592998, 0.42)
