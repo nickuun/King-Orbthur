@@ -91,6 +91,7 @@ func _on_proximity_body_entered(body):
 		var actual_speed = ball_speed * StatsManager.ball_speed_multiplier
 		velocity = knock_dir * actual_speed
 		if !state == BallState.FOLLOWING:
+			play_squash(knock_dir)
 			Game.player.apply_knockback(-knock_dir, 100)
 
 		# Drop off coins...
@@ -104,6 +105,28 @@ func _on_proximity_body_entered(body):
 				coin.launch_to(Game.player.global_position + drop_offset)
 
 		held_coins.clear()
+
+func play_squash(direction: Vector2) -> void:
+	var base_scale := Vector2.ONE
+	var squash_scale := Vector2(1.2, 0.8)
+
+	# Rotate squash relative to hit direction
+	var angle := direction.angle()
+	var stretch_x := cos(angle)
+	var stretch_y := sin(angle)
+
+	var squash := Vector2(
+		lerp(base_scale.x, squash_scale.x, abs(stretch_x)),
+		lerp(base_scale.y, squash_scale.y, abs(stretch_y))
+	)
+
+	# Set initial squash
+	scale = squash
+
+	# Tween back to normal
+	var tween := create_tween()
+	tween.tween_property(self, "scale", base_scale, 0.12).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+
 
 func _physics_process(delta: float) -> void:
 	if state == BallState.NORMAL:

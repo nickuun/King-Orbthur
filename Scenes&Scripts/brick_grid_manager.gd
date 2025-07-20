@@ -27,6 +27,7 @@ var chest_indexes: Array = []       # global flat indices for the entire level
 var stage_brick_index := 0          # total bricks spawned, used to map chest index
 var door_spawned := false
 var level_start_offset: Vector2 = Vector2.ZERO  # Used to shift spawn position each loop
+var queued_stage_spawn: bool = false
 
 
 func _ready():
@@ -92,8 +93,8 @@ func _spawn_next_stage():
 
 	match spawn_stage:
 		0:
-			#_spawn_next_columns(1)
-			_spawn_locked_door_column()
+			_spawn_next_columns(1)
+			#_spawn_locked_door_column()
 		1: _spawn_next_columns(2)
 		2: _spawn_next_columns(3)
 		3: _spawn_next_columns(1)
@@ -102,6 +103,8 @@ func _spawn_next_stage():
 			return
 
 	spawn_stage += 1
+
+
 
 func _on_brick_destroyed(_brick):
 	bricks_remaining -= 1
@@ -112,9 +115,18 @@ func _on_brick_destroyed(_brick):
 	
 	if !door_spawned:
 		if spawn_stage == 3 and stage_bricks_remaining == (3 * max_rows) - max_rows:
-			_spawn_next_stage()
+			_try_queue_or_spawn_next_stage()
 		elif stage_bricks_remaining <= 0:
-			_spawn_next_stage()
+			_try_queue_or_spawn_next_stage()
+
+func _try_queue_or_spawn_next_stage():
+	if queued_stage_spawn:
+		return
+
+	print("⏳ Queued stage spawn — waiting for orb to move right")
+	queued_stage_spawn = true
+
+
 
 func _spawn_locked_door_column():
 	door_spawned = true
@@ -166,3 +178,17 @@ func reset_level(new_start_offset: Vector2 = Vector2.ZERO):
 	_generate_chest_indexes()
 	_spawn_next_stage()
 	get_tree().get_first_node_in_group("World").respawn_ball()
+
+func _on_freeze_area_body_entered(body: Node2D) -> void:
+	if body.is_in_group("Ball"):
+		if queued_stage_spawn :
+			print("✅ Orb on right — spawning queued stage")
+			queued_stage_spawn = false
+			_spawn_next_stage()
+
+func _on_back_wall_body_entered(body: Node2D) -> void:
+	if body.is_in_group("Ball"):
+		if queued_stage_spawn :
+			print("✅ Orb on right — spawning queued stage")
+			queued_stage_spawn = false
+			_spawn_next_stage()

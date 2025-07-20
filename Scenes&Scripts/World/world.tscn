@@ -165,11 +165,11 @@ position = Vector2(321, -2)
 [node name="BrickSpawnSpot" type="Node2D" parent="EdgeContainers/Camera2D" groups=["BrickSpawnSpot"]]
 position = Vector2(142, -64)
 
-[node name="Player" parent="." instance=ExtResource("1_3mgr3")]
-position = Vector2(42, 88)
-
 [node name="Ball" parent="." instance=ExtResource("2_lo3b5")]
 position = Vector2(83, 88)
+
+[node name="Player" parent="." instance=ExtResource("1_3mgr3")]
+position = Vector2(42, 88)
 
 [node name="BrickGridManager" parent="." instance=ExtResource("5_r6fjf")]
 position = Vector2(301, 28)
@@ -261,3 +261,6 @@ visible = false
 
 [connection signal="body_exited" from="EdgeContainers/Camera2D/BallStartPos" to="Ball" method="_on_ball_start_pos_body_exited"]
 [connection signal="body_entered" from="EdgeContainers/Camera2D/BackWall" to="Ball" method="_on_back_wall_body_entered"]
+[connection signal="body_entered" from="EdgeContainers/Camera2D/BackWall" to="BrickGridManager" method="_on_back_wall_body_entered"]
+[connection signal="body_entered" from="EdgeContainers/Camera2D/FreezeArea" to="BrickGridManager" method="_on_freeze_area_body_entered"]
+[connection signal="body_exited" from="EdgeContainers/Camera2D/FreezeArea" to="BrickGridManager" method="_on_freeze_area_body_exited"]

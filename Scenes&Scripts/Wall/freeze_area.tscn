@@ -6,8 +6,8 @@
 size = Vector2(150, 170)
 
 [node name="FreezeArea" type="Area2D"]
-collision_layer = 128
-collision_mask = 128
+collision_layer = 129
+collision_mask = 129
 script = ExtResource("1_qjb2p")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
