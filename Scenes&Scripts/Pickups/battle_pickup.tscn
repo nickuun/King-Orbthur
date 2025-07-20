@@ -1,12 +1,16 @@
-[gd_scene load_steps=10 format=3 uid="uid://csra3lfqieqnb"]
+[gd_scene load_steps=14 format=3 uid="uid://csra3lfqieqnb"]
 
 [ext_resource type="Script" uid="uid://bhr37xyvlk4hu" path="res://Scenes&Scripts/Pickups/battle_pickup.gd" id="1_h0cc5"]
 [ext_resource type="Texture2D" uid="uid://b3unp6rcbkyep" path="res://Sprites/Pickups/Heart/heart.png" id="2_cpo5t"]
 [ext_resource type="Texture2D" uid="uid://c6aeo2eki3t2s" path="res://Sprites/Pixel_Icons/RPG_Skill_Strike_Attack_Sword_Slash_Cleave.png" id="2_m0mje"]
 [ext_resource type="Texture2D" uid="uid://cdfht66d4qlxm" path="res://Sprites/Pixel_Icons/Arrows_Pointer_Down_South.png" id="3_xn20l"]
 [ext_resource type="Texture2D" uid="uid://djiyk1ws46dvs" path="res://Sprites/Pixel_Icons/Boardgames_Scrabble_Piece.png" id="4_2mkia"]
+[ext_resource type="Texture2D" uid="uid://ci8spv0ftcium" path="res://Sprites/Pixel_Icons/Food_Baby_Pacifier_Easy.png" id="6_cgx8k"]
 [ext_resource type="Texture2D" uid="uid://bjhx80xgx1nsp" path="res://Sprites/Pixel_Icons/Software_Clock_Time_Wait_2.png" id="6_plfmw"]
 [ext_resource type="Texture2D" uid="uid://ca0du30vxgthy" path="res://Sprites/Pixel_Icons/RPG_Item_Armor_Equipment_Slot_Feet_Boots_Legplates.png" id="7_cgx8k"]
+[ext_resource type="Texture2D" uid="uid://eeht3na6bv7h" path="res://Sprites/Pixel_Icons/Food_Fruit_Apple.png" id="7_f13at"]
+[ext_resource type="Texture2D" uid="uid://c063guf437mrs" path="res://Sprites/Pixel_Icons/Hats_Astronaut_Helm_Space_Suit.png" id="8_yk4yx"]
+[ext_resource type="Texture2D" uid="uid://c8ctr1gr6drjj" path="res://Sprites/Pixel_Icons/Food_Pizza.png" id="9_nayws"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_o7q7q"]
 animations = [{
@@ -44,6 +48,38 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("6_cgx8k")
+}],
+"loop": true,
+"name": &"perm_ball_slow",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_f13at")
+}],
+"loop": true,
+"name": &"perm_hp_up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_yk4yx")
+}],
+"loop": true,
+"name": &"perm_size_speed_trade",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_nayws")
+}],
+"loop": true,
+"name": &"perm_speed_up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("6_plfmw")
 }],
 "loop": true,
@@ -69,7 +105,7 @@ script = ExtResource("1_h0cc5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_o7q7q")
-animation = &"double_coins"
+animation = &"perm_ball_slow"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_h0cc5")

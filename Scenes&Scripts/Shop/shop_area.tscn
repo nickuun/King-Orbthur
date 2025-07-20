@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3504lyxosutb"]
+
+[ext_resource type="Script" uid="uid://bc4bvvjlfcbmo" path="res://Scenes&Scripts/Shop/shop_area.gd" id="1_4f0ek"]
+
+[node name="ShopArea" type="Node2D" groups=["Shop"]]
+visible = false
+script = ExtResource("1_4f0ek")

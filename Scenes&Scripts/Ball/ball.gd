@@ -7,15 +7,28 @@ var should_respawn := false
 var held_coins: Array = []
 var returning := false
 @export var shrink_speed := 2.0
+var frozen := false
+var previous_velocity = Vector2.ZERO
 
 func _ready():
 		# Detect coin contact
+	var spawn_node = get_tree().get_first_node_in_group("BallStartPos")
+	if spawn_node:
+		spawn_node.connect("body_exited", Callable(self, "_on_ball_start_pos_body_exited"))
+	get_tree().get_first_node_in_group("BackWall").connect("body_entered", Callable(self, "_on_back_wall_body_entered"))
 	$CoinArea.connect("area_entered", _on_coin_area_entered)
 	$ProximityArea.body_entered.connect(_on_proximity_body_entered)
 
-func freeze_and_return_to_player():
+func freeze():
+	previous_velocity = velocity
+	frozen = true
+	
+func unfreeze():
+	velocity = previous_velocity
+	frozen = false
+
+func return_to_player():
 	returning = true
-	#mode = RigidBody2D.MODE_KINEMATIC
 	set_process(true)
 
 func _on_coin_area_entered(area: Area2D):
@@ -40,8 +53,10 @@ func _on_proximity_body_entered(body):
 		else:
 			# Ball was idle — knock player away from hit direction
 			knock_dir = (body.global_position - global_position).normalized()
-
-		velocity = direction * ball_speed
+		
+		var actual_speed = ball_speed * StatsManager.ball_speed_multiplier
+		velocity = direction * actual_speed
+		
 		Game.player.apply_knockback(knock_dir, 100)
 		
 			# Drop off any coins held by the ball
@@ -64,28 +79,36 @@ func _on_proximity_body_entered(body):
 		held_coins.clear()
 
 func _physics_process(delta: float) -> void:
-	if returning:
-		global_position = global_position.lerp(Game.player.global_position, 3.0 * delta)
-		scale = scale.lerp(Vector2.ZERO, shrink_speed * delta)
+	if !frozen:
+		if velocity.length() == 0:
+			return
 		
-		if global_position.distance_to(Game.player.global_position) < 6:
-			queue_free()  # or hide
-			Game.on_orb_collected()
-	
-	if velocity.length() == 0:
-		return
+		var actual_speed = ball_speed * StatsManager.ball_speed_multiplier
+		var collision = move_and_collide(velocity * delta)
+		if collision:
+			var collider = collision.get_collider()
+			var normal = collision.get_normal()
+			velocity = velocity.bounce(normal).normalized() * actual_speed
 
-	var collision = move_and_collide(velocity * delta)
-	if collision:
-		var collider = collision.get_collider()
-		var normal = collision.get_normal()
-		velocity = velocity.bounce(normal).normalized() * ball_speed
-
-		# Check for bricks
-		if collider.is_in_group("brick") and collider.has_method("_on_hit"):
-			collider._on_hit()
+			# Check for bricks
+			if collider.is_in_group("brick") and collider.has_method("_on_hit"):
+				collider._on_hit()
+	else:
+		if returning:
+			global_position = global_position.lerp(Game.player.global_position, 3.0 * delta)
+			#scale = scale.lerp(Vector2.ZERO, shrink_speed * delta)
+			
+			if global_position.distance_to(Game.player.global_position) < 6:
+				queue_free()  # or hide
+				Game.on_orb_collected()
+		
+		else:
+			velocity = Vector2.ZERO
 
 func respawn():
+	print("respawn ball triggered")
+	returning = false
+	
 	var spawn_node = get_tree().get_first_node_in_group("BallStartPos")
 	if not spawn_node:
 		push_error("No BallStartPos in group!")
@@ -108,6 +131,7 @@ func _on_back_wall_body_entered(body: Node2D) -> void:
 	respawn()
 
 func _on_ball_start_pos_body_exited(body: Node2D) -> void:
+	print("Bpdy exited")
 	if should_respawn and body.is_in_group("Player"):
 		respawn()
 		

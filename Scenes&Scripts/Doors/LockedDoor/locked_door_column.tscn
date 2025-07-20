@@ -76,3 +76,6 @@ position = Vector2(0, 5.25024)
 position = Vector2(10, 57)
 shape = SubResource("RectangleShape2D_8pjam")
 debug_color = Color(0.691467, 0.445382, 0.592998, 0.42)
+
+[node name="SpawnSpot" type="Node2D" parent="."]
+position = Vector2(79, 45)

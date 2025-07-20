@@ -2,12 +2,10 @@ extends Node2D
 
 var restart_hold_time := 0.0
 const HOLD_DURATION := 3.0
-
+@export var ball_scene: PackedScene
 
 func _ready() -> void:
-
 	Game.coin_label = get_tree().get_first_node_in_group("CoinLabel")
-
 
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("restart"):
@@ -31,3 +29,18 @@ func restart_game():
 	SeedManager.set_seed(SeedManager.generate_seed())
 
 	get_tree().change_scene_to_file(scene_path)
+	
+func respawn_ball():
+	# Clean up any existing ball if needed
+	for ball in get_tree().get_nodes_in_group("Ball"):
+		ball.queue_free()
+
+	var spawn_point = get_tree().get_first_node_in_group("BallStartPos")
+	if spawn_point:
+		var ball = ball_scene.instantiate()
+		ball.global_position = spawn_point.global_position
+		get_tree().current_scene.add_child(ball)
+		Game.orb = ball  # Save a reference if needed
+		ball.respawn()
+	else:
+		push_error("❌ No BallStartPos found in group!")

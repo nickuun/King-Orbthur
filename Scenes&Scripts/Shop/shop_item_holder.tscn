@@ -1,0 +1,65 @@
+[gd_scene load_steps=6 format=3 uid="uid://bdv1m7s8thb4a"]
+
+[ext_resource type="Script" uid="uid://dn738fgtkuxw5" path="res://Scenes&Scripts/Shop/shop_item_holder.gd" id="1_atrpp"]
+[ext_resource type="Texture2D" uid="uid://dyx4xm57mhhfd" path="res://Sprites/Pixel_Icons/Tools_Crafting_Graphic_Design_Shapes_Square.png" id="1_cvenq"]
+[ext_resource type="FontFile" uid="uid://co5rjng52g146" path="res://Assets/Fonts/Kenney Rocket Square.ttf" id="2_atrpp"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a6wmw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_cvenq")
+}],
+"loop": true,
+"name": &"Active",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"Passive",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ok6oc"]
+radius = 20.025
+
+[node name="ShopItemHolder" type="Area2D" groups=["ShopItemHolder"]]
+texture_filter = 1
+collision_layer = 128
+collision_mask = 128
+script = ExtResource("1_atrpp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_cvenq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_a6wmw")
+animation = &"Passive"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ok6oc")
+
+[node name="DollarSign" type="Label" parent="."]
+offset_left = -13.0
+offset_top = 7.0
+offset_right = -5.0
+offset_bottom = 17.0
+theme_override_fonts/font = ExtResource("2_atrpp")
+theme_override_font_sizes/font_size = 7
+text = "$"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PriceLabel" type="Label" parent="."]
+offset_left = -5.0
+offset_top = 6.0
+offset_right = 11.0
+offset_bottom = 16.0
+theme_override_fonts/font = ExtResource("2_atrpp")
+theme_override_font_sizes/font_size = 8
+text = "99"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

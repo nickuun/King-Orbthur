@@ -17,22 +17,24 @@ var sword_side = "left"
 @onready var sprite = $AnimatedSprite2D
 var last_frame = -1
 var dust_scene = preload("res://Scenes&Scripts/Player/Dust/dust_trail.tscn")
-var coin_count: int = 0
+var coin_count: int = 100
 var coin_multiplier: int = 0
 var is_hurting: bool = false
 @export var autoplay: bool = true
 
+#var has_key := false
 var has_key := false
 
 func swing_sword():
-	if sword_side == "left": 
-		sword.get_node("Sprite").play("SwingRight")
-		sword_desired_offset = 180
-		sword_side = "right"
-	else:
-		sword.get_node("Sprite").play("SwingLeft")
-		sword_side = "left"
-		sword_desired_offset = -180
+	if !Game.orb.returning:
+		if sword_side == "left": 
+			sword.get_node("Sprite").play("SwingRight")
+			sword_desired_offset = 180
+			sword_side = "right"
+		else:
+			sword.get_node("Sprite").play("SwingLeft")
+			sword_side = "left"
+			sword_desired_offset = -180
 
 func add_coin():
 	coin_count += coin_multiplier
@@ -187,6 +189,20 @@ func collect_battle_pickup(pickup_type: String) -> void:
 			await get_tree().create_timer(5.0).timeout
 			coin_multiplier = 1
 
+		"perm_speed_up":
+			max_speed += 20
+
+		"perm_hp_up":
+			max_health += 10
+			current_health = max_health
+			update_lifebar()
+
+		"perm_size_speed_trade":
+			scale *= 2
+			max_speed -= 20
+
+		"perm_ball_slow":
+			StatsManager.ball_speed_multiplier *= 0.85
 
 func game_over():
 	pass

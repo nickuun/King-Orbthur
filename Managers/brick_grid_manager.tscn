@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bj7kpvnfvl28x" path="res://Scenes&Scripts/Doors/LockedDoor/locked_door_column.tscn" id="4_jyeae"]
 [ext_resource type="PackedScene" uid="uid://brm5uchn5sauw" path="res://Scenes&Scripts/Key/key.tscn" id="5_jvq76"]
 
-[node name="BrickGridManager" type="Node2D"]
+[node name="BrickGridManager" type="Node2D" groups=["BrickManager"]]
 script = ExtResource("1_k4qtw")
 bricks = ExtResource("2_2skns")
 chest_bricks = ExtResource("3_8cfnf")

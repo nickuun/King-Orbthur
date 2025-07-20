@@ -9,10 +9,6 @@ var floating_text_scene := preload("res://Scenes&Scripts/Tools/FloatingText/floa
 var Seeded: Node = null
 var should_keep_seed := false  # default to false
 
-static func freeze_orb():
-	if is_instance_valid(Game.orb):
-		Game.orb.freeze_and_return_to_player()
-
 func get_seed() -> String:
 	return SeedManager.get_seed()
 
@@ -21,3 +17,6 @@ func show_floating_text(text: String, pos: Vector2, color := Color.WHITE, size :
 	node.global_position = pos
 	get_tree().current_scene.add_child(node)
 	node.setup(text, color, size, duration)
+
+func on_orb_collected():
+	pass

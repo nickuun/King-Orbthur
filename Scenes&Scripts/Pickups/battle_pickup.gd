@@ -1,6 +1,7 @@
 extends Area2D
 
 @export var pickup_type: String = "heal"  # e.g. heal, speed_up, ball_slow, etc.
+@export var skip_launch := false  # Useful for shop drops
 
 @export var arc_height := randf_range(16, 24)
 @export var lifetime := 10.0
@@ -19,13 +20,24 @@ var fade_timer := 0.0
 @onready var sprite := $AnimatedSprite2D
 
 func _ready():
+	print("ITEM DROPPED")
 	sprite.play(pickup_type)
 	sprite.speed_scale = randf_range(0.8, 1.2)
 	connect("body_entered", _on_body_entered)
 	set_process(true)
 	modulate.a = 1.0
+	
+	if skip_launch:
+		landed = true
+		$CollisionShape2D.disabled = false
+	else:
+		set_process(true)
 
 func _process(delta):
+	#print("I am alive")
+	if skip_launch:
+		return  # Don’t animate or fade
+
 	if not landed:
 		elapsed += delta
 		var t = clamp(elapsed / time_to_land, 0.0, 1.0)

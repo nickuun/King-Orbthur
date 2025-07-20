@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dpqkxlaa6c4o3"]
+[gd_scene load_steps=20 format=3 uid="uid://dpqkxlaa6c4o3"]
 
 [ext_resource type="Script" uid="uid://b054o1j18drrq" path="res://Scenes&Scripts/World/world.gd" id="1_1eef5"]
 [ext_resource type="PackedScene" uid="uid://ni1fdvifit6o" path="res://Scenes&Scripts/Player/player.tscn" id="1_3mgr3"]
@@ -9,11 +9,14 @@
 [ext_resource type="PackedScene" uid="uid://dikdtfgtdq853" path="res://Managers/brick_grid_manager.tscn" id="5_r6fjf"]
 [ext_resource type="Texture2D" uid="uid://c83wg2su386px" path="res://Sprites/Walls/EdgeContainers/DottedLine.png" id="6_dfhr7"]
 [ext_resource type="Script" uid="uid://b014s4dhbqfjp" path="res://UI/score_label.gd" id="7_4r4ay"]
+[ext_resource type="PackedScene" uid="uid://dfsa2vp4gs2ev" path="res://Scenes&Scripts/Wall/shop_entry_trigger.tscn" id="7_ehnaw"]
 [ext_resource type="FontFile" uid="uid://c8x1ul0g5boh8" path="res://Assets/Fonts/Kenney Mini.ttf" id="7_q0lgp"]
 [ext_resource type="PackedScene" uid="uid://by4di14icoly0" path="res://UI/lifebar.tscn" id="7_qhwu4"]
 [ext_resource type="PackedScene" uid="uid://gl0bfm437qih" path="res://Scenes&Scripts/Wall/freeze_area.tscn" id="7_u0km0"]
 [ext_resource type="PackedScene" uid="uid://df1s48lmtbsn1" path="res://Scenes&Scripts/Tilemaps/BaseTerrainTilemap.tscn" id="10_h8k3j"]
+[ext_resource type="Texture2D" uid="uid://bhse1kp22lqby" path="res://Sprites/Pixel_Icons/Alchemy_Alembic_Crafting_Brewing_Station_Full.png" id="12_a2x15"]
 [ext_resource type="Texture2D" uid="uid://swg7857q0bhs" path="res://Sprites/Coins/Coin Sheet.png" id="12_poia6"]
+[ext_resource type="PackedScene" uid="uid://cyg4ueel6i320" path="res://UI/ItemPopup/item_popup.tscn" id="16_a2x15"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4r4ay"]
 radius = 14.0
@@ -21,84 +24,98 @@ radius = 14.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tsomi"]
 size = Vector2(20, 183)
 
-[node name="World" type="Node2D"]
+[node name="World" type="Node2D" groups=["World"]]
 texture_filter = 1
 script = ExtResource("1_1eef5")
+ball_scene = ExtResource("2_lo3b5")
 
 [node name="BaseTerrainTilemap" parent="." instance=ExtResource("10_h8k3j")]
 
 [node name="EdgeContainers" type="Node2D" parent="." groups=["EdgeContainers"]]
 
-[node name="BallStartPos" type="Area2D" parent="EdgeContainers" groups=["BallStartPos"]]
-position = Vector2(83, 88)
+[node name="Camera2D" type="Camera2D" parent="EdgeContainers" groups=["Camera"]]
+position = Vector2(159, 92)
+position_smoothing_enabled = true
+
+[node name="DottedLine2" type="Sprite2D" parent="EdgeContainers/Camera2D"]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(80, 87)
+texture = ExtResource("6_dfhr7")
+region_enabled = true
+region_rect = Rect2(0, 0, 160, 3)
+
+[node name="BallStartPos" type="Area2D" parent="EdgeContainers/Camera2D" groups=["BallStartPos"]]
+position = Vector2(-76, -4)
 collision_layer = 256
 collision_mask = 2
 script = ExtResource("3_cehqr")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EdgeContainers/BallStartPos"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EdgeContainers/Camera2D/BallStartPos"]
 shape = SubResource("CircleShape2D_4r4ay")
 
-[node name="Wall" parent="EdgeContainers" instance=ExtResource("3_senvn")]
-position = Vector2(0, -5)
+[node name="Wall" parent="EdgeContainers/Camera2D" instance=ExtResource("3_senvn")]
+position = Vector2(-159, -97)
 
-[node name="Wall2" parent="EdgeContainers" instance=ExtResource("3_senvn")]
-position = Vector2(2, 190)
+[node name="Wall2" parent="EdgeContainers/Camera2D" instance=ExtResource("3_senvn")]
+position = Vector2(-157, 98)
 
-[node name="Wall3" parent="EdgeContainers" instance=ExtResource("3_senvn")]
-position = Vector2(322.5, 8)
+[node name="Wall3" parent="EdgeContainers/Camera2D" instance=ExtResource("3_senvn")]
+position = Vector2(163.5, -84)
 rotation = 1.57079
 
-[node name="Camera2D" type="Camera2D" parent="EdgeContainers"]
-position = Vector2(159, 92)
+[node name="BackWall" type="Area2D" parent="EdgeContainers/Camera2D" groups=["BackWall"]]
+position = Vector2(-159, -92)
 
-[node name="BackWall" type="Area2D" parent="EdgeContainers"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EdgeContainers/BackWall"]
-position = Vector2(-13, 90)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EdgeContainers/Camera2D/BackWall"]
+position = Vector2(-1, 90)
 shape = SubResource("RectangleShape2D_tsomi")
 debug_color = Color(0.886326, 0.330618, 0, 0.42)
 
-[node name="PlayerBoundry" parent="EdgeContainers" instance=ExtResource("5_qhwu4")]
-position = Vector2(-73, 5)
+[node name="PlayerBoundry" parent="EdgeContainers/Camera2D" instance=ExtResource("5_qhwu4")]
+position = Vector2(-232, -87)
 
-[node name="PlayerBoundry2" parent="EdgeContainers" instance=ExtResource("5_qhwu4")]
-position = Vector2(231, 179)
+[node name="PlayerBoundry2" parent="EdgeContainers/Camera2D" instance=ExtResource("5_qhwu4")]
+position = Vector2(72, 87)
 rotation = 3.14159
 
-[node name="PlayerBoundry3" parent="EdgeContainers" instance=ExtResource("5_qhwu4")]
-position = Vector2(0, 243)
-rotation = 4.71238
+[node name="PlayerBoundry3" parent="EdgeContainers/Camera2D" instance=ExtResource("5_qhwu4")]
+position = Vector2(-159, 151)
+rotation = -1.57081
 
-[node name="PlayerBoundry4" parent="EdgeContainers" groups=["MiddleBoundry"] instance=ExtResource("5_qhwu4")]
-position = Vector2(159, -61)
-rotation = 7.85397
+[node name="PlayerBoundry4" parent="EdgeContainers/Camera2D" groups=["MiddleBoundry"] instance=ExtResource("5_qhwu4")]
+position = Vector2(0, -153)
+rotation = 1.57078
 
-[node name="DottedLine2" type="Sprite2D" parent="EdgeContainers"]
+[node name="DottedLine3" type="Sprite2D" parent="EdgeContainers/Camera2D"]
 texture_filter = 1
 texture_repeat = 2
-position = Vector2(239, 179)
-texture = ExtResource("6_dfhr7")
-region_enabled = true
-region_rect = Rect2(0, 0, 160, 3)
-
-[node name="DottedLine3" type="Sprite2D" parent="EdgeContainers"]
-texture_filter = 1
-texture_repeat = 2
-position = Vector2(312.5, 91)
+position = Vector2(153.5, -1)
 rotation = 1.57079
 texture = ExtResource("6_dfhr7")
 region_enabled = true
 region_rect = Rect2(0, 0, 160, 3)
 
-[node name="DottedLine" type="Sprite2D" parent="EdgeContainers"]
+[node name="DottedLine" type="Sprite2D" parent="EdgeContainers/Camera2D"]
 texture_filter = 1
 texture_repeat = 2
-position = Vector2(239, 5)
+position = Vector2(80, -87)
 texture = ExtResource("6_dfhr7")
 region_enabled = true
 region_rect = Rect2(0, 0, 160, 3)
 
-[node name="FreezeArea" parent="EdgeContainers" instance=ExtResource("7_u0km0")]
+[node name="ShopEntryTrigger" parent="EdgeContainers/Camera2D" node_paths=PackedStringArray("shop_camera_target") instance=ExtResource("7_ehnaw")]
+position = Vector2(-159, -92)
+shop_camera_target = NodePath("../Shop")
+
+[node name="FreezeArea" parent="EdgeContainers/Camera2D" instance=ExtResource("7_u0km0")]
+position = Vector2(-159, -92)
+
+[node name="Shop" type="Node2D" parent="EdgeContainers/Camera2D"]
+position = Vector2(321, -2)
+
+[node name="BrickSpawnSpot" type="Node2D" parent="EdgeContainers/Camera2D" groups=["BrickSpawnSpot"]]
+position = Vector2(142, -64)
 
 [node name="Player" parent="." instance=ExtResource("1_3mgr3")]
 position = Vector2(42, 88)
@@ -108,6 +125,11 @@ position = Vector2(83, 88)
 
 [node name="BrickGridManager" parent="." instance=ExtResource("5_r6fjf")]
 position = Vector2(301, 28)
+
+[node name="AlchemyAlembicCraftingBrewingStationFull" type="Sprite2D" parent="BrickGridManager"]
+visible = false
+position = Vector2(-3, 0)
+texture = ExtResource("12_a2x15")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -122,10 +144,10 @@ offset_bottom = 13.0
 [node name="ScoreValue" type="Label" parent="CanvasLayer/ScoreUI" node_paths=PackedStringArray("score_label") groups=["ScoreLabel"]]
 modulate = Color(1, 1, 1, 0.517647)
 texture_filter = 1
-offset_left = 276.0
-offset_top = 169.0
-offset_right = 312.0
-offset_bottom = 182.0
+offset_left = 155.0
+offset_top = 4.0
+offset_right = 191.0
+offset_bottom = 17.0
 pivot_offset = Vector2(18, 8)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("7_q0lgp")
@@ -139,10 +161,10 @@ metadata/_edit_use_anchors_ = true
 [node name="ScoreLabel" type="Label" parent="CanvasLayer/ScoreUI"]
 modulate = Color(1, 1, 1, 0.517647)
 texture_filter = 1
-offset_left = 252.0
-offset_top = 169.0
-offset_right = 288.0
-offset_bottom = 182.0
+offset_left = 131.0
+offset_top = 4.0
+offset_right = 167.0
+offset_bottom = 17.0
 pivot_offset = Vector2(18, 8)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("7_q0lgp")
@@ -175,5 +197,8 @@ text = "0"
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[connection signal="body_exited" from="EdgeContainers/BallStartPos" to="Ball" method="_on_ball_start_pos_body_exited"]
-[connection signal="body_entered" from="EdgeContainers/BackWall" to="Ball" method="_on_back_wall_body_entered"]
+[node name="ItemPopup" parent="CanvasLayer" instance=ExtResource("16_a2x15")]
+visible = false
+
+[connection signal="body_exited" from="EdgeContainers/Camera2D/BallStartPos" to="Ball" method="_on_ball_start_pos_body_exited"]
+[connection signal="body_entered" from="EdgeContainers/Camera2D/BackWall" to="Ball" method="_on_back_wall_body_entered"]

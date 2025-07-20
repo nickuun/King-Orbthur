@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dfsa2vp4gs2ev"]
+
+[ext_resource type="Script" uid="uid://ceajy7ytmwm71" path="res://Scenes&Scripts/Wall/shop_entry_trigger.gd" id="1_q78vw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ns71r"]
+size = Vector2(16, 196)
+
+[node name="ShopEntryTrigger" type="Area2D"]
+collision_layer = 128
+collision_mask = 128
+script = ExtResource("1_q78vw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(324, 93)
+shape = SubResource("RectangleShape2D_ns71r")
+debug_color = Color(0, 0.644663, 0.276369, 0.42)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

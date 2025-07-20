@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c83wg2su386px" path="res://Sprites/Walls/EdgeContainers/DottedLine.png" id="1_n6kj7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dvg03"]
-size = Vector2(383, 13)
+size = Vector2(640, 13)
 
 [node name="PlayerBoundry" type="StaticBody2D"]
 texture_filter = 1
