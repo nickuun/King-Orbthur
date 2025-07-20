@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dpqkxlaa6c4o3"]
+[gd_scene load_steps=24 format=3 uid="uid://dpqkxlaa6c4o3"]
 
 [ext_resource type="Script" uid="uid://b054o1j18drrq" path="res://Scenes&Scripts/World/world.gd" id="1_1eef5"]
 [ext_resource type="PackedScene" uid="uid://ni1fdvifit6o" path="res://Scenes&Scripts/Player/player.tscn" id="1_3mgr3"]
@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://swg7857q0bhs" path="res://Sprites/Coins/Coin Sheet.png" id="12_poia6"]
 [ext_resource type="PackedScene" uid="uid://cyg4ueel6i320" path="res://UI/ItemPopup/item_popup.tscn" id="16_a2x15"]
 [ext_resource type="PackedScene" uid="uid://d0b56ttynlexk" path="res://Scenes&Scripts/Wall/pickup_rescue_zone.tscn" id="18_rqldd"]
+[ext_resource type="PackedScene" uid="uid://bsatq3tfmwtcv" path="res://UI/cheat_window.tscn" id="19_iads3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iads3"]
 size = Vector2(32, 315)
@@ -237,6 +238,9 @@ metadata/_edit_use_anchors_ = true
 
 [node name="ItemPopup" parent="CanvasLayer" instance=ExtResource("16_a2x15")]
 visible = false
+
+[node name="CheatWindow" parent="CanvasLayer" instance=ExtResource("19_iads3")]
+process_mode = 3
 
 [connection signal="body_exited" from="EdgeContainers/Camera2D/BallStartPos" to="Ball" method="_on_ball_start_pos_body_exited"]
 [connection signal="body_entered" from="EdgeContainers/Camera2D/BackWall" to="Ball" method="_on_back_wall_body_entered"]

@@ -14,8 +14,18 @@ func _ready():
 		# Detect coin contact
 	var spawn_node = get_tree().get_first_node_in_group("BallStartPos")
 	if spawn_node:
-		spawn_node.connect("body_exited", Callable(self, "_on_ball_start_pos_body_exited"))
-	get_tree().get_first_node_in_group("BackWall").connect("body_entered", Callable(self, "_on_back_wall_body_entered"))
+		if not spawn_node.is_connected("body_exited", Callable(self, "_on_ball_start_pos_body_exited")):
+			spawn_node.connect("body_exited", Callable(self, "_on_ball_start_pos_body_exited"))
+	
+	var back_wall = get_tree().get_first_node_in_group("BackWall")
+
+	if is_instance_valid(back_wall):
+		if not back_wall.is_connected("body_entered", Callable(self, "_on_back_wall_body_entered")):
+			back_wall.connect("body_entered", Callable(self, "_on_back_wall_body_entered"))
+	else:
+		print("⚠️ BackWall not found during _ready, deferring connection...")
+		call_deferred("_connect_back_wall")
+	
 	$CoinArea.connect("area_entered", _on_coin_area_entered)
 	$ProximityArea.body_entered.connect(_on_proximity_body_entered)
 

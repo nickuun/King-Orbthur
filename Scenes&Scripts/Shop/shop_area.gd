@@ -19,6 +19,6 @@ func _ready():
 		var holder = ShopItemHolderScene.instantiate()
 		holder.position += Vector2(offset,0)
 		offset += COLUMNSPACING
-		add_child(holder)
+		self.call_deferred("add_child", holder)
 		holder.setup(item_data)
 	

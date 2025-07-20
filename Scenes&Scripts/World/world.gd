@@ -39,8 +39,8 @@ func respawn_ball():
 	if spawn_point:
 		var ball = ball_scene.instantiate()
 		ball.global_position = spawn_point.global_position
-		get_tree().current_scene.add_child(ball)
+		get_tree().current_scene.call_deferred("add_child", ball)
 		Game.orb = ball  # Save a reference if needed
-		ball.respawn()
+		ball.call_deferred("respawn")
 	else:
 		push_error("❌ No BallStartPos found in group!")

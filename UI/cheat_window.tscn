@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://bsatq3tfmwtcv"]
+
+[ext_resource type="FontFile" uid="uid://o5lcnjx7o0sm" path="res://Assets/Fonts/Kenney Future Narrow.ttf" id="1_2c06b"]
+[ext_resource type="Script" uid="uid://cufcjivnp0s6x" path="res://UI/cheat_window.gd" id="1_bmykt"]
+
+[node name="CheatWindow" type="Control"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1.0
+offset_top = 136.0
+offset_right = 41.0
+offset_bottom = 176.0
+script = ExtResource("1_bmykt")
+
+[node name="TextEdit" type="TextEdit" parent="."]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 12.0
+offset_right = 198.0
+offset_bottom = 40.0
+theme_override_fonts/font = ExtResource("1_2c06b")
+theme_override_font_sizes/font_size = 13
+text = "sdfsdfsdf"

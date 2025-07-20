@@ -69,7 +69,7 @@ func _spawn_columns_sequentially(count: int) -> void:
 			brick.position = Vector2(x, row_index * row_spacing)
 			brick.stage_index = stage_brick_index
 			brick.connect("brick_destroyed", Callable(self, "_on_brick_destroyed"))
-			$LevelContainer.add_child(brick)
+			$LevelContainer.call_deferred("add_child", brick)
 
 			bricks_remaining += 1
 			stage_bricks_remaining += 1
