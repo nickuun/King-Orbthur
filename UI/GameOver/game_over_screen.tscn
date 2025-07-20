@@ -1,0 +1,184 @@
+[gd_scene load_steps=7 format=3 uid="uid://bbggl2ochu7ya"]
+
+[ext_resource type="Texture2D" uid="uid://c83wg2su386px" path="res://Sprites/Walls/EdgeContainers/DottedLine.png" id="1_m6qc7"]
+[ext_resource type="Script" uid="uid://e6u3wg4wg5n7" path="res://UI/GameOver/game_over_screen.gd" id="1_t6ss3"]
+[ext_resource type="FontFile" uid="uid://c8x1ul0g5boh8" path="res://Assets/Fonts/Kenney Mini.ttf" id="2_t6ss3"]
+[ext_resource type="Texture2D" uid="uid://1sjc41rtbing" path="res://Sprites/Healthbar/RedUnder.png" id="3_hwhak"]
+
+[sub_resource type="Gradient" id="Gradient_0ye0n"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_r1uq1"]
+gradient = SubResource("Gradient_0ye0n")
+
+[node name="GameOverScreen" type="Control" groups=["GameOverScreen"]]
+visible = false
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_t6ss3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.8)
+position = Vector2(163, 91)
+scale = Vector2(3.48437, 1.875)
+texture = SubResource("GradientTexture2D_r1uq1")
+
+[node name="DottedLine3" type="Sprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(51.5001, 92)
+rotation = 1.57079
+texture = ExtResource("1_m6qc7")
+region_enabled = true
+region_rect = Rect2(0, 0, 116, 3)
+
+[node name="DottedLine5" type="Sprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(162, 31)
+texture = ExtResource("1_m6qc7")
+region_enabled = true
+region_rect = Rect2(0, 0, 220, 3)
+
+[node name="DottedLine6" type="Sprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(162, 151)
+texture = ExtResource("1_m6qc7")
+region_enabled = true
+region_rect = Rect2(0, 0, 220, 3)
+
+[node name="DottedLine4" type="Sprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(273.5, 92)
+rotation = 1.57079
+texture = ExtResource("1_m6qc7")
+region_enabled = true
+region_rect = Rect2(0, 0, 116, 3)
+
+[node name="ItemTitle" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0.517647)
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.16875
+anchor_top = -0.572222
+anchor_right = 0.0375
+anchor_bottom = -0.522222
+offset_left = 152.0
+offset_top = 135.0
+offset_right = 210.0
+offset_bottom = 150.0
+pivot_offset = Vector2(18, 8)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_t6ss3")
+theme_override_font_sizes/font_size = 19
+text = "Game Over"
+horizontal_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="ItemTitle2" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0.517647)
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.16875
+anchor_top = -0.433333
+anchor_right = 0.0375
+anchor_bottom = -0.433333
+offset_left = 152.0
+offset_top = 135.0
+offset_right = 210.0
+offset_bottom = 150.0
+pivot_offset = Vector2(18, 8)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_t6ss3")
+theme_override_font_sizes/font_size = 12
+text = "Score:"
+horizontal_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="ScoreLabel" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0.517647)
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.16875
+anchor_top = -0.355556
+anchor_right = 0.0375
+anchor_bottom = -0.355556
+offset_left = 152.0
+offset_top = 135.0
+offset_right = 210.0
+offset_bottom = 150.0
+pivot_offset = Vector2(18, 8)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_t6ss3")
+theme_override_font_sizes/font_size = 8
+text = "1337"
+horizontal_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="ItemTitle5" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0.517647)
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.16875
+anchor_top = -0.166667
+anchor_right = 0.0375
+anchor_bottom = -0.166667
+offset_left = 152.0
+offset_top = 135.0
+offset_right = 210.0
+offset_bottom = 150.0
+pivot_offset = Vector2(18, 8)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_t6ss3")
+theme_override_font_sizes/font_size = 8
+text = "6969"
+horizontal_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="ItemTitle4" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0.517647)
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.16875
+anchor_top = -0.244444
+anchor_right = 0.0375
+anchor_bottom = -0.244444
+offset_left = 152.0
+offset_top = 135.0
+offset_right = 210.0
+offset_bottom = 150.0
+pivot_offset = Vector2(18, 8)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_t6ss3")
+theme_override_font_sizes/font_size = 12
+text = "Highscore"
+horizontal_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 131.0
+offset_right = 174.0
+offset_bottom = 139.0
+texture_normal = ExtResource("3_hwhak")

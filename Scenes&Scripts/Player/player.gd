@@ -20,7 +20,8 @@ var dust_scene = preload("res://Scenes&Scripts/Player/Dust/dust_trail.tscn")
 var coin_count: int = 100
 var coin_multiplier: int = 0
 var is_hurting: bool = false
-@export var autoplay: bool = true
+@export var autoplay: bool = false
+@export var alive: bool = true
 
 #var has_key := false
 var has_key := false
@@ -67,65 +68,67 @@ func _ready():
 func _physics_process(delta):
 	var is_moving = velocity.length() > 0.5
 
-	if !is_hurting:
-		if is_moving and !is_dashing:
-			sprite.play("walk")  # play walk only if moving
-			var current_frame = sprite.frame
-			if current_frame != last_frame:
-				if current_frame == 1 or current_frame == 3:
-					spawn_dust()
-				last_frame = current_frame
+	if alive:
+		if !is_hurting:
+			if is_moving and !is_dashing:
+				sprite.play("walk")  # play walk only if moving
+				var current_frame = sprite.frame
+				if current_frame != last_frame:
+					if current_frame == 1 or current_frame == 3:
+						spawn_dust()
+					last_frame = current_frame
+			else:
+				sprite.play("idle")
 		else:
-			sprite.play("idle")
-	else:
-			sprite.play("hurt")
-	
-	if is_dashing:
-		velocity = dash_direction * dash_speed
-		dash_timer -= delta
-		if dash_timer <= 0.0:
-			is_dashing = false
-	if Input.is_action_just_pressed("dash") and not is_dashing:
-		print("DASHING")
-		var input_dir = Vector2(
-			Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
-			Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
-		).normalized()
+				sprite.play("hurt")
+		
+		if is_dashing:
+			velocity = dash_direction * dash_speed
+			dash_timer -= delta
+			if dash_timer <= 0.0:
+				is_dashing = false
+		if Input.is_action_just_pressed("dash") and not is_dashing:
+			print("DASHING")
+			var input_dir = Vector2(
+				Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
+				Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
+			).normalized()
 
-		if input_dir != Vector2.ZERO:
-			dash_direction = input_dir
-			is_dashing = true
-			dash_timer = dash_duration
+			if input_dir != Vector2.ZERO:
+				dash_direction = input_dir
+				is_dashing = true
+				dash_timer = dash_duration
 
 
-	var input_vector = Vector2.ZERO
+		var input_vector = Vector2.ZERO
 
-	input_vector = Vector2(
-			Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
-			Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
-		).normalized()
+		input_vector = Vector2(
+				Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
+				Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
+			).normalized()
 
-	if autoplay and Game.orb and  input_vector == Vector2.ZERO:
-		var direction_y = sign(Game.orb.global_position.y - global_position.y)
-		input_vector = Vector2(0, direction_y)
+		if autoplay and Game.orb and  input_vector == Vector2.ZERO:
+			var direction_y = sign(Game.orb.global_position.y - global_position.y)
+			input_vector = Vector2(0, direction_y)
 
-	if input_vector != Vector2.ZERO:
-		velocity = velocity.move_toward(input_vector * max_speed, accel * delta)
-	else:
-		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
-	
-	move_and_slide()
-	
-		# Face the orb
-	if Game.orb:
-		sprite.flip_h = Game.orb.global_position.x < global_position.x
+		if input_vector != Vector2.ZERO:
+			velocity = velocity.move_toward(input_vector * max_speed, accel * delta)
+		else:
+			velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
+		
+		
+		move_and_slide()
+		
+			# Face the orb
+		if Game.orb:
+			sprite.flip_h = Game.orb.global_position.x < global_position.x
 
-	
-	if Game.orb:
-		var to_orb = Game.orb.global_position - global_position
-		if to_orb.length() > 1:
-			var cock_angle = to_orb.angle() + PI  # Face opposite direction
-			sword.rotation = cock_angle + sword_desired_offset + PI / 2
+		
+		if Game.orb:
+			var to_orb = Game.orb.global_position - global_position
+			if to_orb.length() > 1:
+				var cock_angle = to_orb.angle() + PI  # Face opposite direction
+				sword.rotation = cock_angle + sword_desired_offset + PI / 2
 
 func apply_damage():
 	if is_hurting:
@@ -205,4 +208,9 @@ func collect_battle_pickup(pickup_type: String) -> void:
 			StatsManager.ball_speed_multiplier *= 0.85
 
 func game_over():
-	pass
+	alive = false
+	$Sword.hide()
+	sprite.play("die")
+	await get_tree().create_timer(1.5).timeout
+	var game_over_screen = get_tree().get_first_node_in_group("GameOverScreen")
+	game_over_screen.show_scores()
