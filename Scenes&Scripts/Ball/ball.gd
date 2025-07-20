@@ -64,7 +64,7 @@ func _on_coin_area_entered(area: Area2D):
 
 func _on_proximity_body_entered(body):
 	if body.is_in_group("Player"):
-		if Game.player.is_dashing:
+		if Game.player.is_dashing or Game.player.dash_coyote_timer > 0.0:
 			freeze_time()
 		Game.player.swing_sword()
 

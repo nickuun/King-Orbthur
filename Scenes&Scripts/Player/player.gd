@@ -22,6 +22,11 @@ var coin_multiplier: int = 0
 var is_hurting: bool = false
 @export var autoplay: bool = false
 @export var alive: bool = true
+@export var dash_coyote_time: float = 0.15
+var dash_coyote_timer: float = 0.0
+@export var dash_directional_influence: float = 0.2
+
+
 
 @export var dash_cooldown_duration: float = 0.5
 var dash_cooldown_timer: float = 0.0
@@ -74,6 +79,8 @@ func _physics_process(delta):
 	var is_moving = velocity.length() > 0.5
 
 	if alive:
+		dash_coyote_timer = max(dash_coyote_timer - delta, 0.0)
+
 		dash_cooldown_timer = max(dash_cooldown_timer - delta, 0.0)
 
 		if is_dashing:
@@ -92,10 +99,19 @@ func _physics_process(delta):
 
 		
 		if is_dashing:
-			velocity = dash_direction * dash_speed
+			var input_dir = Vector2(
+				Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
+				Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
+			).normalized()
+			
+			var influence = input_dir * dash_speed * dash_directional_influence
+			velocity = (dash_direction * dash_speed) + influence
+
 			dash_timer -= delta
 			if dash_timer <= 0.0:
 				is_dashing = false
+				dash_coyote_timer = dash_coyote_time
+
 				
 		if Input.is_action_just_pressed("dash") and not is_dashing:
 			if dash_cooldown_timer > 0:
