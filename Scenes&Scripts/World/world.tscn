@@ -241,6 +241,7 @@ visible = false
 
 [node name="CheatWindow" parent="CanvasLayer" instance=ExtResource("19_iads3")]
 process_mode = 3
+visible = false
 
 [connection signal="body_exited" from="EdgeContainers/Camera2D/BallStartPos" to="Ball" method="_on_ball_start_pos_body_exited"]
 [connection signal="body_entered" from="EdgeContainers/Camera2D/BackWall" to="Ball" method="_on_back_wall_body_entered"]

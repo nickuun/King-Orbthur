@@ -63,7 +63,7 @@ func _navigate_history(direction: int):
 	input_field.set_caret_column(input_field.text.length())
 
 func _execute_command():
-	var command = input_field.text.strip_edges()
+	var command = input_field.text.strip_edges().to_lower()
 	if command.is_empty():
 		_hide_console()
 		return
