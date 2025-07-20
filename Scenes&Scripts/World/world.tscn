@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dpqkxlaa6c4o3"]
+[gd_scene load_steps=23 format=3 uid="uid://dpqkxlaa6c4o3"]
 
 [ext_resource type="Script" uid="uid://b054o1j18drrq" path="res://Scenes&Scripts/World/world.gd" id="1_1eef5"]
 [ext_resource type="PackedScene" uid="uid://ni1fdvifit6o" path="res://Scenes&Scripts/Player/player.tscn" id="1_3mgr3"]
@@ -17,6 +17,13 @@
 [ext_resource type="Texture2D" uid="uid://bhse1kp22lqby" path="res://Sprites/Pixel_Icons/Alchemy_Alembic_Crafting_Brewing_Station_Full.png" id="12_a2x15"]
 [ext_resource type="Texture2D" uid="uid://swg7857q0bhs" path="res://Sprites/Coins/Coin Sheet.png" id="12_poia6"]
 [ext_resource type="PackedScene" uid="uid://cyg4ueel6i320" path="res://UI/ItemPopup/item_popup.tscn" id="16_a2x15"]
+[ext_resource type="PackedScene" uid="uid://d0b56ttynlexk" path="res://Scenes&Scripts/Wall/pickup_rescue_zone.tscn" id="18_rqldd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iads3"]
+size = Vector2(32, 315)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rqldd"]
+size = Vector2(166, 20)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4r4ay"]
 radius = 14.0
@@ -36,6 +43,37 @@ ball_scene = ExtResource("2_lo3b5")
 [node name="Camera2D" type="Camera2D" parent="EdgeContainers" groups=["Camera"]]
 position = Vector2(159, 92)
 position_smoothing_enabled = true
+
+[node name="PickupRescueZone" parent="EdgeContainers/Camera2D" instance=ExtResource("18_rqldd")]
+position = Vector2(-159, -92)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EdgeContainers/Camera2D/PickupRescueZone"]
+position = Vector2(156.5, -6.99983)
+rotation = -1.57079
+shape = SubResource("RectangleShape2D_iads3")
+debug_color = Color(0.637371, 0.373653, 0.935129, 0.42)
+
+[node name="PickupRescueZone3" parent="EdgeContainers/Camera2D" instance=ExtResource("18_rqldd")]
+position = Vector2(158, -152)
+rotation = 1.57079
+collision_layer = 1
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EdgeContainers/Camera2D/PickupRescueZone3"]
+position = Vector2(152, -5.99985)
+shape = SubResource("RectangleShape2D_rqldd")
+debug_color = Color(0.597047, 0.386676, 0.968994, 0.42)
+
+[node name="PickupRescueZone2" parent="EdgeContainers/Camera2D" instance=ExtResource("18_rqldd")]
+position = Vector2(-158, 106)
+collision_layer = 1
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EdgeContainers/Camera2D/PickupRescueZone2"]
+position = Vector2(156.5, -6.99983)
+rotation = -1.57079
+shape = SubResource("RectangleShape2D_iads3")
+debug_color = Color(0.637371, 0.373653, 0.935129, 0.42)
 
 [node name="DottedLine2" type="Sprite2D" parent="EdgeContainers/Camera2D"]
 texture_filter = 1

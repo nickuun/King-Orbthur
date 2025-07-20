@@ -61,13 +61,6 @@ func _spawn_columns_sequentially(count: int) -> void:
 		for row_index in range(max_rows):
 			var brick = chest_bricks.instantiate() if chest_indexes.has(stage_brick_index) else bricks.instantiate()
 			
-			# 🗝️ Assign key if this is the selected brick
-
-				# Mark brick for key drop if its index matches
-				
-			#if stage_brick_index == 3:  # Hardcoded test
-				#brick.drops_key = true
-
 			if stage_brick_index == key_brick_index:
 				if is_instance_valid(brick) and "drops_key" in brick:
 					brick.drops_key = true

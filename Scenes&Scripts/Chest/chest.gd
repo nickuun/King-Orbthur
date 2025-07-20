@@ -3,6 +3,8 @@ extends RigidBody2D
 @export var hit_points: int = 5
 signal brick_destroyed(brick: Node)
 var stage_index: int = -1  # Default to invalid
+var drops_key: bool = false  # Enable chest to drop a key
+
 
 var coin_scene = preload("res://Scenes&Scripts/Coin/coin.tscn")
 
@@ -30,6 +32,16 @@ func _on_hit():
 			coin.global_position = global_position
 			var offset = Vector2(randf_range(-32, 32), randf_range(-20, -40))
 			coin.launch_to(global_position + offset)
+		# 🗝️ Drop a key if this chest was marked
+		
+		if drops_key:
+			print("🗝️ Dropped key from chest!")
+			var key = preload("res://Scenes&Scripts/Key/key.tscn").instantiate()
+			get_tree().current_scene.add_child(key)
+			key.global_position = global_position
+			var offset = Vector2(randf_range(-24, 24), randf_range(-24, -40))
+			key.launch_to(global_position + offset)
+
 
 		emit_signal("brick_destroyed", self)
 		get_tree().get_first_node_in_group("ScoreLabel").add_points(10)
