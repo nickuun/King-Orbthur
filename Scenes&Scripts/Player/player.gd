@@ -27,7 +27,7 @@ var is_hurting: bool = false
 var dash_cooldown_timer: float = 0.0
 
 #var has_key := false
-var key_count: int = 6
+var key_count: int = 0
 
 
 func swing_sword():

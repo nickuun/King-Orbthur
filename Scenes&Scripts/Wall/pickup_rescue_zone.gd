@@ -12,12 +12,12 @@ func _ready():
 func _on_area_entered(area):
 	if area.is_in_group("pickup") and not tracked_pickups.has(area):
 		tracked_pickups.append(area)
-		print("🧲 RescueZone: Tracking", area.name)
+		#print("🧲 RescueZone: Tracking", area.name)
 
 func _on_area_exited(area):
 	if tracked_pickups.has(area):
 		tracked_pickups.erase(area)
-		print("🧲 RescueZone: Released", area.name)
+		#print("🧲 RescueZone: Released", area.name)
 
 func _process(delta):
 	# Determine safe target — usually player

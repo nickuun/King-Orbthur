@@ -61,10 +61,10 @@ func _spawn_columns_sequentially(count: int) -> void:
 		for row_index in range(max_rows):
 			var brick = chest_bricks.instantiate() if chest_indexes.has(stage_brick_index) else bricks.instantiate()
 			
-			if stage_brick_index == key_brick_index:
-				if is_instance_valid(brick) and "drops_key" in brick:
-					brick.drops_key = true
-					print("✅ Marked brick index %d to drop key" % stage_brick_index)
+			#if stage_brick_index == key_brick_index:
+				#if is_instance_valid(brick) and "drops_key" in brick:
+					#brick.drops_key = true
+					#print("✅ Marked brick index %d to drop key" % stage_brick_index)
 
 			brick.position = Vector2(x, row_index * row_spacing)
 			brick.stage_index = stage_brick_index
@@ -73,7 +73,7 @@ func _spawn_columns_sequentially(count: int) -> void:
 
 			bricks_remaining += 1
 			stage_bricks_remaining += 1
-			stage_brick_index += 1
+			#stage_brick_index += 1
 
 		print("🧱 Spawned column", current_column_index)
 		current_column_index += 1
@@ -92,8 +92,8 @@ func _spawn_next_stage():
 
 	match spawn_stage:
 		0:
-			#_spawn_next_columns(1)
-			_spawn_locked_door_column()
+			_spawn_next_columns(1)
+			#_spawn_locked_door_column()
 		1: _spawn_next_columns(2)
 		2: _spawn_next_columns(3)
 		3: _spawn_next_columns(1)
@@ -120,32 +120,31 @@ func _spawn_locked_door_column():
 	door_spawned = true
 	print("🚪 Spawning locked door!")
 
-	# 🔐 Pick a brick that already exists and is alive
+	# 🔐 Find a valid, active brick to drop the key
 	var candidates := []
 	for brick in $LevelContainer.get_children():
-		# Only add if it's a brick and not queued to be freed
 		if brick.has_method("_on_hit") and not brick.is_queued_for_deletion():
 			candidates.append(brick)
 
 	if candidates.size() > 0:
 		var chosen = candidates.pick_random()
 		chosen.drops_key = true
-		print("✅ Key will drop from EXISTING brick with index:", chosen.stage_index)
+		print("✅ Key assigned to visible brick:", chosen.name, "at stage index", chosen.stage_index)
 	else:
-		print("⚠️ No valid bricks available to assign key!")
+		print("⚠️ No valid bricks to assign key!")
 
-	# 🧱 Spawn the actual locked door
+	# 🚪 Spawn the actual locked door
 	var door := locked_door_scene.instantiate()
 	var x = current_column_index * column_spacing
 	door.position = Vector2(x, 0)
 	$LevelContainer.add_child(door)
 
-	# Smooth scroll
+	# 👉 Smooth scroll
 	var edge = get_tree().get_first_node_in_group("EdgeContainers")
 	var from_pos = edge.position
 	var to_pos = from_pos + Vector2(column_spacing, 0)
 
-	var tween := create_tween()
+	var tween = create_tween()
 	tween.tween_property(edge, "position", to_pos, 1.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 
 	current_column_index += 1

@@ -9,7 +9,8 @@ var history_index: int = -1
 var command_map: Dictionary = {
 	"/heal_full": func(): _heal_player(),
 	"/autoplay_on": func(): Game.player.autoplay = true,
-	"/autoplay_off": func(): Game.player.autoplay = false
+	"/autoplay_off": func(): Game.player.autoplay = false,
+	"/give_key": func(): Game.player.key_count += 1
 }
 
 func _ready():
