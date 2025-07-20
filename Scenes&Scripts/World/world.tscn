@@ -1,10 +1,11 @@
-[gd_scene load_steps=25 format=3 uid="uid://dpqkxlaa6c4o3"]
+[gd_scene load_steps=27 format=3 uid="uid://dpqkxlaa6c4o3"]
 
 [ext_resource type="Script" uid="uid://b054o1j18drrq" path="res://Scenes&Scripts/World/world.gd" id="1_1eef5"]
 [ext_resource type="PackedScene" uid="uid://ni1fdvifit6o" path="res://Scenes&Scripts/Player/player.tscn" id="1_3mgr3"]
 [ext_resource type="PackedScene" uid="uid://c62fikdpk3nl6" path="res://Scenes&Scripts/Ball/ball.tscn" id="2_lo3b5"]
 [ext_resource type="Script" uid="uid://p04n620wdjmb" path="res://Scenes&Scripts/Ball/BallStartPos/ball_start_pos.gd" id="3_cehqr"]
 [ext_resource type="PackedScene" uid="uid://b3e0j2mnr5tpy" path="res://Scenes&Scripts/Wall/wall.tscn" id="3_senvn"]
+[ext_resource type="AudioStream" uid="uid://8pu1nl2hxmr3" path="res://Assets/Music/Castle Quest/Castle Quest.mp3" id="3_xdxaw"]
 [ext_resource type="PackedScene" uid="uid://bpm76d0d2pyqt" path="res://Scenes&Scripts/Wall/playerboundry.tscn" id="5_qhwu4"]
 [ext_resource type="PackedScene" uid="uid://dikdtfgtdq853" path="res://Managers/brick_grid_manager.tscn" id="5_r6fjf"]
 [ext_resource type="Texture2D" uid="uid://c83wg2su386px" path="res://Sprites/Walls/EdgeContainers/DottedLine.png" id="6_dfhr7"]
@@ -20,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://d0b56ttynlexk" path="res://Scenes&Scripts/Wall/pickup_rescue_zone.tscn" id="18_rqldd"]
 [ext_resource type="PackedScene" uid="uid://bsatq3tfmwtcv" path="res://UI/cheat_window.tscn" id="19_iads3"]
 [ext_resource type="PackedScene" uid="uid://bbggl2ochu7ya" path="res://UI/GameOver/game_over_screen.tscn" id="20_rp57k"]
+[ext_resource type="PackedScene" uid="uid://vfe8l7oos0kv" path="res://UI/PauseMenu/pause_menu.tscn" id="21_lo6en"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iads3"]
 size = Vector2(32, 315)
@@ -37,6 +39,12 @@ size = Vector2(20, 183)
 texture_filter = 1
 script = ExtResource("1_1eef5")
 ball_scene = ExtResource("2_lo3b5")
+
+[node name="MusicPlayer" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+stream = ExtResource("3_xdxaw")
+autoplay = true
+bus = &"Music"
 
 [node name="BaseTerrainTilemap" parent="." instance=ExtResource("10_h8k3j")]
 
@@ -245,6 +253,9 @@ process_mode = 3
 visible = false
 
 [node name="GameOverScreen" parent="CanvasLayer" instance=ExtResource("20_rp57k")]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("21_lo6en")]
+process_mode = 3
 
 [connection signal="body_exited" from="EdgeContainers/Camera2D/BallStartPos" to="Ball" method="_on_ball_start_pos_body_exited"]
 [connection signal="body_entered" from="EdgeContainers/Camera2D/BackWall" to="Ball" method="_on_back_wall_body_entered"]

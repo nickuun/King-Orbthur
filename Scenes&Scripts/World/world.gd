@@ -29,7 +29,10 @@ func restart_game():
 	SeedManager.set_seed(SeedManager.generate_seed())
 
 	get_tree().change_scene_to_file(scene_path)
-	
+
+
+
+
 func respawn_ball():
 	# Clean up any existing ball if needed
 	for ball in get_tree().get_nodes_in_group("Ball"):

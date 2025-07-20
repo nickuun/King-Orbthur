@@ -1,0 +1,116 @@
+[gd_scene load_steps=7 format=3 uid="uid://vfe8l7oos0kv"]
+
+[ext_resource type="Script" uid="uid://cgcceusixc0oe" path="res://UI/PauseMenu/pause_menu.gd" id="1_af6kt"]
+[ext_resource type="FontFile" uid="uid://c8x1ul0g5boh8" path="res://Assets/Fonts/Kenney Mini.ttf" id="1_lq2tb"]
+[ext_resource type="Texture2D" uid="uid://c83wg2su386px" path="res://Sprites/Walls/EdgeContainers/DottedLine.png" id="2_af6kt"]
+[ext_resource type="Texture2D" uid="uid://cmp7up2rbtoti" path="res://Sprites/Healthbar/GreenUnder.png" id="3_s0ulm"]
+[ext_resource type="Texture2D" uid="uid://1sjc41rtbing" path="res://Sprites/Healthbar/RedUnder.png" id="4_i14rv"]
+[ext_resource type="Texture2D" uid="uid://cs65xjwixtxgf" path="res://Sprites/Pixel_Icons/Media_Audio_Ear_Hearing_Volume_0_Deaf_Disabled_Muted.png" id="6_s0ulm"]
+
+[node name="PauseMenu" type="Control" groups=["PauseMenu"]]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_af6kt")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -109.0
+offset_top = -59.0
+offset_right = 114.0
+offset_bottom = 61.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.764706)
+
+[node name="ItemTitle" type="Label" parent="ColorRect"]
+modulate = Color(1, 1, 1, 0.517647)
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.430493
+anchor_top = -1.075
+anchor_right = -0.219731
+anchor_bottom = -1.0
+offset_left = 152.0
+offset_top = 135.0
+offset_right = 210.0
+offset_bottom = 150.0
+pivot_offset = Vector2(18, 8)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_lq2tb")
+theme_override_font_sizes/font_size = 19
+text = "Paused:"
+horizontal_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="DottedLine3" type="Sprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(51.5001, 92)
+rotation = 1.57079
+texture = ExtResource("2_af6kt")
+region_enabled = true
+region_rect = Rect2(0, 0, 116, 3)
+
+[node name="DottedLine5" type="Sprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(162, 31)
+texture = ExtResource("2_af6kt")
+region_enabled = true
+region_rect = Rect2(0, 0, 220, 3)
+
+[node name="DottedLine6" type="Sprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(162, 151)
+texture = ExtResource("2_af6kt")
+region_enabled = true
+region_rect = Rect2(0, 0, 220, 3)
+
+[node name="DottedLine4" type="Sprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(273.5, 92)
+rotation = 1.57079
+texture = ExtResource("2_af6kt")
+region_enabled = true
+region_rect = Rect2(0, 0, 116, 3)
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 145.0
+offset_top = 89.0
+offset_right = 175.0
+offset_bottom = 97.0
+texture_normal = ExtResource("3_s0ulm")
+
+[node name="TextureButton2" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 145.0
+offset_top = 124.0
+offset_right = 175.0
+offset_bottom = 132.0
+texture_normal = ExtResource("4_i14rv")
+
+[node name="HSlider" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 238.0
+offset_top = 6.0
+offset_right = 311.0
+offset_bottom = 22.0
+
+[node name="MediaAudioEarHearingVolume0DeafDisabledMuted" type="Sprite2D" parent="."]
+position = Vector2(227, 14)
+texture = ExtResource("6_s0ulm")

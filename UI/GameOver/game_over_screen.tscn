@@ -13,7 +13,6 @@ colors = PackedColorArray(0, 0, 0, 1)
 gradient = SubResource("Gradient_0ye0n")
 
 [node name="GameOverScreen" type="Control" groups=["GameOverScreen"]]
-visible = false
 texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
