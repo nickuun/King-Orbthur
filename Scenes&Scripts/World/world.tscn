@@ -116,7 +116,7 @@ rotation = 1.57079
 position = Vector2(-159, -92)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EdgeContainers/Camera2D/BackWall"]
-position = Vector2(-1, 90)
+position = Vector2(-10, 91)
 shape = SubResource("RectangleShape2D_tsomi")
 debug_color = Color(0.886326, 0.330618, 0, 0.42)
 
@@ -253,9 +253,11 @@ process_mode = 3
 visible = false
 
 [node name="GameOverScreen" parent="CanvasLayer" instance=ExtResource("20_rp57k")]
+visible = false
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("21_lo6en")]
 process_mode = 3
+visible = false
 
 [connection signal="body_exited" from="EdgeContainers/Camera2D/BallStartPos" to="Ball" method="_on_ball_start_pos_body_exited"]
 [connection signal="body_entered" from="EdgeContainers/Camera2D/BackWall" to="Ball" method="_on_back_wall_body_entered"]

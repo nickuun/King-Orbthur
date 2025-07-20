@@ -5,7 +5,8 @@ extends CharacterBody2D
 @export var bounce_strength: float = 1.0
 var should_respawn := false
 var held_coins: Array = []
-enum BallState { NORMAL, FROZEN, RETURNING, RETURNED }
+enum BallState { NORMAL, FROZEN, RETURNING, RETURNED, FOLLOWING }
+
 var state: BallState = BallState.NORMAL
 @export var shrink_speed := 2.0
 var previous_velocity = Vector2.ZERO
@@ -89,8 +90,8 @@ func _on_proximity_body_entered(body):
 
 		var actual_speed = ball_speed * StatsManager.ball_speed_multiplier
 		velocity = knock_dir * actual_speed
-
-		Game.player.apply_knockback(-knock_dir, 100)
+		if !state == BallState.FOLLOWING:
+			Game.player.apply_knockback(-knock_dir, 100)
 
 		# Drop off coins...
 		for coin in held_coins:
@@ -123,9 +124,12 @@ func _physics_process(delta: float) -> void:
 		global_position = global_position.lerp(Game.player.global_position, 3.0 * delta)
 
 		if global_position.distance_to(Game.player.global_position) < 6:
-			state = BallState.RETURNED
-			queue_free()
-			Game.on_orb_collected()
+			print("✅ Orb reached player — now following.")
+			state = BallState.FOLLOWING
+	elif state == BallState.FOLLOWING:
+		var follow_target = Game.player.global_position + Vector2(0, -20)
+		global_position = global_position.lerp(follow_target, 5.0 * delta)
+
 	else:
 		velocity = Vector2.ZERO
 
@@ -155,10 +159,11 @@ func respawn():
 		spawn_node.connect("body_exited", Callable(self, "_on_respawn_area_cleared"), CONNECT_ONE_SHOT)
 
 func _on_back_wall_body_entered(body: Node2D) -> void:
-	if body.is_in_group("Damage"):
-		print("Applying damage")
-		Game.player.apply_damage()
-	respawn()
+	if state == BallState.NORMAL:
+		if body.is_in_group("Damage"):
+			print("Applying damage")
+			Game.player.apply_damage()
+		respawn()
 
 func _on_ball_start_pos_body_exited(body: Node2D) -> void:
 	print("Bpdy exited")

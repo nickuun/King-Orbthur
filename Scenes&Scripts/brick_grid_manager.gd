@@ -92,8 +92,8 @@ func _spawn_next_stage():
 
 	match spawn_stage:
 		0:
-			_spawn_next_columns(1)
-			#_spawn_locked_door_column()
+			#_spawn_next_columns(1)
+			_spawn_locked_door_column()
 		1: _spawn_next_columns(2)
 		2: _spawn_next_columns(3)
 		3: _spawn_next_columns(1)

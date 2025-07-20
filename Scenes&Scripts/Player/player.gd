@@ -17,7 +17,7 @@ var sword_side = "left"
 @onready var sprite = $AnimatedSprite2D
 var last_frame = -1
 var dust_scene = preload("res://Scenes&Scripts/Player/Dust/dust_trail.tscn")
-var coin_count: int = 100
+var coin_count: int = 0
 var coin_multiplier: int = 0
 var is_hurting: bool = false
 @export var autoplay: bool = false
@@ -27,8 +27,7 @@ var is_hurting: bool = false
 var dash_cooldown_timer: float = 0.0
 
 #var has_key := false
-var key_count: int = 0
-
+var key_count: int = 3
 
 func swing_sword():
 	if Game.orb and Game.orb.state == Game.orb.BallState.NORMAL:
