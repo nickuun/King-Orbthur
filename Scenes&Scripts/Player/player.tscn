@@ -1,8 +1,20 @@
-[gd_scene load_steps=23 format=3 uid="uid://ni1fdvifit6o"]
+[gd_scene load_steps=26 format=3 uid="uid://ni1fdvifit6o"]
 
 [ext_resource type="Texture2D" uid="uid://xac2cbttqn2v" path="res://Sprites/camelot_ [version 1.0]/camelot_ [version 1.0]/arthurPendragon_.png" id="1_i5wxm"]
 [ext_resource type="Script" uid="uid://c1rshh02kg0ip" path="res://Scenes&Scripts/Player/player.gd" id="1_y7hhy"]
 [ext_resource type="PackedScene" uid="uid://chnfkcosmplfx" path="res://Scenes&Scripts/Player/Sword/sword.tscn" id="2_endnh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_52r8g"]
+atlas = ExtResource("1_i5wxm")
+region = Rect2(0, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8t7md"]
+atlas = ExtResource("1_i5wxm")
+region = Rect2(32, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jwx4m"]
+atlas = ExtResource("1_i5wxm")
+region = Rect2(64, 160, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_id5bn"]
 atlas = ExtResource("1_i5wxm")
@@ -70,6 +82,20 @@ region = Rect2(96, 32, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_sbqqg"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_52r8g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8t7md")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jwx4m")
+}],
+"loop": false,
+"name": &"dash",
+"speed": 12.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_id5bn")
@@ -157,8 +183,10 @@ script = ExtResource("1_y7hhy")
 texture_filter = 1
 position = Vector2(0, -4)
 sprite_frames = SubResource("SpriteFrames_sbqqg")
-animation = &"idle"
+animation = &"dash"
 autoplay = "idle"
+frame = 2
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_i5wxm")

@@ -13,10 +13,10 @@ func _on_body_entered(body: Node):
 		
 		
 	#if body.name == "Ball":
-	if body.name == "Ball" and Game.player.has_key:
+	if body.name == "Ball" and Game.player.key_count > 0:
 		print("🔓 Unlocking door!")
 		is_unlocked = true
-		Game.player.has_key = false  # Consume key
+		Game.player.key_count -= 1
 		#$AnimatedSprite2D.play("unlock")  # Optional animation
 		#await $AnimatedSprite2D.animation_finished
 		get_tree().get_first_node_in_group("MiddleBoundry").unlock_boundary()

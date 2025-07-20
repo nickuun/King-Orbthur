@@ -122,6 +122,11 @@ func respawn():
 	print("respawn ball triggered")
 	returning = false
 	
+	var tree = get_tree()
+	if tree == null:
+		push_error("🚫 Tree not available yet during respawn!")
+		return
+	
 	var spawn_node = get_tree().get_first_node_in_group("BallStartPos")
 	if not spawn_node:
 		push_error("No BallStartPos in group!")

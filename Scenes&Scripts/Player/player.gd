@@ -23,8 +23,12 @@ var is_hurting: bool = false
 @export var autoplay: bool = false
 @export var alive: bool = true
 
+@export var dash_cooldown_duration: float = 0.5
+var dash_cooldown_timer: float = 0.0
+
 #var has_key := false
-var has_key := false
+var key_count: int = 0
+
 
 func swing_sword():
 	if !Game.orb.returning:
@@ -69,35 +73,46 @@ func _physics_process(delta):
 	var is_moving = velocity.length() > 0.5
 
 	if alive:
-		if !is_hurting:
-			if is_moving and !is_dashing:
-				sprite.play("walk")  # play walk only if moving
-				var current_frame = sprite.frame
-				if current_frame != last_frame:
-					if current_frame == 1 or current_frame == 3:
-						spawn_dust()
-					last_frame = current_frame
-			else:
-				sprite.play("idle")
+		dash_cooldown_timer = max(dash_cooldown_timer - delta, 0.0)
+
+		if is_dashing:
+			sprite.play("dash")
+		elif is_hurting:
+			sprite.play("hurt")
+		elif is_moving:
+			sprite.play("walk")
+			var current_frame = sprite.frame
+			if current_frame != last_frame:
+				if current_frame == 1 or current_frame == 3:
+					spawn_dust()
+				last_frame = current_frame
 		else:
-				sprite.play("hurt")
+			sprite.play("idle")
+
 		
 		if is_dashing:
 			velocity = dash_direction * dash_speed
 			dash_timer -= delta
 			if dash_timer <= 0.0:
 				is_dashing = false
+				
 		if Input.is_action_just_pressed("dash") and not is_dashing:
-			print("DASHING")
-			var input_dir = Vector2(
-				Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
-				Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
-			).normalized()
+			if dash_cooldown_timer > 0:
+				print("⏳ dash on cooldown!")
+			else:
+				print("DASHING")
+				var input_dir = Vector2(
+					Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
+					Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
+				).normalized()
 
-			if input_dir != Vector2.ZERO:
-				dash_direction = input_dir
-				is_dashing = true
-				dash_timer = dash_duration
+				if input_dir != Vector2.ZERO:
+					dash_direction = input_dir
+					is_dashing = true
+					dash_timer = dash_duration
+					dash_cooldown_timer = dash_cooldown_duration
+					sprite.play("dash")
+
 
 
 		var input_vector = Vector2.ZERO
@@ -158,8 +173,8 @@ func update_lifebar():
 	Game.lifebar.update_health_bar(current_health, max_health)
 	
 func obtain_key():
-	has_key = true
-	print("🔑 Key acquired!")
+	key_count += 1
+	print("🔑 Key acquired! Now have", key_count, "keys.")
 	
 func collect_battle_pickup(pickup_type: String) -> void:
 	match pickup_type:
