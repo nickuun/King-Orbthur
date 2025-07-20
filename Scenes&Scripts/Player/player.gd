@@ -27,11 +27,11 @@ var is_hurting: bool = false
 var dash_cooldown_timer: float = 0.0
 
 #var has_key := false
-var key_count: int = 0
+var key_count: int = 6
 
 
 func swing_sword():
-	if !Game.orb.returning:
+	if Game.orb and Game.orb.state == Game.orb.BallState.NORMAL:
 		if sword_side == "left": 
 			sword.get_node("Sprite").play("SwingRight")
 			sword_desired_offset = 180
@@ -40,6 +40,8 @@ func swing_sword():
 			sword.get_node("Sprite").play("SwingLeft")
 			sword_side = "left"
 			sword_desired_offset = -180
+	else:
+		print("⚠️ Can't swing — ball is frozen, returning, or gone.")
 
 func add_coin():
 	coin_count += coin_multiplier

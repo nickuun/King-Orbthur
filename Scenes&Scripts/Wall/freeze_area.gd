@@ -8,7 +8,7 @@ func _process(delta):
 	if inside:
 		timer += delta
 		if timer >= delay_before_freeze:
-			if is_instance_valid(Game.orb):
+			if is_instance_valid(Game.orb) and Game.orb.state == Game.orb.BallState.FROZEN:
 				Game.orb.return_to_player()
 
 func _on_body_entered(body):
@@ -20,7 +20,7 @@ func _on_body_entered(body):
 
 func _on_body_exited(body):
 	if body.is_in_group("Player"):
-		if is_instance_valid(Game.orb):
+		if is_instance_valid(Game.orb) and Game.orb.state == Game.orb.BallState.FROZEN:
 			Game.orb.unfreeze()
 			inside = false
 			timer = 0.0

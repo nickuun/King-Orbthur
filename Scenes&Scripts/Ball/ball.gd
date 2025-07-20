@@ -5,13 +5,14 @@ extends CharacterBody2D
 @export var bounce_strength: float = 1.0
 var should_respawn := false
 var held_coins: Array = []
-var returning := false
+enum BallState { NORMAL, FROZEN, RETURNING, RETURNED }
+var state: BallState = BallState.NORMAL
 @export var shrink_speed := 2.0
-var frozen := false
 var previous_velocity = Vector2.ZERO
 
 func _ready():
 		# Detect coin contact
+	respawn()
 	var spawn_node = get_tree().get_first_node_in_group("BallStartPos")
 	if spawn_node:
 		if not spawn_node.is_connected("body_exited", Callable(self, "_on_ball_start_pos_body_exited")):
@@ -30,16 +31,28 @@ func _ready():
 	$ProximityArea.body_entered.connect(_on_proximity_body_entered)
 
 func freeze():
+	if state == BallState.RETURNING or state == BallState.RETURNED:
+		return
 	previous_velocity = velocity
-	frozen = true
+	state = BallState.FROZEN
+
 	
 func unfreeze():
-	velocity = previous_velocity
-	frozen = false
+	if state == BallState.FROZEN:
+		velocity = previous_velocity
+		state = BallState.NORMAL
 
 func return_to_player():
-	returning = true
+	if state == BallState.RETURNING or state == BallState.RETURNED:
+		return
+	if state != BallState.FROZEN:
+		print("❌ Cannot return: ball not frozen!")
+		return
+	state = BallState.RETURNING
 	set_process(true)
+	print("🔁 Ball returning to player")
+
+
 
 func _on_coin_area_entered(area: Area2D):
 	if area.is_in_group("pickup") and not area.held_by_ball:
@@ -92,7 +105,7 @@ func _on_proximity_body_entered(body):
 		held_coins.clear()
 
 func _physics_process(delta: float) -> void:
-	if !frozen:
+	if state == BallState.NORMAL:
 		if velocity.length() == 0:
 			return
 		
@@ -106,22 +119,21 @@ func _physics_process(delta: float) -> void:
 			# Check for bricks
 			if collider.is_in_group("brick") and collider.has_method("_on_hit"):
 				collider._on_hit()
+	elif state == BallState.RETURNING:
+		global_position = global_position.lerp(Game.player.global_position, 3.0 * delta)
+
+		if global_position.distance_to(Game.player.global_position) < 6:
+			state = BallState.RETURNED
+			queue_free()
+			Game.on_orb_collected()
 	else:
-		if returning:
-			global_position = global_position.lerp(Game.player.global_position, 3.0 * delta)
-			#scale = scale.lerp(Vector2.ZERO, shrink_speed * delta)
-			
-			if global_position.distance_to(Game.player.global_position) < 6:
-				queue_free()  # or hide
-				Game.on_orb_collected()
-		
-		else:
-			velocity = Vector2.ZERO
+		velocity = Vector2.ZERO
 
 func respawn():
 	print("respawn ball triggered")
-	returning = false
-	
+	state = BallState.NORMAL
+	velocity = Vector2.ZERO
+	held_coins.clear()
 	var tree = get_tree()
 	if tree == null:
 		push_error("🚫 Tree not available yet during respawn!")
