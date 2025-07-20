@@ -43,38 +43,41 @@ func _on_proximity_body_entered(body):
 		if Game.player.is_dashing:
 			freeze_time()
 		Game.player.swing_sword()
+
+		var knock_dir = Vector2.ZERO
+		var to_ball = (global_position - body.global_position).normalized()
+
+		var player_velocity = body.velocity.normalized()
+		var ball_velocity = velocity.normalized()
+
+		var influence_factor = 0.4  # Controls how much player velocity affects the ball
+		var bounce_factor = 0.2     # How much original knock_dir matters
 		
-		var direction = (global_position - body.global_position).normalized()
-		var knock_dir: Vector2
+		if Game.player.is_dashing:
+			influence_factor = 0.9  # reward aggressive precision
+			bounce_factor = 0.3     # still retain a bit of bounce control
 
 		if velocity.length() > 0.1:
-			# Ball already moving — knock player in ball's current direction
-			knock_dir = velocity.normalized()
+			# Ball already moving — preserve some of its direction
+			knock_dir = (ball_velocity * 0.4 + to_ball * 0.6).normalized()
 		else:
-			# Ball was idle — knock player away from hit direction
-			knock_dir = (body.global_position - global_position).normalized()
-		
+			# Ball was idle — player influence more important
+			knock_dir = (to_ball * bounce_factor + player_velocity * influence_factor).normalized()
+
 		var actual_speed = ball_speed * StatsManager.ball_speed_multiplier
-		velocity = direction * actual_speed
-		
-		Game.player.apply_knockback(knock_dir, 100)
-		
-			# Drop off any coins held by the ball
+		velocity = knock_dir * actual_speed
+
+		Game.player.apply_knockback(-knock_dir, 100)
+
+		# Drop off coins...
 		for coin in held_coins:
 			if is_instance_valid(coin):
-				coin.held_by_ball = false  # It can now be picked up
-				coin.global_position = self.global_position
-				coin.show()  # Make visible again! 
-				coin.modulate = Color(1,1,1,1)  # Fully visible
-
-				## Optionally re-enable collision in case it's still disabled
-				#if coin.has_node("CollisionShape2D"):
-					#coin.get_node("CollisionShape2D").disabled = true  # Ensure re-disabled during relaunch
-
-				# Relaunch from the ball to the player with a bounce arc
+				coin.held_by_ball = false
+				coin.global_position = global_position
+				coin.show()
+				coin.modulate = Color(1, 1, 1, 1)
 				var drop_offset = Vector2(randf_range(-32, 32), randf_range(-20, -40))
 				coin.launch_to(Game.player.global_position + drop_offset)
-
 
 		held_coins.clear()
 

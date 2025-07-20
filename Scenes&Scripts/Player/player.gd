@@ -20,7 +20,7 @@ var dust_scene = preload("res://Scenes&Scripts/Player/Dust/dust_trail.tscn")
 var coin_count: int = 100
 var coin_multiplier: int = 0
 var is_hurting: bool = false
-@export var autoplay: bool = true
+@export var autoplay: bool = false
 
 #var has_key := false
 var has_key := false
