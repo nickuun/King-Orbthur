@@ -21,20 +21,19 @@ func generate_seed() -> String:
 	return seed
 
 func set_seed(seed_string: String):
-	# Strip spaces and uppercase
 	var seed_clean = seed_string.strip_edges().replace(" ", "").to_upper()
-
-	# Handle special seeds
 	if SPECIAL_SEEDS.has(seed_clean):
 		current_seed = seed_clean
 		SPECIAL_SEEDS[seed_clean].call()
-		# Still randomize to avoid collisions
 		rng.seed = hash_djb2(generate_seed())
 	else:
 		current_seed = seed_clean
-		rng.seed = hash_djb2(current_seed)
+		var seed_int = hash_djb2(current_seed)
+		rng.seed = seed_int
+		print("🎯 RNG seeded with:", seed_int)
 
 	print("🔢 Game seed set to:", current_seed)
+
 
 func get_seed() -> String:
 	return current_seed

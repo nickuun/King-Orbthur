@@ -31,21 +31,36 @@ var queued_stage_spawn: bool = false
 
 
 func _ready():
+	# Force re-apply the seed BEFORE using it
+	if Game.should_keep_seed:
+		SeedManager.set_seed(Game.get_seed())
+	else:
+		var new_seed = SeedManager.generate_seed()
+		Game.saved_seed = new_seed
+		SeedManager.set_seed(new_seed)
+
+	# Now proceed with generation
 	_generate_chest_indexes()
 	_spawn_next_stage()
-	#_spawn_locked_door_column()
+
 
 func _generate_chest_indexes():
 	var pool := []
 	for i in chest_cap:
 		pool.append(i)
 	SeedManager.shuffle_array(pool)
+	print("🧰 Chest pool after shuffle:", pool)
 
-	chest_indexes.append(pool[0])  # always 1 chest
+
+	# Log first few randoms
+	print("🔍 RNG sample:", SeedManager.randi(), SeedManager.randi(), SeedManager.randf())
+
+	chest_indexes.append(pool[0])
 	if chest_max > chest_min and SeedManager.randf() < 0.5:
 		chest_indexes.append(pool[1])
 
 	print("🧰 Chests (flat indices):", chest_indexes)
+
 
 func _spawn_next_columns(column_count: int) -> void:
 	await _spawn_columns_sequentially(column_count)
@@ -74,7 +89,7 @@ func _spawn_columns_sequentially(count: int) -> void:
 
 			bricks_remaining += 1
 			stage_bricks_remaining += 1
-			#stage_brick_index += 1
+			stage_brick_index += 1  # ✅ this is critica
 
 		print("🧱 Spawned column", current_column_index)
 		current_column_index += 1
@@ -90,6 +105,7 @@ func _spawn_columns_sequentially(count: int) -> void:
 
 func _spawn_next_stage():
 	stage_bricks_remaining = 0
+	
 
 	match spawn_stage:
 		0:
@@ -139,7 +155,7 @@ func _spawn_locked_door_column():
 			candidates.append(brick)
 
 	if candidates.size() > 0:
-		var chosen = candidates.pick_random()
+		var chosen = candidates[SeedManager.randi_range(0, candidates.size() - 1)]
 		chosen.drops_key = true
 		print("✅ Key assigned to visible brick:", chosen.name, "at stage index", chosen.stage_index)
 	else:

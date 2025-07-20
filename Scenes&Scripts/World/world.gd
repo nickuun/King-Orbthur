@@ -25,8 +25,12 @@ func restart_game():
 	var current_scene = get_tree().current_scene
 	var scene_path = current_scene.scene_file_path
 
-	Game.should_keep_seed = false
-	SeedManager.set_seed(SeedManager.generate_seed())
+	if Game.should_keep_seed and Game.saved_seed != "":
+		SeedManager.set_seed(Game.saved_seed)
+	else:
+		var new_seed = SeedManager.generate_seed()
+		Game.saved_seed = new_seed
+		SeedManager.set_seed(new_seed)
 
 	get_tree().change_scene_to_file(scene_path)
 

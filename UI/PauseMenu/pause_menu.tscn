@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://vfe8l7oos0kv"]
+[gd_scene load_steps=8 format=3 uid="uid://vfe8l7oos0kv"]
 
 [ext_resource type="Script" uid="uid://cgcceusixc0oe" path="res://UI/PauseMenu/pause_menu.gd" id="1_af6kt"]
 [ext_resource type="FontFile" uid="uid://c8x1ul0g5boh8" path="res://Assets/Fonts/Kenney Mini.ttf" id="1_lq2tb"]
 [ext_resource type="Texture2D" uid="uid://c83wg2su386px" path="res://Sprites/Walls/EdgeContainers/DottedLine.png" id="2_af6kt"]
 [ext_resource type="Texture2D" uid="uid://cmp7up2rbtoti" path="res://Sprites/Healthbar/GreenUnder.png" id="3_s0ulm"]
 [ext_resource type="Texture2D" uid="uid://1sjc41rtbing" path="res://Sprites/Healthbar/RedUnder.png" id="4_i14rv"]
+[ext_resource type="Texture2D" uid="uid://biui7joh61ipd" path="res://Sprites/Healthbar/OrangeUnder.png" id="6_i14rv"]
 [ext_resource type="Texture2D" uid="uid://cs65xjwixtxgf" path="res://Sprites/Pixel_Icons/Media_Audio_Ear_Hearing_Volume_0_Deaf_Disabled_Muted.png" id="6_s0ulm"]
 
 [node name="PauseMenu" type="Control" groups=["PauseMenu"]]
@@ -103,6 +104,13 @@ offset_top = 124.0
 offset_right = 175.0
 offset_bottom = 132.0
 texture_normal = ExtResource("4_i14rv")
+
+[node name="RestartWithSeedButton" type="TextureButton" parent="."]
+offset_left = 58.0
+offset_top = 138.0
+offset_right = 88.0
+offset_bottom = 146.0
+texture_normal = ExtResource("6_i14rv")
 
 [node name="HSlider" type="HSlider" parent="."]
 layout_mode = 0
