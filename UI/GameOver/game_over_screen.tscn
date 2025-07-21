@@ -130,7 +130,7 @@ horizontal_alignment = 1
 uppercase = true
 metadata/_edit_use_anchors_ = true
 
-[node name="ItemTitle5" type="Label" parent="."]
+[node name="HighscoreLabel" type="Label" parent="."]
 modulate = Color(1, 1, 1, 0.517647)
 texture_filter = 1
 layout_mode = 1

@@ -157,6 +157,7 @@ func _physics_process(delta: float) -> void:
 		velocity = Vector2.ZERO
 
 func respawn():
+	
 	print("respawn ball triggered")
 	state = BallState.NORMAL
 	velocity = Vector2.ZERO
@@ -172,6 +173,9 @@ func respawn():
 		return
 
 	if spawn_node.is_clear():
+		self.visible = true
+		velocity = Vector2.ZERO
+			
 		print("✅ Respawning ball")
 		global_position = spawn_node.global_position
 		velocity = Vector2.ZERO
@@ -182,6 +186,7 @@ func respawn():
 		spawn_node.connect("body_exited", Callable(self, "_on_respawn_area_cleared"), CONNECT_ONE_SHOT)
 
 func _on_back_wall_body_entered(body: Node2D) -> void:
+	self.visible = false
 	if state == BallState.NORMAL:
 		if body.is_in_group("Damage"):
 			print("Applying damage")
@@ -189,9 +194,13 @@ func _on_back_wall_body_entered(body: Node2D) -> void:
 		respawn()
 
 func _on_ball_start_pos_body_exited(body: Node2D) -> void:
+	
 	print("Bpdy exited")
 	if should_respawn and body.is_in_group("Player"):
 		respawn()
+		self.visible = true
+		velocity = Vector2.ZERO
+			
 		
 func freeze_time():
 	var timer := get_tree().create_timer(0.05, true)  # true = real-time, ignores time_scale
