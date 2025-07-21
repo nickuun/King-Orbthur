@@ -12,9 +12,13 @@ var orb: CharacterBody2D
 var floating_text_scene := preload("res://Scenes&Scripts/Tools/FloatingText/floating_text.tscn")
 var Seeded: Node = null
 var should_keep_seed := false  # default to false
+var effect_manager: Node = null
+
+
 
 func _ready():
 	load_highscore()
+	effect_manager = get_tree().get_first_node_in_group("EffectManager")
 
 func get_seed() -> String:
 	return saved_seed
@@ -39,3 +43,15 @@ func load_highscore():
 		if file:
 			var line = file.get_line()
 			highscore = int(line)
+
+func get_item_by_effect(effect_name: String) -> Dictionary:
+	print("🔍 Looking for effect in shop DB:", effect_name)
+
+	for item in ShopDB.shop_items:
+		print("🧪 Checking item:", item.effect)
+		if item.effect == effect_name:
+			print("✅ Found match:", item.name)
+			return item
+
+	print("❌ No match found.")
+	return {}

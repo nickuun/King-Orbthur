@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dpqkxlaa6c4o3"]
+[gd_scene load_steps=28 format=3 uid="uid://dpqkxlaa6c4o3"]
 
 [ext_resource type="Script" uid="uid://b054o1j18drrq" path="res://Scenes&Scripts/World/world.gd" id="1_1eef5"]
 [ext_resource type="PackedScene" uid="uid://ni1fdvifit6o" path="res://Scenes&Scripts/Player/player.tscn" id="1_3mgr3"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://bsatq3tfmwtcv" path="res://UI/cheat_window.tscn" id="19_iads3"]
 [ext_resource type="PackedScene" uid="uid://bbggl2ochu7ya" path="res://UI/GameOver/game_over_screen.tscn" id="20_rp57k"]
 [ext_resource type="PackedScene" uid="uid://vfe8l7oos0kv" path="res://UI/PauseMenu/pause_menu.tscn" id="21_lo6en"]
+[ext_resource type="PackedScene" uid="uid://cik0nai0mwfa8" path="res://UI/EffectUI/effect_manager.tscn" id="23_1jj4f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iads3"]
 size = Vector2(32, 315)
@@ -180,6 +181,8 @@ position = Vector2(-3, 0)
 texture = ExtResource("12_a2x15")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="EffectManager" parent="CanvasLayer" instance=ExtResource("23_1jj4f")]
 
 [node name="Lifebar" parent="CanvasLayer" instance=ExtResource("7_qhwu4")]
 offset_left = 3.0

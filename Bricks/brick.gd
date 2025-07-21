@@ -48,7 +48,9 @@ func _on_hit():
 			var offs = Vector2(randf_range(-24, 24), randf_range(-24, -40))
 			key.launch_to(global_position + offset)
 		
-		if SeedManager.randf() <= 0.1:
+		#if SeedManager.randf() <= 0.1:
+		if SeedManager.randf() <= 1.0:
+		
 			var battle_pickup = preload("res://Scenes&Scripts/Pickups/battle_pickup.tscn").instantiate()
 			battle_pickup.pickup_type = pick_random_type()
 			get_tree().current_scene.add_child(battle_pickup)

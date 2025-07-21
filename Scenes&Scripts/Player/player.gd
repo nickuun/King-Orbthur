@@ -195,6 +195,14 @@ func obtain_key():
 	print("🔑 Key acquired! Now have", key_count, "keys.")
 	
 func collect_battle_pickup(pickup_type: String) -> void:
+	print("📦 COLLECTED PICKUP:", pickup_type)
+
+	var effect_data = Game.get_item_by_effect(pickup_type)
+	if effect_data.has("texture") and pickup_type in ["speed_up", "speed_down", "ball_slow", "ball_damage_up", "double_coins"]:
+		print("✨ Attempting to show effect icon")
+		Game.effect_manager.add_effect(pickup_type, effect_data.texture, 5.0)
+
+
 	match pickup_type:
 		"heal":
 			current_health = min(current_health + 10, max_health)

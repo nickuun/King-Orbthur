@@ -13,7 +13,7 @@ var shop_items := [
 		"name": "Speed Syringe",
 		"price": 8,
 		"texture": preload("res://Sprites/Pixel_Icons/Food_Pizza.png"),
-		"effect": "perm_speed_up",
+		"effect": "speed_up",
 		"scene": preload("res://Scenes&Scripts/Pickups/battle_pickup.tscn"),
 		"flavour": "Increases your base speed permanently."
 	},
@@ -37,8 +37,9 @@ var shop_items := [
 		"name": "Orb Stabilizer",
 		"price": 9,
 		"texture": preload("res://Sprites/Pixel_Icons/Food_Baby_Pacifier_Easy.png"),
-		"effect": "perm_ball_slow",
+		"effect": "ball_slow",
 		"scene": preload("res://Scenes&Scripts/Pickups/battle_pickup.tscn"),
 		"flavour": "Reduces orb speed permanently."
-	}
+	},
+	
 ]

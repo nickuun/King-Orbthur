@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://cik0nai0mwfa8"]
+
+[ext_resource type="Script" uid="uid://dmvwb114in30q" path="res://UI/EffectUI/effect_manager.gd" id="1_3dv8u"]
+[ext_resource type="PackedScene" uid="uid://wgqf1dprpwh2" path="res://UI/EffectUI/effect_icon.tscn" id="2_lrnlm"]
+
+[node name="EffectManager" type="Control" groups=["EffectManager"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3dv8u")
+icon_scene = ExtResource("2_lrnlm")
+
+[node name="SpawnNode" type="Node2D" parent="."]
+position = Vector2(154, 19)
+
+[node name="DestinationNode" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -107.0
+offset_top = 14.0
+offset_right = -18.0
+offset_bottom = 52.0
+grow_horizontal = 0
