@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 Game="*res://Globals/Game.gd"
 SeedManager="*res://Globals/SeedManager.gd"
 StatsManager="*res://Globals/StatsManager.gd"
+ScreenShakeManager="*res://Globals/screen_shake_manager.gd"
 
 [display]
 

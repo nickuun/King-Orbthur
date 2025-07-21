@@ -173,6 +173,7 @@ func apply_damage():
 
 	# Play hurt animation
 	$AnimatedSprite2D.play("hurt")
+	ScreenShakeManager.shake(0.5, 0.15)
 
 	# Wait for hurt animation to finish
 	await $AnimatedSprite2D.animation_finished
