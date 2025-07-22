@@ -3,7 +3,11 @@ extends Area2D
 @export var pull_speed := 40.0
 @export var target_position := Vector2.ZERO  # Fallback if no player found
 
+@export_enum("up", "down", "left", "right") var pull_direction := "up"
+
 var tracked_pickups := []
+
+
 
 func _ready():
 	connect("area_entered", _on_area_entered)
@@ -20,13 +24,18 @@ func _on_area_exited(area):
 		#print("🧲 RescueZone: Released", area.name)
 
 func _process(delta):
-	# Determine safe target — usually player
-	var safe_target = Game.player.global_position if is_instance_valid(Game.player) else target_position
+	var direction := Vector2.ZERO
 
-	# Gently pull tracked pickups toward target
+	if pull_direction == "up":
+		direction = Vector2.UP
+	elif pull_direction == "down":
+		direction = Vector2.DOWN
+	elif pull_direction == "left":
+		direction = Vector2.LEFT
+	elif pull_direction == "right":
+		direction = Vector2.RIGHT
+
 	for item in tracked_pickups:
 		if not is_instance_valid(item):
-			continue  # Cleanup invalid references
-
-		var direction = (safe_target - item.global_position).normalized()
+			continue
 		item.global_position += direction * pull_speed * delta
