@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://btpwt2gtkjdwk"]
+
+[ext_resource type="Script" uid="uid://dq67n4tginogn" path="res://Scenes&Scripts/Inspector/info_inspect.gd" id="1_jjesc"]
+
+[node name="InfoInspect" type="Area2D"]
+process_mode = 3
+script = ExtResource("1_jjesc")

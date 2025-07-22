@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://bsknlsxfgt1b4"]
+
+[ext_resource type="FontFile" uid="uid://w6ks5lm5tbmd" path="res://Assets/Fonts/Micro5-Regular.ttf" id="1_n8735"]
+[ext_resource type="Script" uid="uid://c2ab4mrjpuioi" path="res://UI/Inspector/info_overlay.gd" id="1_vmwxc"]
+
+[node name="InfoOverlay" type="CanvasLayer" groups=["InfoOverlay"]]
+process_mode = 3
+script = ExtResource("1_vmwxc")
+
+[node name="FadeRect" type="ColorRect" parent="."]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+color = Color(0, 0, 0, 0.517647)
+
+[node name="Tooltip" type="Panel" parent="."]
+texture_filter = 1
+offset_left = -76.0
+offset_top = -31.0
+offset_right = 78.0
+offset_bottom = 34.0
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="Tooltip"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 4.0
+offset_top = 2.0
+offset_right = 152.0
+offset_bottom = 63.0
+theme_override_constants/line_spacing = -6
+theme_override_fonts/font = ExtResource("1_n8735")
+text = "Descirption of things go here, this is where words go - Descirption of things go here, this is where words go."
+autowrap_mode = 3

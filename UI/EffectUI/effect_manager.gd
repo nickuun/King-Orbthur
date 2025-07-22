@@ -6,6 +6,8 @@ extends Control
 @onready var spawn_node = $SpawnNode
 @onready var destination_node = $DestinationNode
 
+func _ready() -> void:
+	self.show()
 
 func add_effect(effect_name: String, texture: Texture2D, duration: float = 5.0):
 	# Check if the same effect is already active

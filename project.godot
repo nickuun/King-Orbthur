@@ -57,6 +57,7 @@ BackWall=""
 GameOverScreen=""
 PauseMenu=""
 EffectManager=""
+InfoOverlay=""
 
 [input]
 
