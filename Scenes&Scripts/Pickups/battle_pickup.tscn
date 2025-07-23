@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://csra3lfqieqnb"]
+[gd_scene load_steps=17 format=3 uid="uid://csra3lfqieqnb"]
 
 [ext_resource type="Script" uid="uid://bhr37xyvlk4hu" path="res://Scenes&Scripts/Pickups/battle_pickup.gd" id="1_h0cc5"]
 [ext_resource type="Texture2D" uid="uid://c6aeo2eki3t2s" path="res://Sprites/Pixel_Icons/RPG_Skill_Strike_Attack_Sword_Slash_Cleave.png" id="2_m0mje"]
 [ext_resource type="Texture2D" uid="uid://bde4dj0ch312x" path="res://Sprites/Items/IconSpritesheet.png" id="3_d38nb"]
+[ext_resource type="PackedScene" uid="uid://btpwt2gtkjdwk" path="res://Scenes&Scripts/Inspector/info_inspect.tscn" id="6_d38nb"]
 [ext_resource type="Texture2D" uid="uid://eeht3na6bv7h" path="res://Sprites/Pixel_Icons/Food_Fruit_Apple.png" id="7_f13at"]
 [ext_resource type="Texture2D" uid="uid://c063guf437mrs" path="res://Sprites/Pixel_Icons/Hats_Astronaut_Helm_Space_Suit.png" id="8_yk4yx"]
 
@@ -25,6 +26,14 @@ region = Rect2(48, 0, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_plfmw"]
 atlas = ExtResource("3_d38nb")
 region = Rect2(128, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cgx8k"]
+atlas = ExtResource("3_d38nb")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d38nb"]
+atlas = ExtResource("3_d38nb")
+region = Rect2(64, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_o7q7q"]
 animations = [{
@@ -107,9 +116,28 @@ animations = [{
 "loop": true,
 "name": &"speed_up",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cgx8k")
+}],
+"loop": true,
+"name": &"temp_ball_grow",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d38nb")
+}],
+"loop": true,
+"name": &"temp_player_grow",
+"speed": 5.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h0cc5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m0mje"]
+size = Vector2(16, 16)
 
 [node name="BattlePickup" type="Area2D" groups=["pickup"]]
 texture_filter = 1
@@ -119,7 +147,13 @@ script = ExtResource("1_h0cc5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_o7q7q")
-animation = &"speed_up"
+animation = &"temp_ball_grow"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_h0cc5")
+
+[node name="InfoInspect" parent="." instance=ExtResource("6_d38nb")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InfoInspect"]
+shape = SubResource("RectangleShape2D_m0mje")
+debug_color = Color(0.642751, 0.501358, 0.421501, 0.42)

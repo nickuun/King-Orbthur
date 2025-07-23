@@ -19,6 +19,8 @@ var fade_timer := 0.0
 
 @onready var sprite := $AnimatedSprite2D
 
+#$InfoInspect
+
 func _ready():
 	print("ITEM DROPPED")
 	sprite.play(pickup_type)
@@ -26,12 +28,25 @@ func _ready():
 	connect("body_entered", _on_body_entered)
 	set_process(true)
 	modulate.a = 1.0
-	
+
+	# 🧠 Set tooltip text on InfoInspect if exists
+	var inspector = $InfoInspect if has_node("InfoInspect") else null
+	if inspector:
+		var db = load("res://Globals/ShopItemDB.gd").new()
+		var match = db.shop_items.filter(func(i): return i.has("effect") and i.effect == pickup_type)
+
+		if match.size() > 0 and match[0].has("flavour"):
+			inspector.description = match[0].flavour
+		else:
+			inspector.description = "This is a Battle Pickup - Touch it to learn more"
+
+	# Handle drop animation
 	if skip_launch:
 		landed = true
 		$CollisionShape2D.disabled = false
 	else:
 		set_process(true)
+
 
 func _process(delta):
 	#print("I am alive")

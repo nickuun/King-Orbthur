@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bsknlsxfgt1b4"]
 
-[ext_resource type="FontFile" uid="uid://w6ks5lm5tbmd" path="res://Assets/Fonts/Micro5-Regular.ttf" id="1_n8735"]
 [ext_resource type="Script" uid="uid://c2ab4mrjpuioi" path="res://UI/Inspector/info_overlay.gd" id="1_vmwxc"]
+[ext_resource type="FontFile" uid="uid://c8x1ul0g5boh8" path="res://Assets/Fonts/Kenney Mini.ttf" id="2_vmwxc"]
 
 [node name="InfoOverlay" type="CanvasLayer" groups=["InfoOverlay"]]
 process_mode = 3
@@ -34,6 +34,7 @@ offset_top = 2.0
 offset_right = 152.0
 offset_bottom = 63.0
 theme_override_constants/line_spacing = -6
-theme_override_fonts/font = ExtResource("1_n8735")
+theme_override_fonts/font = ExtResource("2_vmwxc")
+theme_override_font_sizes/font_size = 12
 text = "Descirption of things go here, this is where words go - Descirption of things go here, this is where words go."
 autowrap_mode = 3

@@ -11,8 +11,9 @@ var offset = 0
 
 func _ready():
 	var db = load("res://Globals/ShopItemDB.gd").new()
-	var items = db.shop_items.duplicate()
+	var items = db.shop_items.filter(func(item): return item.available_for_sale)
 	items.shuffle()
+
 	
 	for i in range(min(items.size(), ROWS * COLUMNS)):
 		var item_data = items[i]

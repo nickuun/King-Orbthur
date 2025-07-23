@@ -106,7 +106,12 @@ func _on_proximity_body_entered(body):
 
 		held_coins.clear()
 
+
 func play_squash(direction: Vector2) -> void:
+	var sprite := $Sprite2D
+	if not sprite:
+		return
+
 	var base_scale := Vector2.ONE
 	var squash_scale := Vector2(1.2, 0.8)
 
@@ -121,18 +126,16 @@ func play_squash(direction: Vector2) -> void:
 	)
 
 	# Set initial squash
-	scale = squash
+	sprite.scale = squash
 
 	# Tween back to normal
 	var tween := create_tween()
-	tween.tween_property(self, "scale", base_scale, 0.12).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
-
+	tween.tween_property(sprite, "scale", base_scale, 0.12).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
 
 func _physics_process(delta: float) -> void:
 	if state == BallState.NORMAL:
 		if velocity.length() == 0:
 			return
-		
 		var actual_speed = ball_speed * StatsManager.ball_speed_multiplier
 		var collision = move_and_collide(velocity * delta)
 		if collision:
@@ -152,7 +155,6 @@ func _physics_process(delta: float) -> void:
 	elif state == BallState.FOLLOWING:
 		var follow_target = Game.player.global_position + Vector2(0, -20)
 		global_position = global_position.lerp(follow_target, 5.0 * delta)
-
 	else:
 		velocity = Vector2.ZERO
 
@@ -200,7 +202,6 @@ func _on_ball_start_pos_body_exited(body: Node2D) -> void:
 		respawn()
 		self.visible = true
 		velocity = Vector2.ZERO
-			
 		
 func freeze_time():
 	var timer := get_tree().create_timer(0.05, true)  # true = real-time, ignores time_scale
