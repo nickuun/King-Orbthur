@@ -57,7 +57,7 @@ func show_tooltip(text: String, source_node: Node):
 			lifted_node = source_node.get_parent()
 			if lifted_node.has_method("set_z_index"):
 				original_z_index = lifted_node.z_index
-				lifted_node.z_index = 9999
+				lifted_node.z_index = 999
 
 func hide_tooltip():
 	tooltip.visible = false
