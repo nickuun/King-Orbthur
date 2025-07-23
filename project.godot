@@ -13,6 +13,8 @@ config_version=5
 config/name="KingOrbthur"
 run/main_scene="uid://dpqkxlaa6c4o3"
 config/features=PackedStringArray("4.4", "GL Compatibility")
+boot_splash/use_filter=false
+boot_splash/image="uid://dyccbh2j2n2kv"
 config/icon="res://icon.svg"
 
 [autoload]
