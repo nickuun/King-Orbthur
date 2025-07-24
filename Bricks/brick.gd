@@ -82,6 +82,6 @@ func _on_hit():
 		$AnimatedSprite2D.play("box%d" % variant)
 
 func pick_random_type() -> String:
-	#var options = ["heal", "speed_up", "temp_ball_slow", "double_coins", "temp_player_grow"]
-	var options = ["temp_coin_hit"]
+	var options = ["heal", "temp_speed_up", "temp_ball_slow", "temp_coin_hit", "temp_player_grow", "temp_coin_hit"]
+	#var options = ["temp_coin_hit"]
 	return options[randi() % options.size()]

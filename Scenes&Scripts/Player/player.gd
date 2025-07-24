@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @export var max_speed: float = 100.0 #200
+
 @export var accel: float = 800.0
 @export var friction: float = 600.0
 @export var max_health: int = 100
@@ -268,7 +269,7 @@ func collect_battle_pickup(pickup_type: String) -> void:
 		"temp_coin_hit":
 			apply_temporary_effect(
 				"temp_coin_hit",
-				50.0,
+				5.0,
 				func(): pass,  # effect is checked directly in bricks
 				func(): pass
 			)
