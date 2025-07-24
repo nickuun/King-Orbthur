@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://dpqkxlaa6c4o3"]
+[gd_scene load_steps=32 format=3 uid="uid://dpqkxlaa6c4o3"]
 
 [ext_resource type="Script" uid="uid://b054o1j18drrq" path="res://Scenes&Scripts/World/world.gd" id="1_1eef5"]
 [ext_resource type="PackedScene" uid="uid://ni1fdvifit6o" path="res://Scenes&Scripts/Player/player.tscn" id="1_3mgr3"]
@@ -25,6 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://vfe8l7oos0kv" path="res://UI/PauseMenu/pause_menu.tscn" id="21_lo6en"]
 [ext_resource type="PackedScene" uid="uid://cik0nai0mwfa8" path="res://UI/EffectUI/effect_manager.tscn" id="23_1jj4f"]
 [ext_resource type="PackedScene" uid="uid://bsknlsxfgt1b4" path="res://UI/Inspector/info_overlay.tscn" id="24_rsyaa"]
+[ext_resource type="Texture2D" uid="uid://cvpoycb5wti7o" path="res://icon.svg" id="27_175jr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iads3"]
 size = Vector2(32, 315)
@@ -44,6 +45,13 @@ size = Vector2(20, 183)
 texture_filter = 1
 script = ExtResource("1_1eef5")
 ball_scene = ExtResource("2_lo3b5")
+
+[node name="Icon" type="Sprite2D" parent="."]
+texture_repeat = 2
+position = Vector2(99.25, 93)
+texture = ExtResource("27_175jr")
+region_enabled = true
+region_rect = Rect2(-1, -2, 140.63, 50)
 
 [node name="MusicPlayer" type="AudioStreamPlayer2D" parent="."]
 process_mode = 3
