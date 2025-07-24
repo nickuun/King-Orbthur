@@ -5,7 +5,7 @@ var shop_items := [
 		"name": "Speed Syringe",
 		"price": 8,
 		"texture": preload("res://Sprites/Pixel_Icons/Food_Pizza.png"),
-		"effect": "speed_up",
+		"effect": "temp_speed_up",
 		"available_for_sale": true,
 		"scene": preload("res://Scenes&Scripts/Pickups/battle_pickup.tscn"),
 		"flavour": "Increases your base speed permanently."
@@ -32,7 +32,7 @@ var shop_items := [
 		"name": "Orb Stabilizer",
 		"price": 9,
 		"texture": preload("res://Sprites/Pixel_Icons/Food_Baby_Pacifier_Easy.png"),
-		"effect": "ball_slow",
+		"effect": "temp_ball_slow",
 		"available_for_sale": true,
 		"scene": preload("res://Scenes&Scripts/Pickups/battle_pickup.tscn"),
 		"flavour": "Reduces orb speed permanently."
@@ -86,5 +86,16 @@ var shop_items := [
 		"texture": preload("res://Sprites/Pixel_Icons/Food_Pizza.png"),
 		"scene": preload("res://Scenes&Scripts/Pickups/battle_pickup.tscn"),
 		"flavour": "Permanently reduces shop prices."
-	}
+	},
+	{
+	"name": "Coin Magnetizer",
+	"type": "battle",
+	"effect": "temp_coin_hit",
+	"price": 0,
+	"available_for_sale": false,
+	"texture": preload("res://Sprites/Pixel_Icons/Food_Pizza.png"),
+	"scene": preload("res://Scenes&Scripts/Pickups/battle_pickup.tscn"),
+	"flavour": "Bricks drop coins even when tapped!"
+},
+
 ]

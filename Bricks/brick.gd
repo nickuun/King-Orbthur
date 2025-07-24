@@ -23,6 +23,15 @@ func _ready():
 
 func _on_hit():
 	print("💥 Brick hit at stage index:", stage_index)
+	
+	
+	## 💰 Guaranteed coin drop if effect active
+	if Game.has_temp_effect("temp_coin_hit"):
+		var coin = coin_scene.instantiate()
+		get_tree().current_scene.add_child(coin)
+		coin.global_position = global_position
+		var offset = Vector2(randf_range(-24, 24), randf_range(-16, -24))
+		coin.launch_to(global_position + offset)
 
 	hit_points -= 1
 
@@ -73,6 +82,6 @@ func _on_hit():
 		$AnimatedSprite2D.play("box%d" % variant)
 
 func pick_random_type() -> String:
-	#var options = ["heal", "speed_up", "ball_slow", "double_coins", "temp_player_grow"]
-	var options = ["temp_ball_grow"]
+	#var options = ["heal", "speed_up", "temp_ball_slow", "double_coins", "temp_player_grow"]
+	var options = ["temp_coin_hit"]
 	return options[randi() % options.size()]

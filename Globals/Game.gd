@@ -14,6 +14,7 @@ var Seeded: Node = null
 var should_keep_seed := false  # default to false
 var effect_manager: Node = null
 
+var active_temp_effects := {}
 
 
 func _ready():
@@ -28,6 +29,9 @@ func show_floating_text(text: String, pos: Vector2, color := Color.WHITE, size :
 	node.global_position = pos
 	get_tree().current_scene.add_child(node)
 	node.setup(text, color, size, duration)
+
+func has_temp_effect(effect_name: String) -> bool:
+	return active_temp_effects.has(effect_name)
 
 func on_orb_collected():
 	pass

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://csra3lfqieqnb"]
+[gd_scene load_steps=18 format=3 uid="uid://csra3lfqieqnb"]
 
 [ext_resource type="Script" uid="uid://bhr37xyvlk4hu" path="res://Scenes&Scripts/Pickups/battle_pickup.gd" id="1_h0cc5"]
 [ext_resource type="Texture2D" uid="uid://c6aeo2eki3t2s" path="res://Sprites/Pixel_Icons/RPG_Skill_Strike_Attack_Sword_Slash_Cleave.png" id="2_m0mje"]
@@ -7,10 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://eeht3na6bv7h" path="res://Sprites/Pixel_Icons/Food_Fruit_Apple.png" id="7_f13at"]
 [ext_resource type="Texture2D" uid="uid://c063guf437mrs" path="res://Sprites/Pixel_Icons/Hats_Astronaut_Helm_Space_Suit.png" id="8_yk4yx"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_m0mje"]
-atlas = ExtResource("3_d38nb")
-region = Rect2(16, 0, 16, 16)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_7gh4m"]
 atlas = ExtResource("3_d38nb")
 region = Rect2(112, 16, 16, 16)
@@ -18,6 +14,10 @@ region = Rect2(112, 16, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_xn20l"]
 atlas = ExtResource("3_d38nb")
 region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m0mje"]
+atlas = ExtResource("3_d38nb")
+region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2mkia"]
 atlas = ExtResource("3_d38nb")
@@ -31,6 +31,10 @@ region = Rect2(128, 0, 16, 16)
 atlas = ExtResource("3_d38nb")
 region = Rect2(48, 16, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_f13at"]
+atlas = ExtResource("3_d38nb")
+region = Rect2(112, 16, 16, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_d38nb"]
 atlas = ExtResource("3_d38nb")
 region = Rect2(64, 0, 16, 16)
@@ -43,14 +47,6 @@ animations = [{
 }],
 "loop": true,
 "name": &"ball_damage_up",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_m0mje")
-}],
-"loop": true,
-"name": &"ball_slow",
 "speed": 5.0
 }, {
 "frames": [{
@@ -111,14 +107,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_2mkia")
-}],
-"loop": true,
-"name": &"speed_up",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_cgx8k")
 }],
 "loop": true,
@@ -127,10 +115,34 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_m0mje")
+}],
+"loop": true,
+"name": &"temp_ball_slow",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f13at")
+}],
+"loop": true,
+"name": &"temp_coin_hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_d38nb")
 }],
 "loop": true,
 "name": &"temp_player_grow",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2mkia")
+}],
+"loop": true,
+"name": &"temp_speed_up",
 "speed": 5.0
 }]
 
@@ -147,7 +159,7 @@ script = ExtResource("1_h0cc5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_o7q7q")
-animation = &"temp_ball_grow"
+animation = &"temp_coin_hit"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_h0cc5")
