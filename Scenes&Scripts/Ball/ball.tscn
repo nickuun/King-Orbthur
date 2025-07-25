@@ -132,6 +132,14 @@ region = Rect2(19, 76, 19, 19)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("31_e0tlq")
+}],
+"loop": true,
+"name": &"Yellow_Orb",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_yeoai")
 }, {
 "duration": 1.0,
@@ -324,5 +332,5 @@ shape = SubResource("CircleShape2D_2q42d")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_v0gkh")
-animation = &"new_animation"
-autoplay = "new_animation"
+animation = &"Yellow_Orb"
+autoplay = "Yellow_Orb"

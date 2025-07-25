@@ -1,8 +1,9 @@
-[gd_scene load_steps=32 format=3 uid="uid://dpqkxlaa6c4o3"]
+[gd_scene load_steps=34 format=3 uid="uid://dpqkxlaa6c4o3"]
 
 [ext_resource type="Script" uid="uid://b054o1j18drrq" path="res://Scenes&Scripts/World/world.gd" id="1_1eef5"]
 [ext_resource type="PackedScene" uid="uid://ni1fdvifit6o" path="res://Scenes&Scripts/Player/player.tscn" id="1_3mgr3"]
 [ext_resource type="PackedScene" uid="uid://c62fikdpk3nl6" path="res://Scenes&Scripts/Ball/ball.tscn" id="2_lo3b5"]
+[ext_resource type="Shader" uid="uid://b2rn3ywxht7te" path="res://Scenes&Scripts/Shaders/Lightning.gdshader" id="3_175jr"]
 [ext_resource type="Script" uid="uid://p04n620wdjmb" path="res://Scenes&Scripts/Ball/BallStartPos/ball_start_pos.gd" id="3_cehqr"]
 [ext_resource type="PackedScene" uid="uid://b3e0j2mnr5tpy" path="res://Scenes&Scripts/Wall/wall.tscn" id="3_senvn"]
 [ext_resource type="AudioStream" uid="uid://8pu1nl2hxmr3" path="res://Assets/Music/Castle Quest/Castle Quest.mp3" id="3_xdxaw"]
@@ -27,6 +28,16 @@
 [ext_resource type="PackedScene" uid="uid://bsknlsxfgt1b4" path="res://UI/Inspector/info_overlay.tscn" id="24_rsyaa"]
 [ext_resource type="Texture2D" uid="uid://cvpoycb5wti7o" path="res://icon.svg" id="27_175jr"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hknge"]
+shader = ExtResource("3_175jr")
+shader_parameter/lightning_color = Color(0.0470588, 0.890196, 0.85098, 1)
+shader_parameter/size = 0.005
+shader_parameter/width = 0.189
+shader_parameter/cycle = 8.78
+shader_parameter/offset_x = 0.5
+shader_parameter/seed = 10.0
+shader_parameter/glow_intensity = 0.9
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iads3"]
 size = Vector2(32, 315)
 
@@ -48,6 +59,7 @@ ball_scene = ExtResource("2_lo3b5")
 
 [node name="Icon" type="Sprite2D" parent="."]
 texture_repeat = 2
+material = SubResource("ShaderMaterial_hknge")
 position = Vector2(99.25, 93)
 texture = ExtResource("27_175jr")
 region_enabled = true
