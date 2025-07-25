@@ -4,7 +4,7 @@ extends Node
 
 # -- Orb Stats --
 var ball_speed_multiplier: float = 1.0
-var ball_base_speed := 250.0
+var ball_base_speed := 180.0
 var ball_base_scale := Vector2(1, 1)
 var ball_scale_multiplier := 1.0
 # -- Player Stats --

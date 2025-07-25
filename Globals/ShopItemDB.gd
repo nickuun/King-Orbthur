@@ -4,7 +4,7 @@ var shop_items := [
 	{
 		"name": "Speed Syringe",
 		"price": 8,
-		"texture": preload("res://Sprites/Pixel_Icons/Food_Pizza.png"),
+		"texture": preload("res://Sprites/Items/CustomIcons5.png"),
 		"effect": "temp_speed_up",
 		"available_for_sale": true,
 		"scene": preload("res://Scenes&Scripts/Pickups/battle_pickup.tscn"),
@@ -34,7 +34,7 @@ var shop_items := [
 		"texture": preload("res://Sprites/Pixel_Icons/Food_Baby_Pacifier_Easy.png"),
 		"effect": "temp_ball_slow",
 		"available_for_sale": true,
-		"scene": preload("res://Scenes&Scripts/Pickups/battle_pickup.tscn"),
+		"scene": preload("res://Sprites/Items/CustomIcons2.png"),
 		"flavour": "Reduces orb speed permanently."
 	},
 		{
@@ -53,7 +53,7 @@ var shop_items := [
 		"price": 7,
 		"available_for_sale": true,
 		"effect": "temp_ball_grow",
-		"texture": preload("res://Sprites/Pixel_Icons/Food_Baby_Pacifier_Easy.png"),
+		"texture": preload("res://Sprites/Items/CustomIcons15.png"),
 		"scene": preload("res://Scenes&Scripts/Pickups/battle_pickup.tscn"),
 		"flavour": "Temporarily increases orb size."
 	},
@@ -63,7 +63,7 @@ var shop_items := [
 		"price": 7,
 		"available_for_sale": true,
 		"effect": "temp_player_grow",
-		"texture": preload("res://Sprites/Pixel_Icons/Hats_Astronaut_Helm_Space_Suit.png"),
+		"texture": preload("res://Sprites/Items/CustomIcons6.png"),
 		"scene": preload("res://Scenes&Scripts/Pickups/battle_pickup.tscn"),
 		"flavour": "Temporarily increases player size."
 	},
@@ -88,14 +88,14 @@ var shop_items := [
 		"flavour": "Permanently reduces shop prices."
 	},
 	{
-	"name": "Coin Magnetizer",
-	"type": "battle",
-	"effect": "temp_coin_hit",
-	"price": 0,
-	"available_for_sale": false,
-	"texture": preload("res://Sprites/Pixel_Icons/Food_Pizza.png"),
-	"scene": preload("res://Scenes&Scripts/Pickups/battle_pickup.tscn"),
-	"flavour": "Bricks drop coins even when tapped!"
-},
+		"name": "Coin Magnetizer",
+		"type": "battle",
+		"effect": "temp_coin_hit",
+		"price": 0,
+		"available_for_sale": false,
+		"texture": preload("res://Sprites/Items/CustomIcons19.png"),
+		"scene": preload("res://Scenes&Scripts/Pickups/battle_pickup.tscn"),
+		"flavour": "Bricks drop coins even when tapped!"
+	},
 
 ]

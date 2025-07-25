@@ -17,7 +17,7 @@ func _process(_delta):
 		if Game.player.coin_count >= item_data.price:
 			print("PURCHASED ")
 			Game.player.coin_count -= item_data.price
-			Game.player.update_coin_ui()
+			Game.update_coin_ui(Game.player.coin_count)
 			purchased = true
 			$PriceLabel.hide()
 			spawn_real_item()

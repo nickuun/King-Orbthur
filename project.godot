@@ -24,6 +24,9 @@ SeedManager="*res://Globals/SeedManager.gd"
 StatsManager="*res://Globals/StatsManager.gd"
 ScreenShakeManager="*res://Globals/screen_shake_manager.gd"
 ShopDB="*res://Globals/ShopItemDB.gd"
+BattlePickupManager="*res://Globals/BattlePickupManager.gd"
+InputManager="*res://Globals/InputManager.gd"
+VisualEffectManager="*res://Globals/VisualEffectManager.gd"
 
 [display]
 

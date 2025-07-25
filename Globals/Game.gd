@@ -59,3 +59,7 @@ func get_item_by_effect(effect_name: String) -> Dictionary:
 
 	print("❌ No match found.")
 	return {}
+
+func update_coin_ui(coin_count):
+	if Game.coin_label:
+		Game.coin_label.text = str(coin_count)

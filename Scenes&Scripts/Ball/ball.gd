@@ -1,6 +1,5 @@
 extends CharacterBody2D
 
-@export var ball_speed: float = 180.0#200
 @export var knockback_force: float = 400.0
 @export var bounce_strength: float = 1.0
 var should_respawn := false
@@ -88,7 +87,7 @@ func _on_proximity_body_entered(body):
 			# Ball was idle — player influence more important
 			knock_dir = (to_ball * bounce_factor + player_velocity * influence_factor).normalized()
 
-		var actual_speed = ball_speed * StatsManager.ball_speed_multiplier
+		var actual_speed = get_speed() * StatsManager.ball_speed_multiplier
 		velocity = knock_dir * actual_speed
 		if !state == BallState.FOLLOWING:
 			play_squash(knock_dir)
@@ -108,35 +107,13 @@ func _on_proximity_body_entered(body):
 
 
 func play_squash(direction: Vector2) -> void:
-	var sprite := $Sprite2D
-	if not sprite:
-		return
-
-	var base_scale := Vector2.ONE
-	var squash_scale := Vector2(1.2, 0.8)
-
-	# Rotate squash relative to hit direction
-	var angle := direction.angle()
-	var stretch_x := cos(angle)
-	var stretch_y := sin(angle)
-
-	var squash := Vector2(
-		lerp(base_scale.x, squash_scale.x, abs(stretch_x)),
-		lerp(base_scale.y, squash_scale.y, abs(stretch_y))
-	)
-
-	# Set initial squash
-	sprite.scale = squash
-
-	# Tween back to normal
-	var tween := create_tween()
-	tween.tween_property(sprite, "scale", base_scale, 0.12).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+	VisualEffectManager.play_squash(self, direction)
 
 func _physics_process(delta: float) -> void:
 	if state == BallState.NORMAL:
 		if velocity.length() == 0:
 			return
-		var actual_speed = ball_speed * StatsManager.ball_speed_multiplier
+		var actual_speed = get_speed() * StatsManager.ball_speed_multiplier
 		var collision = move_and_collide(velocity * delta)
 		if collision:
 			var collider = collision.get_collider()
@@ -208,3 +185,6 @@ func freeze_time():
 	Engine.time_scale = 0.1
 	await timer.timeout
 	Engine.time_scale = 1.0
+
+func get_speed() -> float:
+	return StatsManager.get_final_ball_speed()

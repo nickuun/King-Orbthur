@@ -1,5 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://chnfkcosmplfx"]
+[gd_scene load_steps=13 format=3 uid="uid://chnfkcosmplfx"]
 
+[ext_resource type="Script" uid="uid://dfwkaqawtjpsh" path="res://Scenes&Scripts/Player/Sword/sword.gd" id="1_8gd5u"]
 [ext_resource type="Texture2D" uid="uid://bu1xm7xmqhs4v" path="res://Sprites/camelot_ [version 1.0]/camelot_ [version 1.0]/excalibur_.png" id="1_vcm4g"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8gd5u"]
@@ -91,6 +92,7 @@ animations = [{
 
 [node name="Sword" type="Node2D"]
 texture_filter = 1
+script = ExtResource("1_8gd5u")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -13)

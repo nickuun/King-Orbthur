@@ -27,9 +27,6 @@ var is_hurting: bool = false
 var dash_coyote_timer: float = 0.0
 @export var dash_directional_influence: float = 0.2
 var active_temp_effects: Dictionary = {}
-
-
-
 @export var dash_cooldown_duration: float = 0.5
 var dash_cooldown_timer: float = 0.0
 
@@ -37,25 +34,11 @@ var dash_cooldown_timer: float = 0.0
 var key_count: int = 3
 
 func swing_sword():
-	if Game.orb and Game.orb.state == Game.orb.BallState.NORMAL:
-		if sword_side == "left": 
-			sword.get_node("Sprite").play("SwingRight")
-			sword_desired_offset = 180
-			sword_side = "right"
-		else:
-			sword.get_node("Sprite").play("SwingLeft")
-			sword_side = "left"
-			sword_desired_offset = -180
-	else:
-		print("⚠️ Can't swing — ball is frozen, returning, or gone.")
+	$Sword.swing_sword()
 
 func add_coin():
 	coin_count += coin_multiplier
-	update_coin_ui()
-	
-func update_coin_ui():
-	if Game.coin_label:
-		Game.coin_label.text = str(coin_count)
+	Game.update_coin_ui(coin_count)
 		
 func spawn_dust():
 	if not is_instance_valid(dust_spawn):
@@ -101,10 +84,7 @@ func _physics_process(delta):
 
 		
 		if is_dashing:
-			var input_dir = Vector2(
-				Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
-				Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
-			).normalized()
+			var input_dir = InputManager.get_movement_vector()
 			
 			var influence = input_dir * dash_speed * dash_directional_influence
 			velocity = (dash_direction * dash_speed) + influence
@@ -113,17 +93,13 @@ func _physics_process(delta):
 			if dash_timer <= 0.0:
 				is_dashing = false
 				dash_coyote_timer = dash_coyote_time
-
 				
-		if Input.is_action_just_pressed("dash") and not is_dashing:
+		if InputManager.is_dash_pressed() and not is_dashing:
 			if dash_cooldown_timer > 0:
 				print("⏳ dash on cooldown!")
 			else:
 				print("DASHING")
-				var input_dir = Vector2(
-					Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
-					Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
-				).normalized()
+				var input_dir = InputManager.get_movement_vector()
 
 				if input_dir != Vector2.ZERO:
 					dash_direction = input_dir
@@ -132,31 +108,23 @@ func _physics_process(delta):
 					dash_cooldown_timer = dash_cooldown_duration
 					sprite.play("dash")
 
-
-
 		var input_vector = Vector2.ZERO
 
-		input_vector = Vector2(
-				Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
-				Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
-			).normalized()
+		input_vector = InputManager.get_movement_vector()
 
 		if autoplay and Game.orb and  input_vector == Vector2.ZERO:
 			var direction_y = sign(Game.orb.global_position.y - global_position.y)
 			input_vector = Vector2(0, direction_y)
 
 		if input_vector != Vector2.ZERO:
-			velocity = velocity.move_toward(input_vector * max_speed, accel * delta)
+			velocity = velocity.move_toward(input_vector * get_speed(), accel * delta)
 		else:
 			velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
 		
-		
 		move_and_slide()
 		
-			# Face the orb
 		if Game.orb:
 			sprite.flip_h = Game.orb.global_position.x < global_position.x
-
 		
 		if Game.orb:
 			var to_orb = Game.orb.global_position - global_position
@@ -197,87 +165,7 @@ func obtain_key():
 	print("🔑 Key acquired! Now have", key_count, "keys.")
 	
 func collect_battle_pickup(pickup_type: String) -> void:
-	var effect_data = Game.get_item_by_effect(pickup_type)
-
-	# ✅ Always show the effect icon if there's a texture
-	if effect_data and effect_data.has("texture") and is_instance_valid(Game.effect_manager):
-		Game.effect_manager.add_effect(pickup_type, effect_data.texture, 5.0)
-
-	match pickup_type:
-		"temp_ball_slow":
-			apply_temporary_effect(
-				"temp_ball_slow",
-				5.0,
-				func(): Game.orb.ball_speed *= 0.5,
-				func(): Game.orb.ball_speed *= 2.0
-			)
-		
-		"temp_ball_grow":
-			apply_temporary_effect(
-				"temp_ball_grow",
-				5.0,
-				func():
-					var tween = Game.orb.create_tween()
-					tween.tween_property(Game.orb, "scale", Vector2(2, 2), 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT),
-				func():
-					var tween = Game.orb.create_tween()
-					tween.tween_property(Game.orb, "scale", Vector2(1, 1), 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
-			)
-
-		"temp_player_grow":
-			apply_temporary_effect(
-				"temp_player_grow",
-				5.0,
-				func():
-					var tween = create_tween()
-					tween.tween_property(self, "scale", Vector2(2, 2), 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT),
-				func():
-					var tween = create_tween()
-					tween.tween_property(self, "scale", Vector2(1, 1), 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
-			)
-
-		"temp_lifesteal":
-			Game.lifesteal_enabled = true
-			await get_tree().create_timer(5.0).timeout
-			Game.lifesteal_enabled = false
-
-		"temp_sword_grow":
-			Game.player_sword.scale *= 2.0
-			await get_tree().create_timer(5.0).timeout
-			Game.player_sword.scale /= 2.0
-
-		"perm_shop_discount":
-			Game.shop_discount = 0.8
-
-		"perm_speed_up":
-			max_speed += 20
-
-		"temp_speed_up":
-			apply_temporary_effect(
-				"temp_speed_up",
-				5.0,
-				func():
-					max_speed *= 1.5,
-				func():
-					max_speed /= 1.5
-			)
-
-		"heal":
-			current_health = min(current_health + 10, max_health)
-			update_lifebar()
-			
-		"temp_coin_hit":
-			apply_temporary_effect(
-				"temp_coin_hit",
-				5.0,
-				func(): pass,  # effect is checked directly in bricks
-				func(): pass
-			)
-
-		# ...other cases...
-
-		_:
-			print("⚠️ Unknown pickup type:", pickup_type)
+	BattlePickupManager.apply(pickup_type, self)
 
 func game_over():
 	alive = false
@@ -287,6 +175,9 @@ func game_over():
 	var game_over_screen = get_tree().get_first_node_in_group("GameOverScreen")
 	game_over_screen.show_scores()
 
+func get_speed() -> float:
+	return StatsManager.get_final_player_speed()
+
 func apply_temporary_effect(
 	effect_name: String,
 	duration: float,
@@ -295,26 +186,36 @@ func apply_temporary_effect(
 ) -> void:
 	# If already active, extend duration
 	if Game.active_temp_effects.has(effect_name):
-		var timer: Timer = Game.active_temp_effects[effect_name]["timer"]
+		var data = Game.active_temp_effects[effect_name]
+		var timer: Timer = data["timer"]
 		if is_instance_valid(timer):
-			timer.start(duration)
+			timer.wait_time += duration  # 🧠 ADD to existing time
+			timer.start()
 			return
 
-	# Otherwise, apply effect and create timer
+	# Not active: apply effect
 	start_func.call()
 
 	var timer := Timer.new()
 	timer.one_shot = true
-	timer.autostart = true
 	timer.wait_time = duration
-	add_child(timer)  # Or add it to a manager node
+	timer.name = "temp_timer_" + effect_name
+	add_child(timer)
+
+	# Store the effect
 	Game.active_temp_effects[effect_name] = {
 		"timer": timer,
-		"is_active": true
+		"end_func": end_func
 	}
 
-	await timer.timeout
+	timer.connect("timeout", Callable(self, "_on_temp_effect_timeout").bind(effect_name))
+	timer.start()
 
-	end_func.call()
-	Game.active_temp_effects.erase(effect_name)
-	timer.queue_free()
+func _on_temp_effect_timeout(effect_name: String) -> void:
+	if Game.active_temp_effects.has(effect_name):
+		var data = Game.active_temp_effects[effect_name]
+		var end_func: Callable = data.get("end_func")
+		if end_func:
+			end_func.call()
+		data["timer"].queue_free()
+		Game.active_temp_effects.erase(effect_name)
