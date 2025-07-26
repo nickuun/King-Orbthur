@@ -30,8 +30,20 @@ var active_temp_effects: Dictionary = {}
 @export var dash_cooldown_duration: float = 0.5
 var dash_cooldown_timer: float = 0.0
 
+var active_item: ActiveItem = null
+@export var max_active_charge: int = 3
+
 #var has_key := false
 var key_count: int = 3
+
+func assign_active_item(item: ActiveItem):
+	if active_item:
+		active_item.queue_free()
+	
+	active_item = item
+	add_child(active_item)
+	print("🎮 Assigned active item:", active_item.item_name)
+
 
 func swing_sword():
 	$Sword.swing_sword()
@@ -52,6 +64,17 @@ func spawn_dust():
 		get_tree().current_scene.add_child(dust) # Use top-level node to avoid offset issues
 
 func _ready():
+	var test_item := preload("res://Scenes&Scripts/Pickups/Items/active_item.tscn").instantiate()
+	test_item.item_name = "Speed Burst"
+	test_item.icon = preload("res://Sprites/Items/CustomIcons5.png")
+	test_item.max_charges = 3
+	test_item.on_activate_func = func(): 
+		StatsManager.player_speed_multiplier *= 2.0
+		await get_tree().create_timer(3.0).timeout
+		StatsManager.player_speed_multiplier /= 2.0
+
+	assign_active_item(test_item)
+	
 	coin_multiplier = 1
 	Game.orb = get_tree().get_first_node_in_group("Ball")  # now globally available
 	Game.player = self
@@ -61,6 +84,10 @@ func _ready():
 	update_lifebar()
 
 func _physics_process(delta):
+	if Input.is_action_just_pressed("activate_item") and active_item:
+		active_item.try_activate()
+
+	
 	var is_moving = velocity.length() > 0.5
 
 	if alive:

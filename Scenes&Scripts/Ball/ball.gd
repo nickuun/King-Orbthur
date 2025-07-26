@@ -168,13 +168,13 @@ func _on_back_wall_body_entered(body: Node2D) -> void:
 	self.visible = false
 	if state == BallState.NORMAL:
 		if body.is_in_group("Damage"):
-			print("Applying damage")
+			#print("Applying damage")
 			Game.player.apply_damage()
 		respawn()
 
 func _on_ball_start_pos_body_exited(body: Node2D) -> void:
 	
-	print("Bpdy exited")
+	#print("Bpdy exited")
 	if should_respawn and body.is_in_group("Player"):
 		respawn()
 		self.visible = true

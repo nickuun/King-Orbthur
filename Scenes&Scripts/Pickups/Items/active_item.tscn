@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://p5gyo2dq41x3"]
+
+[ext_resource type="Script" uid="uid://brncxl1h4cmit" path="res://Scenes&Scripts/Pickups/Items/active_item.gd" id="1_k6bev"]
+
+[node name="ActiveItem" type="Node2D"]
+script = ExtResource("1_k6bev")
