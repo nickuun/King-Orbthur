@@ -202,14 +202,6 @@ description = "This is an orb."
 shape = SubResource("CircleShape2D_xbyuq")
 debug_color = Color(0.931656, 2.63757e-05, 0.651898, 0.42)
 
-[node name="InfoInspect-Ball2" parent="Ball" instance=ExtResource("12_rtdyl")]
-position = Vector2(17, -1)
-description = "This is an orb."
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball/InfoInspect-Ball2"]
-shape = SubResource("CircleShape2D_xbyuq")
-debug_color = Color(0.931656, 2.63757e-05, 0.651898, 0.42)
-
 [node name="Player" parent="." instance=ExtResource("1_3mgr3")]
 position = Vector2(42, 88)
 
