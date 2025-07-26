@@ -1,18 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://wgqf1dprpwh2"]
+[gd_scene load_steps=7 format=3 uid="uid://wgqf1dprpwh2"]
 
 [ext_resource type="Script" uid="uid://2oaywcygtq8t" path="res://UI/EffectUI/effect_icon.gd" id="1_7a1ad"]
 [ext_resource type="Texture2D" uid="uid://dyx4xm57mhhfd" path="res://Sprites/Pixel_Icons/Tools_Crafting_Graphic_Design_Shapes_Square.png" id="2_puvev"]
 [ext_resource type="FontFile" uid="uid://dvcjeamicow7" path="res://Assets/Fonts/Kenney Mini Square.ttf" id="3_le5gx"]
 [ext_resource type="Texture2D" uid="uid://l41jx8wq7rq2" path="res://Sprites/Pixel_Icons/Alchemy_Copper_Venus_Female_Gender.png" id="3_puvev"]
+[ext_resource type="PackedScene" uid="uid://btpwt2gtkjdwk" path="res://Scenes&Scripts/Inspector/info_inspect.tscn" id="5_le5gx"]
 
-[node name="EffectIcon" type="Control"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_csi53"]
+size = Vector2(14, 14)
+
+[node name="EffectIcon" type="Node2D"]
 texture_filter = 1
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 script = ExtResource("1_7a1ad")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -24,7 +22,6 @@ position = Vector2(0.5, 0.5)
 texture = ExtResource("3_puvev")
 
 [node name="TimerLabel" type="Label" parent="."]
-layout_mode = 0
 offset_left = -4.0
 offset_top = -2.0
 offset_right = 8.0
@@ -35,3 +32,8 @@ theme_override_fonts/font = ExtResource("3_le5gx")
 theme_override_font_sizes/font_size = 8
 text = "1.2"
 horizontal_alignment = 1
+
+[node name="InfoInspect" parent="." instance=ExtResource("5_le5gx")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InfoInspect"]
+shape = SubResource("RectangleShape2D_csi53")

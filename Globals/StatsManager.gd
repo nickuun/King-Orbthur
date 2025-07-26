@@ -7,6 +7,7 @@ var ball_speed_multiplier: float = 1.0
 var ball_base_speed := 180.0
 var ball_base_scale := Vector2(1, 1)
 var ball_scale_multiplier := 1.0
+
 # -- Player Stats --
 var player_base_speed := 100.0
 var player_speed_multiplier := 1.0
@@ -15,6 +16,8 @@ var player_scale_multiplier := 1.0
 # -- Coin Drops --
 var coin_drop_rate := 0.1  # 10% by default
 var coin_drop_guaranteed := false
+
+var battle_pickup_time_modifier: float = 1.0  # Multiplier applied to all temp pickup durations
 
 func reset():
 	ball_speed_multiplier = 1.0

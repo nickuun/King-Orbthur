@@ -1,6 +1,7 @@
-extends Control
+extends Node2D
 
 @export var effect_name: String = ""
+@export var effect_description: String = ""
 @export var duration: float = 5.0
 @export var icon_texture: Texture2D
 var remaining_time: float
@@ -11,6 +12,7 @@ var tween: Tween
 @onready var icon_rect: Sprite2D = $Icon
 
 func _ready():
+	$InfoInspect.description = effect_description
 	print("HELLO FROM ICON")
 	remaining_time = duration
 	icon_rect.texture = icon_texture

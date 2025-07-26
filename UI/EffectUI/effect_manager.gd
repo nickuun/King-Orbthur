@@ -1,4 +1,4 @@
-extends Control
+extends Node2D
 
 @export var icon_scene: PackedScene
 @export var spacing: int = 4
@@ -9,7 +9,7 @@ extends Control
 func _ready() -> void:
 	self.show()
 
-func add_effect(effect_name: String, texture: Texture2D, duration: float = 5.0):
+func add_effect(effect_name: String, texture: Texture2D, duration: float = 5.0, description: String = "No Effect"):
 	for child in destination_node.get_children():
 		if child.effect_name == effect_name:
 			child.extend_duration(duration)
@@ -17,6 +17,7 @@ func add_effect(effect_name: String, texture: Texture2D, duration: float = 5.0):
 
 	var icon = icon_scene.instantiate()
 	icon.effect_name = effect_name
+	icon.effect_description = description
 	icon.icon_texture = texture
 	icon.duration = duration
 	destination_node.add_child(icon)

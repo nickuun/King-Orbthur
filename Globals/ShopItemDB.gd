@@ -6,6 +6,7 @@ var shop_items := [
 		"price": 8,
 		"texture": preload("res://Sprites/Items/CustomIcons5.png"),
 		"effect": "temp_speed_up",
+		"duration": 5.0,
 		"available_for_sale": true,
 		"scene": preload("res://Scenes&Scripts/Pickups/battle_pickup.tscn"),
 		"flavour": "Increases your base speed permanently."
@@ -34,6 +35,7 @@ var shop_items := [
 		"texture": preload("res://Sprites/Pixel_Icons/Food_Baby_Pacifier_Easy.png"),
 		"effect": "temp_ball_slow",
 		"available_for_sale": true,
+		"duration": 5.0,
 		"scene": preload("res://Sprites/Items/CustomIcons2.png"),
 		"flavour": "Reduces orb speed permanently."
 	},
@@ -42,6 +44,7 @@ var shop_items := [
 		"type": "battle",  # "battle", "active", or "passive"
 		"price": 5,
 		"available_for_sale": true,
+		"duration": 5.0, #REMOVE REFACTOR refactor Nick
 		"effect": "heal",
 		"texture": preload("res://Sprites/Pixel_Icons/Alchemy_Potion_Vial_Bottle_Huge_Cube_Square_Empty.png"),
 		"scene": preload("res://Scenes&Scripts/Pickups/battle_pickup.tscn"),
@@ -52,6 +55,7 @@ var shop_items := [
 		"type": "battle",
 		"price": 7,
 		"available_for_sale": true,
+		"duration": 5.0,
 		"effect": "temp_ball_grow",
 		"texture": preload("res://Sprites/Items/CustomIcons15.png"),
 		"scene": preload("res://Scenes&Scripts/Pickups/battle_pickup.tscn"),
@@ -62,6 +66,7 @@ var shop_items := [
 		"type": "battle",
 		"price": 7,
 		"available_for_sale": true,
+		"duration": 5.0,
 		"effect": "temp_player_grow",
 		"texture": preload("res://Sprites/Items/CustomIcons6.png"),
 		"scene": preload("res://Scenes&Scripts/Pickups/battle_pickup.tscn"),
@@ -71,7 +76,7 @@ var shop_items := [
 		"name": "Lifesteal Serum",
 		"type": "battle",
 		"price": 9,
-		"available_for_sale": true,
+		"available_for_sale": false,
 		"effect": "temp_lifesteal",
 		"texture": preload("res://Sprites/Pixel_Icons/Food_Fruit_Apple.png"),
 		"scene": preload("res://Scenes&Scripts/Pickups/battle_pickup.tscn"),
@@ -93,6 +98,7 @@ var shop_items := [
 		"effect": "temp_coin_hit",
 		"price": 0,
 		"available_for_sale": false,
+		"duration": 5.0,
 		"texture": preload("res://Sprites/Items/CustomIcons19.png"),
 		"scene": preload("res://Scenes&Scripts/Pickups/battle_pickup.tscn"),
 		"flavour": "Bricks drop coins even when tapped!"

@@ -6,13 +6,20 @@ func apply(pickup_type: String, receiver: Node) -> void:
 
 	# ✅ Show icon if texture available
 	if effect_data and effect_data.has("texture") and is_instance_valid(Game.effect_manager):
-		Game.effect_manager.add_effect(pickup_type, effect_data.texture, 5.0)
+		Game.effect_manager.add_effect(pickup_type, effect_data.texture, 5.0, effect_data.flavour )
+	
+	# Determine duration
+	var base_duration: float = 5.0
+	if effect_data and effect_data.has("duration"):
+		base_duration = effect_data.duration
+	var duration: float = base_duration * StatsManager.battle_pickup_time_modifier
+
 
 	match pickup_type:
 		"temp_ball_slow":
 			receiver.apply_temporary_effect(
 				"temp_ball_slow",
-				5.0,
+				duration,
 				func(): StatsManager.ball_speed_multiplier *= 0.5,
 				func(): StatsManager.ball_speed_multiplier /= 0.5
 			)
@@ -20,7 +27,7 @@ func apply(pickup_type: String, receiver: Node) -> void:
 		"temp_ball_grow":
 			receiver.apply_temporary_effect(
 				"temp_ball_grow",
-				5.0,
+				duration,
 				func():
 					var tween = Game.orb.create_tween()
 					tween.tween_property(Game.orb, "scale", Vector2(2, 2), 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT),
@@ -32,7 +39,7 @@ func apply(pickup_type: String, receiver: Node) -> void:
 		"temp_player_grow":
 			receiver.apply_temporary_effect(
 				"temp_player_grow",
-				5.0,
+				duration,
 				func():
 					var tween = receiver.create_tween()
 					tween.tween_property(receiver, "scale", Vector2(2, 2), 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT),
@@ -44,7 +51,7 @@ func apply(pickup_type: String, receiver: Node) -> void:
 		"temp_speed_up":
 			receiver.apply_temporary_effect(
 				"temp_speed_up",
-				5.0,
+				duration,
 				func(): StatsManager.player_speed_multiplier *= 1.5,
 				func(): StatsManager.player_speed_multiplier /= 1.5
 			)
@@ -55,15 +62,10 @@ func apply(pickup_type: String, receiver: Node) -> void:
 		"perm_shop_discount":
 			Game.shop_discount = 0.8
 
-		"temp_lifesteal":
-			Game.lifesteal_enabled = true
-			await get_tree().create_timer(5.0).timeout
-			Game.lifesteal_enabled = false
-
 		"temp_coin_hit":
 			receiver.apply_temporary_effect(
 				"temp_coin_hit",
-				5.0,
+				duration,
 				func(): StatsManager.coin_drop_guaranteed = true,
 				func(): StatsManager.coin_drop_guaranteed = false
 			)
