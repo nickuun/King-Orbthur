@@ -19,7 +19,6 @@ var active_temp_effects := {}
 
 func _ready():
 	load_highscore()
-	effect_manager = get_tree().get_first_node_in_group("EffectManager")
 
 func get_seed() -> String:
 	return saved_seed

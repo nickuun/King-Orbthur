@@ -187,10 +187,9 @@ func apply_temporary_effect(
 	# If already active, extend duration
 	if Game.active_temp_effects.has(effect_name):
 		var data = Game.active_temp_effects[effect_name]
-		var timer: Timer = data["timer"]
-		if is_instance_valid(timer):
-			timer.wait_time += duration  # 🧠 ADD to existing time
-			timer.start()
+		if data.has("timer") and is_instance_valid(data["timer"]):
+			var timer: Timer = data["timer"]
+			timer.start(duration)
 			return
 
 	# Not active: apply effect
