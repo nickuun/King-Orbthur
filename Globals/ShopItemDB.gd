@@ -110,7 +110,16 @@ var shop_items := [
 	"available_for_sale": true,
 	"effect": "active_speed_boost",
 	"texture": preload("res://Sprites/Items/CustomIcons5.png"),
-	"flavour": "Tap to double your speed temporarily!"
+	"flavour": "Active: Tap to double your speed temporarily!"
+},
+{
+	"name": "Orb Grower",
+	"type": "active",
+	"price": 10,
+	"available_for_sale": true,
+	"effect": "active_orb_grow",
+	"texture": preload("res://Sprites/Items/CustomIcons15.png"),
+	"flavour": "Active: Temporarily enlarges the orb!"
 }
 
 ]

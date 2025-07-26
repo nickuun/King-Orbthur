@@ -18,7 +18,7 @@ var sword_side = "left"
 @onready var sprite = $AnimatedSprite2D
 var last_frame = -1
 var dust_scene = preload("res://Scenes&Scripts/Player/Dust/dust_trail.tscn")
-var coin_count: int = 0
+var coin_count: int = 100
 var coin_multiplier: int = 0
 var is_hurting: bool = false
 @export var autoplay: bool = false
@@ -36,14 +36,18 @@ var active_item: ActiveItem = null
 #var has_key := false
 var key_count: int = 3
 
-func assign_active_item(item: ActiveItem):
-	if active_item:
-		active_item.queue_free()
-	
-	active_item = item
-	add_child(active_item)
-	print("🎮 Assigned active item:", active_item.item_name)
+func assign_active_item(new_item: ActiveItem):
+	if active_item and active_item != new_item:
+		var drop_pos = global_position + Vector2(0, -16)
+		active_item.reparent(get_tree().current_scene)
+		active_item.set_equipped(false)  # Show it again
+		active_item.launch_to(drop_pos)
+		
 
+	active_item = new_item
+	add_child(active_item)
+	active_item.set_equipped(true)  # Hide while equipped
+	print("🎮 Assigned active item:", active_item.item_name)
 
 func swing_sword():
 	$Sword.swing_sword()
@@ -66,13 +70,9 @@ func spawn_dust():
 func _ready():
 	var test_item := preload("res://Scenes&Scripts/Pickups/Items/active_item.tscn").instantiate()
 	test_item.item_name = "Speed Burst"
-	test_item.icon = preload("res://Sprites/Items/CustomIcons5.png")
+	test_item.effect_name = "active_orb_grow"
+	test_item.icon = preload("res://Sprites/Items/CustomIcons15.png")
 	test_item.max_charges = 3
-	test_item.on_activate_func = func(): 
-		StatsManager.player_speed_multiplier *= 2.0
-		await get_tree().create_timer(3.0).timeout
-		StatsManager.player_speed_multiplier /= 2.0
-
 	assign_active_item(test_item)
 	
 	coin_multiplier = 1

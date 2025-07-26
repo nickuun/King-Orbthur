@@ -1,6 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://p5gyo2dq41x3"]
+[gd_scene load_steps=4 format=3 uid="uid://p5gyo2dq41x3"]
 
 [ext_resource type="Script" uid="uid://brncxl1h4cmit" path="res://Scenes&Scripts/Pickups/Items/active_item.gd" id="1_k6bev"]
+[ext_resource type="Texture2D" uid="uid://b1mv8tkfns17h" path="res://Sprites/Items/CustomIcons3.png" id="2_508s2"]
 
-[node name="ActiveItem" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_508s2"]
+size = Vector2(16, 16)
+
+[node name="ActiveItem" type="Area2D"]
+texture_filter = 1
+collision_layer = 128
+collision_mask = 128
 script = ExtResource("1_k6bev")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_508s2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_508s2")
