@@ -1,24 +1,31 @@
 extends CanvasLayer
 
-@onready var fade_rect: ColorRect = $FadeRect
+@onready var fade_rect: Sprite2D
 @onready var tooltip: Panel = $Tooltip
 @onready var tooltip_label: Label = $Tooltip/Label
 
 var is_inspect_mode: bool = false
 var hovered_inspectors: Array[InfoInspect] = []
-var lifted_node: Node = null
-var original_z_index: int = 0
+var lifted_nodes: Array[Node] = []
+var original_z_indices := {}
+
 
 func _ready() -> void:
-	fade_rect.visible = false
+	#fade_rect.visible = false
 	tooltip.visible = false
+	fade_rect = get_tree().get_first_node_in_group("InspectOverlay")
+	if fade_rect:
+		fade_rect.visible = false
 
 func _process(delta: float) -> void:
 	var should_enable := Input.is_key_pressed(KEY_ALT)
 
 	if should_enable != is_inspect_mode:
 		is_inspect_mode = should_enable
-		fade_rect.visible = is_inspect_mode
+
+		if fade_rect:
+			fade_rect.visible = is_inspect_mode
+
 		tooltip.visible = false
 		get_tree().paused = is_inspect_mode
 
@@ -82,15 +89,16 @@ func show_tooltip(text: String, source_node: Node) -> void:
 	tooltip_label.text = text
 	tooltip.visible = true
 
-	if source_node.get_parent() and source_node.get_parent().has_method("set_z_index"):
-		if lifted_node and lifted_node != source_node.get_parent():
-			lifted_node.z_index = original_z_index
-		lifted_node = source_node.get_parent()
-		original_z_index = lifted_node.z_index
-		lifted_node.z_index = 999
+	var parent = source_node.get_parent()
+	if parent and parent.has_method("set_z_index") and not lifted_nodes.has(parent):
+		original_z_indices[parent] = parent.z_index
+		parent.z_index = 999
+		lifted_nodes.append(parent)
 
 func hide_tooltip() -> void:
 	tooltip.visible = false
-	if lifted_node and lifted_node.has_method("set_z_index"):
-		lifted_node.z_index = original_z_index
-		lifted_node = null
+	for node in lifted_nodes:
+		if node and original_z_indices.has(node):
+			node.z_index = original_z_indices[node]
+	original_z_indices.clear()
+	lifted_nodes.clear()

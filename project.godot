@@ -63,6 +63,7 @@ GameOverScreen=""
 PauseMenu=""
 EffectManager=""
 InfoOverlay=""
+InspectOverlay=""
 
 [input]
 

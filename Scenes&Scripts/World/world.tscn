@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://dpqkxlaa6c4o3"]
+[gd_scene load_steps=36 format=3 uid="uid://dpqkxlaa6c4o3"]
 
 [ext_resource type="Script" uid="uid://b054o1j18drrq" path="res://Scenes&Scripts/World/world.gd" id="1_1eef5"]
 [ext_resource type="PackedScene" uid="uid://ni1fdvifit6o" path="res://Scenes&Scripts/Player/player.tscn" id="1_3mgr3"]
@@ -49,6 +49,13 @@ radius = 14.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tsomi"]
 size = Vector2(20, 183)
+
+[sub_resource type="Gradient" id="Gradient_ht257"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0, 0, 0, 0.568627)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_175jr"]
+gradient = SubResource("Gradient_ht257")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xbyuq"]
 
@@ -195,6 +202,12 @@ position = Vector2(142, -64)
 [node name="EffectManager" parent="EdgeContainers/Camera2D" instance=ExtResource("23_1jj4f")]
 z_index = 10
 position = Vector2(-159, -92)
+
+[node name="FadeRect" type="Sprite2D" parent="EdgeContainers/Camera2D" groups=["InspectOverlay"]]
+z_index = 20
+texture_filter = 1
+scale = Vector2(5.0625, 2.78125)
+texture = SubResource("GradientTexture2D_175jr")
 
 [node name="Ball" parent="." instance=ExtResource("2_lo3b5")]
 position = Vector2(83, 88)

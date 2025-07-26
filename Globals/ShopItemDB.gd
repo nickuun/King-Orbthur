@@ -9,7 +9,7 @@ var shop_items := [
 		"duration": 5.0,
 		"available_for_sale": true,
 		"scene": preload("res://Scenes&Scripts/Pickups/battle_pickup.tscn"),
-		"flavour": "Increases your base speed permanently."
+		"flavour": "Increases your base speed temporarily."
 	},
 	{
 		"name": "Heart Container",
@@ -93,7 +93,7 @@ var shop_items := [
 		"flavour": "Permanently reduces shop prices."
 	},
 	{
-		"name": "Coin Magnetizer",
+		"name": "Coin Frenzy",
 		"type": "battle",
 		"effect": "temp_coin_hit",
 		"price": 0,
@@ -101,7 +101,7 @@ var shop_items := [
 		"duration": 5.0,
 		"texture": preload("res://Sprites/Items/CustomIcons19.png"),
 		"scene": preload("res://Scenes&Scripts/Pickups/battle_pickup.tscn"),
-		"flavour": "Bricks drop coins even when tapped!"
+		"flavour": "Bricks drop coins on-hit"
 	},
 
 ]
