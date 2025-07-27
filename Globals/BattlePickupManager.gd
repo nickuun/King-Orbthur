@@ -2,7 +2,9 @@
 extends Node
 
 func apply(pickup_type: String, receiver: Node) -> void:
+	
 	var effect_data = Game.get_item_by_effect(pickup_type)
+	print("Applying effect: ", effect_data)
 
 	# Determine duration
 	var base_duration: float = 5.0

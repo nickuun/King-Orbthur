@@ -73,6 +73,17 @@ var shop_items := [
 		"flavour": "Temporarily increases player size."
 	},
 	{
+		"name": "Player Speed BattlePickup",
+		"type": "battle",
+		"price": 7,
+		"available_for_sale": false,
+		"duration": 5.0,
+		"effect": "temp_speed_up",
+		"texture": preload("res://Sprites/Items/CustomIcons5.png"),
+		"scene": preload("res://Scenes&Scripts/Pickups/battle_pickup.tscn"),
+		"flavour": "Temporarily increases player speed."
+	},
+	{
 		"name": "Lifesteal Serum",
 		"type": "battle",
 		"price": 9,

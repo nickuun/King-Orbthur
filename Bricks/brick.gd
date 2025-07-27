@@ -22,7 +22,7 @@ func _ready():
 	$AnimatedSprite2D.play("box%d" % variant)
 
 func _on_hit():
-	print("💥 Brick hit at stage index:", stage_index)
+	#print("💥 Brick hit at stage index:", stage_index)
 	
 	
 	## 💰 Guaranteed coin drop if effect active
@@ -85,6 +85,6 @@ func _on_hit():
 		$AnimatedSprite2D.play("box%d" % variant)
 
 func pick_random_type() -> String:
-	var options = ["heal", "temp_speed_up", "temp_ball_slow", "temp_coin_hit", "temp_player_grow", "temp_coin_hit", "temp_ball_grow"]
-	#var options = ["temp_coin_hit"]
+	#var options = ["heal", "temp_speed_up", "temp_ball_slow", "temp_coin_hit", "temp_player_grow", "temp_coin_hit", "temp_ball_grow"]
+	var options = ["temp_ball_grow"]
 	return options[randi() % options.size()]
