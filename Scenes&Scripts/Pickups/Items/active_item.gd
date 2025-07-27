@@ -71,7 +71,7 @@ func launch_to(target := Vector2.ZERO):
 	var flip := bool(randi() % 2)
 	var final_angle := base_angle if not flip else base_angle + PI
 
-	var launch_distance := randf_range(48, 72)
+	var launch_distance := randf_range(24, 36)
 	var direction := Vector2.RIGHT.rotated(final_angle)
 	var randomized_target := start_position + direction * launch_distance
 

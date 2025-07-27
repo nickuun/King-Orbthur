@@ -38,16 +38,19 @@ var key_count: int = 3
 
 func assign_active_item(new_item: ActiveItem):
 	if active_item and active_item != new_item:
-		var drop_pos = global_position + Vector2(0, -16)
-		active_item.reparent(get_tree().current_scene)
-		active_item.set_equipped(false)  # Show it again
-		active_item.launch_to(drop_pos)
-		
+		var drop_position := global_position + Vector2(0, -8)
+
+		# 🪄 Detach and move to world
+		active_item.reparent(get_tree().current_scene, true)
+		active_item.global_position = drop_position
+		active_item.set_equipped(false)
+		active_item.launch_to()
 
 	active_item = new_item
 	add_child(active_item)
-	active_item.set_equipped(true)  # Hide while equipped
+	active_item.set_equipped(true)
 	print("🎮 Assigned active item:", active_item.item_name)
+
 
 func swing_sword():
 	$Sword.swing_sword()
