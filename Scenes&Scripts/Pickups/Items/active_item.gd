@@ -17,6 +17,7 @@ var is_on_cooldown := false
 @onready var sprite := get_node(sprite_node)
 
 func _ready():
+	$InfoInspect.description = flavour
 	add_to_group("ActiveItem")
 	if icon and sprite:
 		sprite.texture = icon

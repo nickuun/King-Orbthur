@@ -101,25 +101,34 @@ var shop_items := [
 		"duration": 5.0,
 		"texture": preload("res://Sprites/Items/CustomIcons19.png"),
 		"scene": preload("res://Scenes&Scripts/Pickups/battle_pickup.tscn"),
-		"flavour": "Bricks drop coins on-hit"
+		"flavour": "Bricks drop coins on-hit."
 	},
 	{
-	"name": "Speed Booster",
-	"type": "active",
-	"price": 12,
-	"available_for_sale": true,
-	"effect": "active_speed_boost",
-	"texture": preload("res://Sprites/Items/Active&Passive/CustomItemSprite05.png"),
-	"flavour": "ACTIVE: Tap to double your speed temporarily!"
-},
-{
-	"name": "Orb Grower",
-	"type": "active",
-	"price": 10,
-	"available_for_sale": true,
-	"effect": "active_orb_grow",
-	"texture": preload("res://Sprites/Items/Active&Passive/CustomItemSprite09.png"),
-	"flavour": "ACTIVE: Temporarily enlarges the orb!"
-}
-
+		"name": "Speed Booster",
+		"type": "active",
+		"price": 12,
+		"available_for_sale": true,
+		"effect": "active_speed_boost",
+		"texture": preload("res://Sprites/Items/Active&Passive/CustomItemSprite05.png"),
+		"flavour": "ACTIVE: Tap to double your speed temporarily."
+	},
+	{
+		"name": "Orb Grower",
+		"type": "active",
+		"price": 10,
+		"available_for_sale": true,
+		"effect": "active_orb_grow",
+		"texture": preload("res://Sprites/Items/Active&Passive/CustomItemSprite09.png"),
+		"flavour": "ACTIVE: Temporarily enlarges the orb."
+	},
+	{
+		"name": "Duration Boost",
+		"type": "passive",
+		"price": 10,
+		"available_for_sale": true,
+		"effect": "perm_duration_boost",
+		"texture": preload("res://Sprites/Items/Active&Passive/CustomItemSprite03.png"),
+		"scene": preload("res://Scenes&Scripts/Pickups/battle_pickup.tscn"),
+		"flavour": "Increases the duration of Battle Pickups."
+	}
 ]

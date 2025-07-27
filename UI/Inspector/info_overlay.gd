@@ -33,11 +33,16 @@ func _process(_delta: float) -> void:
 		hide_tooltip()
 		return
 
-	var mouse_pos: Vector2 = get_tree().get_first_node_in_group("World").get_global_mouse_position()
+	# For hover detection (world-space)
+	var world_mouse_pos: Vector2 = get_tree().get_first_node_in_group("World").get_global_mouse_position()
+
+	# For tooltip positioning (screen-space)
+	var screen_mouse_pos: Vector2 = get_viewport().get_mouse_position()
 
 	# --- Hover check ---
 	var query := PhysicsPointQueryParameters2D.new()
-	query.position = mouse_pos
+		# Query at world_mouse_pos
+	query.position = world_mouse_pos
 	query.collide_with_areas = true
 	query.collide_with_bodies = false
 
@@ -59,7 +64,7 @@ func _process(_delta: float) -> void:
 	# Cleanup stale inspectors
 	var cleaned: Array[InfoInspect] = []
 	for inspector in hovered_inspectors:
-		if current_hovered.has(inspector):
+		if is_instance_valid(inspector) and current_hovered.has(inspector):
 			cleaned.append(inspector)
 	hovered_inspectors = cleaned
 
@@ -75,14 +80,8 @@ func _process(_delta: float) -> void:
 	if tooltip_size == Vector2.ZERO:
 		tooltip_size = tooltip.get_combined_minimum_size()
 
-	var new_pos: Vector2 = mouse_pos + offset
-	var screen_size: Vector2 = get_viewport().get_visible_rect().size
-
-	if new_pos.x + tooltip_size.x > screen_size.x:
-		new_pos.x = mouse_pos.x - tooltip_size.x - offset.x
-	if new_pos.y + tooltip_size.y > screen_size.y:
-		new_pos.y = mouse_pos.y - tooltip_size.y - offset.y
-
+		# UI tooltip at screen_mouse_pos
+	var new_pos: Vector2 = screen_mouse_pos + offset
 	tooltip.global_position = new_pos
 
 func show_tooltip(text: String, source_node: Node) -> void:

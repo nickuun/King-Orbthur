@@ -76,6 +76,9 @@ func apply(pickup_type: String, receiver: Node) -> void:
 		"heal":
 			receiver.current_health = min(receiver.current_health + 10, receiver.max_health)
 			receiver.update_lifebar()
+			
+		"perm_duration_boost":
+			StatsManager.battle_pickup_time_modifier *= 1.5
 
 		_:
 			print("⚠️ Unknown pickup type:", pickup_type)

@@ -1,8 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://csra3lfqieqnb"]
+[gd_scene load_steps=20 format=3 uid="uid://csra3lfqieqnb"]
 
 [ext_resource type="Script" uid="uid://bhr37xyvlk4hu" path="res://Scenes&Scripts/Pickups/battle_pickup.gd" id="1_h0cc5"]
 [ext_resource type="Texture2D" uid="uid://c6aeo2eki3t2s" path="res://Sprites/Pixel_Icons/RPG_Skill_Strike_Attack_Sword_Slash_Cleave.png" id="2_m0mje"]
 [ext_resource type="Texture2D" uid="uid://bde4dj0ch312x" path="res://Sprites/Items/IconSpritesheet.png" id="3_d38nb"]
+[ext_resource type="Texture2D" uid="uid://w3xauwda2lm3" path="res://Sprites/Items/Active&Passive/CustomItemSprite03.png" id="4_xn20l"]
 [ext_resource type="PackedScene" uid="uid://btpwt2gtkjdwk" path="res://Scenes&Scripts/Inspector/info_inspect.tscn" id="6_d38nb"]
 [ext_resource type="Texture2D" uid="uid://cion5ceumjitw" path="res://Sprites/Items/Active&Passive/CustomItemSprite02.png" id="6_m0mje"]
 [ext_resource type="Texture2D" uid="uid://eeht3na6bv7h" path="res://Sprites/Pixel_Icons/Food_Fruit_Apple.png" id="7_f13at"]
@@ -72,6 +73,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"perm_ball_slow",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_xn20l")
+}],
+"loop": true,
+"name": &"perm_duration_boost",
 "speed": 5.0
 }, {
 "frames": [{
@@ -160,7 +169,7 @@ script = ExtResource("1_h0cc5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_o7q7q")
-animation = &"perm_speed_up"
+animation = &"perm_duration_boost"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_h0cc5")
