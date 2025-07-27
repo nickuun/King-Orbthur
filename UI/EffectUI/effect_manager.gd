@@ -22,10 +22,10 @@ func add_effect(effect_name: String, texture: Texture2D, duration: float = 5.0, 
 	icon.effect_description = description
 	icon.icon_texture = texture
 	icon.duration = duration
-	destination_node.add_child(icon)
+	destination_node.call_deferred("add_child", icon)
 	icon.position = spawn_node.global_position - destination_node.global_position
-	icon.move_to(_calculate_target_position(destination_node.get_child_count() - 1))
-
+	icon.call_deferred("move_to", _calculate_target_position(destination_node.get_child_count()))
+	
 func reflow_icons():
 	var i = 0
 	for child in destination_node.get_children():

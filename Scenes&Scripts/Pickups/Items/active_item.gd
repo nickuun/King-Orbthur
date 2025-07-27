@@ -10,7 +10,7 @@ class_name ActiveItem
 @export var effect_name: String = "active_default"
 @export var show_effect_in_ui: bool = true
 @export var effect_duration: float = 3.0
-@export var sprite_node: NodePath = "AnimatedSprite2D"
+@export var sprite_node: NodePath = "Sprite2D"
 
 var is_on_cooldown := false
 
@@ -95,7 +95,8 @@ func launch_to(target := Vector2.ZERO):
 # Pickup behavior
 func _on_body_entered(body):
 	if body == Game.player:
-		Game.player.assign_active_item(self)
+		#Game.player.assign_active_item(self)
+		Game.player.call_deferred("assign_active_item", self)
 
 func _on_activate():
 	match effect_name:

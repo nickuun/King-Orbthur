@@ -55,7 +55,7 @@ func _on_hit():
 			get_tree().current_scene.add_child(key)
 			key.global_position = global_position
 			var offs = Vector2(randf_range(-24, 24), randf_range(-24, -40))
-			key.launch_to(global_position + offset)
+			key.launch_to(global_position + offs)
 		
 		#if SeedManager.randf() <= 0.1:
 		if SeedManager.randf() <= 1.0:
@@ -65,7 +65,7 @@ func _on_hit():
 			get_tree().current_scene.add_child(battle_pickup)
 			battle_pickup.global_position = global_position
 			var offse = Vector2(randf_range(-16, 16), randf_range(-24, -32))
-			battle_pickup.launch_to(global_position + offset)
+			battle_pickup.launch_to(global_position + offse)
 
 
 		emit_signal("brick_destroyed", self)

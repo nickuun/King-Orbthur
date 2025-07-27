@@ -17,7 +17,7 @@ func _ready() -> void:
 	if fade_rect:
 		fade_rect.visible = false
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var should_enable := Input.is_key_pressed(KEY_ALT)
 
 	if should_enable != is_inspect_mode:

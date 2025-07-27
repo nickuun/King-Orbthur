@@ -39,15 +39,19 @@ var key_count: int = 3
 func assign_active_item(new_item: ActiveItem):
 	if active_item and active_item != new_item:
 		var drop_position := global_position + Vector2(0, -8)
-
-		# 🪄 Detach and move to world
 		active_item.reparent(get_tree().current_scene, true)
 		active_item.global_position = drop_position
 		active_item.set_equipped(false)
 		active_item.launch_to()
 
 	active_item = new_item
-	add_child(active_item)
+
+	# 🧠 Safely reparent, regardless of source
+	if active_item.get_parent() == null:
+		add_child(active_item)
+	elif active_item.get_parent() != self:
+		active_item.reparent(self, true)
+
 	active_item.set_equipped(true)
 	print("🎮 Assigned active item:", active_item.item_name)
 
@@ -72,7 +76,7 @@ func spawn_dust():
 
 func _ready():
 	var test_item := preload("res://Scenes&Scripts/Pickups/Items/active_item.tscn").instantiate()
-	test_item.item_name = "Speed Burst"
+	test_item.item_name = "Growth Spurt"
 	test_item.effect_name = "active_orb_grow"
 	test_item.icon = preload("res://Sprites/Items/CustomIcons15.png")
 	test_item.max_charges = 3

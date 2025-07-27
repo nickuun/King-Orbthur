@@ -23,8 +23,10 @@ func _process(delta):
 	timer_label.text = "%.1f" % remaining_time
 
 	if remaining_time <= 0.0:
+		if Game.effect_manager:
+			Game.effect_manager.call_deferred("reflow_icons")
 		queue_free()
-		get_parent().call_deferred("reflow_icons")
+
 
 func move_to(pos: Vector2):
 	tween.kill()
