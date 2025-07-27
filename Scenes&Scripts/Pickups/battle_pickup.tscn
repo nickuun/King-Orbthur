@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://csra3lfqieqnb"]
+[gd_scene load_steps=19 format=3 uid="uid://csra3lfqieqnb"]
 
 [ext_resource type="Script" uid="uid://bhr37xyvlk4hu" path="res://Scenes&Scripts/Pickups/battle_pickup.gd" id="1_h0cc5"]
 [ext_resource type="Texture2D" uid="uid://c6aeo2eki3t2s" path="res://Sprites/Pixel_Icons/RPG_Skill_Strike_Attack_Sword_Slash_Cleave.png" id="2_m0mje"]
 [ext_resource type="Texture2D" uid="uid://bde4dj0ch312x" path="res://Sprites/Items/IconSpritesheet.png" id="3_d38nb"]
 [ext_resource type="PackedScene" uid="uid://btpwt2gtkjdwk" path="res://Scenes&Scripts/Inspector/info_inspect.tscn" id="6_d38nb"]
+[ext_resource type="Texture2D" uid="uid://cion5ceumjitw" path="res://Sprites/Items/Active&Passive/CustomItemSprite02.png" id="6_m0mje"]
 [ext_resource type="Texture2D" uid="uid://eeht3na6bv7h" path="res://Sprites/Pixel_Icons/Food_Fruit_Apple.png" id="7_f13at"]
 [ext_resource type="Texture2D" uid="uid://c063guf437mrs" path="res://Sprites/Pixel_Icons/Hats_Astronaut_Helm_Space_Suit.png" id="8_yk4yx"]
 
@@ -18,10 +19,6 @@ region = Rect2(0, 0, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_m0mje"]
 atlas = ExtResource("3_d38nb")
 region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2mkia"]
-atlas = ExtResource("3_d38nb")
-region = Rect2(48, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_plfmw"]
 atlas = ExtResource("3_d38nb")
@@ -38,6 +35,10 @@ region = Rect2(112, 16, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_d38nb"]
 atlas = ExtResource("3_d38nb")
 region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2mkia"]
+atlas = ExtResource("3_d38nb")
+region = Rect2(48, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_o7q7q"]
 animations = [{
@@ -91,7 +92,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_2mkia")
+"texture": ExtResource("6_m0mje")
 }],
 "loop": true,
 "name": &"perm_speed_up",
@@ -159,7 +160,7 @@ script = ExtResource("1_h0cc5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_o7q7q")
-animation = &"temp_coin_hit"
+animation = &"perm_speed_up"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_h0cc5")

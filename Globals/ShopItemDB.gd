@@ -2,14 +2,14 @@ extends Node
 
 var shop_items := [
 	{
-		"name": "Speed Syringe",
+		"name": "Speed Boots",
 		"price": 8,
-		"texture": preload("res://Sprites/Items/CustomIcons5.png"),
-		"effect": "temp_speed_up",
-		"duration": 5.0,
-		"available_for_sale": false,
+		"type": "passive",
+		"texture": preload("res://Sprites/Items/Active&Passive/CustomItemSprite02.png"),
+		"effect": "perm_speed_up",
+		"available_for_sale": true,
 		"scene": preload("res://Scenes&Scripts/Pickups/battle_pickup.tscn"),
-		"flavour": "Increases your base speed temporarily."
+		"flavour": "Increases your base speed permanently."
 	},
 	{
 		"name": "Heart Container",
@@ -67,7 +67,7 @@ var shop_items := [
 		"price": 7,
 		"available_for_sale": false,
 		"duration": 5.0,
-		"effect": "temp_player_grow",
+		"effect": "perm_player_grow",
 		"texture": preload("res://Sprites/Items/CustomIcons6.png"),
 		"scene": preload("res://Scenes&Scripts/Pickups/battle_pickup.tscn"),
 		"flavour": "Temporarily increases player size."
@@ -109,8 +109,8 @@ var shop_items := [
 	"price": 12,
 	"available_for_sale": true,
 	"effect": "active_speed_boost",
-	"texture": preload("res://Sprites/Items/CustomIcons5.png"),
-	"flavour": "Active: Tap to double your speed temporarily!"
+	"texture": preload("res://Sprites/Items/Active&Passive/CustomItemSprite05.png"),
+	"flavour": "ACTIVE: Tap to double your speed temporarily!"
 },
 {
 	"name": "Orb Grower",
@@ -118,8 +118,8 @@ var shop_items := [
 	"price": 10,
 	"available_for_sale": true,
 	"effect": "active_orb_grow",
-	"texture": preload("res://Sprites/Items/CustomIcons15.png"),
-	"flavour": "Active: Temporarily enlarges the orb!"
+	"texture": preload("res://Sprites/Items/Active&Passive/CustomItemSprite09.png"),
+	"flavour": "ACTIVE: Temporarily enlarges the orb!"
 }
 
 ]

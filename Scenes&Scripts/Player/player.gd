@@ -78,7 +78,7 @@ func _ready():
 	var test_item := preload("res://Scenes&Scripts/Pickups/Items/active_item.tscn").instantiate()
 	test_item.item_name = "Growth Spurt"
 	test_item.effect_name = "active_orb_grow"
-	test_item.icon = preload("res://Sprites/Items/CustomIcons15.png")
+	test_item.icon = preload("res://Sprites/Items/Active&Passive/CustomItemSprite09.png")
 	test_item.max_charges = 3
 	assign_active_item(test_item)
 	

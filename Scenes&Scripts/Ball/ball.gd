@@ -52,10 +52,8 @@ func return_to_player():
 	set_process(true)
 	print("🔁 Ball returning to player")
 
-
-
 func _on_coin_area_entered(area: Area2D):
-	if area.is_in_group("pickup") and not area.held_by_ball:
+	if area.is_in_group("pickup") and not area.held_by_ball and state == BallState.NORMAL:
 		area.held_by_ball = true
 		area.has_been_held = true
 		held_coins.append(area)

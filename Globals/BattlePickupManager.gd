@@ -4,16 +4,15 @@ extends Node
 func apply(pickup_type: String, receiver: Node) -> void:
 	var effect_data = Game.get_item_by_effect(pickup_type)
 
-	# ✅ Show icon if texture available
-	if effect_data and effect_data.has("texture") and is_instance_valid(Game.effect_manager):
-		Game.effect_manager.add_effect(pickup_type, effect_data.texture, 5.0, effect_data.flavour )
-	
 	# Determine duration
 	var base_duration: float = 5.0
 	if effect_data and effect_data.has("duration"):
 		base_duration = effect_data.duration
 	var duration: float = base_duration * StatsManager.battle_pickup_time_modifier
-
+		
+	var is_passive: bool = effect_data != null and effect_data.has("type") and effect_data.type == "passive"
+	if not is_passive and effect_data and effect_data.has("texture") and is_instance_valid(Game.effect_manager):
+		Game.effect_manager.add_effect(pickup_type, effect_data.texture, duration, effect_data.flavour)
 
 	match pickup_type:
 		"temp_ball_slow":
@@ -57,7 +56,11 @@ func apply(pickup_type: String, receiver: Node) -> void:
 			)
 
 		"perm_speed_up":
+			print("StatsManager.player_base_speed")
+			print(StatsManager.player_base_speed)
 			StatsManager.player_base_speed += 20
+			print(StatsManager.player_base_speed)
+			
 
 		"perm_shop_discount":
 			Game.shop_discount = 0.8

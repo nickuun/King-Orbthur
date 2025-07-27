@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://dpqkxlaa6c4o3"]
+[gd_scene load_steps=37 format=3 uid="uid://dpqkxlaa6c4o3"]
 
 [ext_resource type="Script" uid="uid://b054o1j18drrq" path="res://Scenes&Scripts/World/world.gd" id="1_1eef5"]
 [ext_resource type="PackedScene" uid="uid://ni1fdvifit6o" path="res://Scenes&Scripts/Player/player.tscn" id="1_3mgr3"]
@@ -27,6 +27,7 @@
 [ext_resource type="PackedScene" uid="uid://cik0nai0mwfa8" path="res://UI/EffectUI/effect_manager.tscn" id="23_1jj4f"]
 [ext_resource type="PackedScene" uid="uid://bsknlsxfgt1b4" path="res://UI/Inspector/info_overlay.tscn" id="24_rsyaa"]
 [ext_resource type="Texture2D" uid="uid://cvpoycb5wti7o" path="res://icon.svg" id="27_175jr"]
+[ext_resource type="PackedScene" uid="uid://csra3lfqieqnb" path="res://Scenes&Scripts/Pickups/battle_pickup.tscn" id="28_175jr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hknge"]
 shader = ExtResource("3_175jr")
@@ -204,6 +205,7 @@ z_index = 10
 position = Vector2(-159, -92)
 
 [node name="FadeRect" type="Sprite2D" parent="EdgeContainers/Camera2D" groups=["InspectOverlay"]]
+visible = false
 z_index = 20
 texture_filter = 1
 scale = Vector2(5.0625, 2.78125)
@@ -311,6 +313,11 @@ process_mode = 3
 visible = false
 
 [node name="InfoOverlay" parent="CanvasLayer" instance=ExtResource("24_rsyaa")]
+
+[node name="BattlePickup" parent="." instance=ExtResource("28_175jr")]
+position = Vector2(104, 44)
+pickup_type = "perm_speed_up"
+skip_launch = true
 
 [connection signal="body_exited" from="EdgeContainers/Camera2D/BallStartPos" to="Ball" method="_on_ball_start_pos_body_exited"]
 [connection signal="body_entered" from="EdgeContainers/Camera2D/BackWall" to="Ball" method="_on_back_wall_body_entered"]
