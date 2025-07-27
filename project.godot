@@ -64,6 +64,7 @@ PauseMenu=""
 EffectManager=""
 InfoOverlay=""
 InspectOverlay=""
+ActiveItemUI=""
 
 [input]
 

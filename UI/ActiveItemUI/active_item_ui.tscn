@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://bm7ch5n4dhkt4"]
+
+[ext_resource type="Script" uid="uid://xkrbpvbwhyxr" path="res://UI/ActiveItemUI/active_item_ui.gd" id="1_jpfpp"]
+[ext_resource type="Texture2D" uid="uid://osg83qjmlir7" path="res://Sprites/Healthbar/Over-Knotches.png" id="2_bbxjc"]
+[ext_resource type="Texture2D" uid="uid://cjanenumhu4tj" path="res://Sprites/Pixel_Icons/Tools_Crafting_Graphic_Design_Shapes_Square_Outlined.png" id="2_y8wdj"]
+[ext_resource type="Texture2D" uid="uid://dakssfdoe71nx" path="res://Sprites/Items/Active&Passive/CustomItemSprite01.png" id="3_bbxjc"]
+[ext_resource type="Texture2D" uid="uid://drplp4oui8lq1" path="res://Sprites/Healthbar/Under.png" id="4_gd8ds"]
+[ext_resource type="Texture2D" uid="uid://cmp7up2rbtoti" path="res://Sprites/Healthbar/GreenUnder.png" id="6_5fwb3"]
+
+[node name="ActiveItemUI" type="Control" groups=["ActiveItemUI"]]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_jpfpp")
+notch_texture = ExtResource("2_bbxjc")
+
+[node name="Boarder" type="Sprite2D" parent="."]
+position = Vector2(18, 18)
+scale = Vector2(2, 2)
+texture = ExtResource("2_y8wdj")
+
+[node name="ItemIcon" type="Sprite2D" parent="."]
+position = Vector2(18, 18)
+scale = Vector2(2, 2)
+texture = ExtResource("3_bbxjc")
+
+[node name="ChargeBar" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 33.0
+offset_right = 33.0
+offset_bottom = 41.0
+value = 75.0
+texture_under = ExtResource("4_gd8ds")
+texture_progress = ExtResource("6_5fwb3")
+
+[node name="NotchHolder" type="Node2D" parent="."]
+position = Vector2(3, 37)

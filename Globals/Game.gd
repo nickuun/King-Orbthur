@@ -2,6 +2,8 @@ extends Node
 
 var player: Node = null
 var lifebar: Node = null
+var active_item_ui: Node = null
+
 var seed_offset: int = 0
 var coin_label: Label = null
 var saved_seed: String = ""  # Make sure this sticks around between restarts

@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://dpqkxlaa6c4o3"]
+[gd_scene load_steps=38 format=3 uid="uid://dpqkxlaa6c4o3"]
 
 [ext_resource type="Script" uid="uid://b054o1j18drrq" path="res://Scenes&Scripts/World/world.gd" id="1_1eef5"]
 [ext_resource type="PackedScene" uid="uid://ni1fdvifit6o" path="res://Scenes&Scripts/Player/player.tscn" id="1_3mgr3"]
@@ -28,6 +28,7 @@
 [ext_resource type="PackedScene" uid="uid://bsknlsxfgt1b4" path="res://UI/Inspector/info_overlay.tscn" id="24_rsyaa"]
 [ext_resource type="Texture2D" uid="uid://cvpoycb5wti7o" path="res://icon.svg" id="27_175jr"]
 [ext_resource type="PackedScene" uid="uid://csra3lfqieqnb" path="res://Scenes&Scripts/Pickups/battle_pickup.tscn" id="28_175jr"]
+[ext_resource type="PackedScene" uid="uid://bm7ch5n4dhkt4" path="res://UI/ActiveItemUI/active_item_ui.tscn" id="28_jiiag"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hknge"]
 shader = ExtResource("3_175jr")
@@ -313,6 +314,8 @@ process_mode = 3
 visible = false
 
 [node name="InfoOverlay" parent="CanvasLayer" instance=ExtResource("24_rsyaa")]
+
+[node name="ActiveItemUI" parent="CanvasLayer" instance=ExtResource("28_jiiag")]
 
 [node name="BattlePickup" parent="." instance=ExtResource("28_175jr")]
 position = Vector2(104, 44)

@@ -37,6 +37,7 @@ var active_item: ActiveItem = null
 var key_count: int = 3
 
 func assign_active_item(new_item: ActiveItem):
+	get_tree().get_first_node_in_group("ActiveItemUI").assign_active_item(new_item)
 	if active_item and active_item != new_item:
 		var drop_position := global_position + Vector2(0, -8)
 		active_item.reparent(get_tree().current_scene, true)
@@ -81,7 +82,7 @@ func _ready():
 	test_item.icon = preload("res://Sprites/Items/Active&Passive/CustomItemSprite09.png")
 	test_item.max_charges = 3
 	assign_active_item(test_item)
-	
+		
 	coin_multiplier = 1
 	Game.orb = get_tree().get_first_node_in_group("Ball")  # now globally available
 	Game.player = self
