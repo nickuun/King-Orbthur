@@ -101,14 +101,14 @@ func _on_body_entered(body):
 
 func _on_activate():
 	match effect_name:
-		"active_orb_grow":
+		"temp_ball_grow":
 			var tween = Game.orb.create_tween()
 			tween.tween_property(Game.orb, "scale", Vector2(2, 2), 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 			await get_tree().create_timer(effect_duration).timeout
 			var tween_out = Game.orb.create_tween()
 			tween_out.tween_property(Game.orb, "scale", Vector2(1, 1), 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 
-		"active_speed_boost":
+		"temp_speed_boost":
 			StatsManager.player_speed_multiplier *= 2.0
 			await get_tree().create_timer(effect_duration).timeout
 			StatsManager.player_speed_multiplier /= 2.0

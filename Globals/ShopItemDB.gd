@@ -119,7 +119,7 @@ var shop_items := [
 		"type": "active",
 		"price": 12,
 		"available_for_sale": true,
-		"effect": "active_speed_boost",
+		"effect": "temp_speed_boost",
 		"texture": preload("res://Sprites/Items/Active&Passive/CustomItemSprite05.png"),
 		"flavour": "ACTIVE: Tap to double your speed temporarily."
 	},
@@ -128,7 +128,7 @@ var shop_items := [
 		"type": "active",
 		"price": 10,
 		"available_for_sale": true,
-		"effect": "active_orb_grow",
+		"effect": "temp_ball_grow",
 		"texture": preload("res://Sprites/Items/Active&Passive/CustomItemSprite09.png"),
 		"flavour": "ACTIVE: Temporarily enlarges the orb."
 	},

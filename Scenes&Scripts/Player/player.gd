@@ -78,7 +78,7 @@ func spawn_dust():
 func _ready():
 	var test_item := preload("res://Scenes&Scripts/Pickups/Items/active_item.tscn").instantiate()
 	test_item.item_name = "Growth Spurt"
-	test_item.effect_name = "active_orb_grow"
+	test_item.effect_name = "temp_ball_grow"
 	test_item.icon = preload("res://Sprites/Items/Active&Passive/CustomItemSprite09.png")
 	test_item.max_charges = 3
 	assign_active_item(test_item)
@@ -224,8 +224,10 @@ func apply_temporary_effect(
 		var data = Game.active_temp_effects[effect_name]
 		if data.has("timer") and is_instance_valid(data["timer"]):
 			var timer: Timer = data["timer"]
-			timer.start(duration)
+			var remaining = timer.time_left
+			timer.start(remaining + duration)
 			return
+
 
 	# Not active: apply effect
 	start_func.call()
