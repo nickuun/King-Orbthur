@@ -1,36 +1,36 @@
-[gd_scene load_steps=58 format=3 uid="uid://c62fikdpk3nl6"]
+[gd_scene load_steps=59 format=3 uid="uid://c62fikdpk3nl6"]
 
 [ext_resource type="Script" uid="uid://b3axbr44eor2c" path="res://Scenes&Scripts/Ball/ball.gd" id="1_jgbud"]
-[ext_resource type="Texture2D" uid="uid://boytmahcol3vu" path="res://Sprites/tiny_realm_asset_pack_free/farm/props/objects.png" id="2_gspqd"]
-[ext_resource type="Texture2D" uid="uid://c7gfyasba4gwf" path="res://Sprites/Orb/GlowingBall Blue 22frames RPG.png" id="3_gspqd"]
-[ext_resource type="Texture2D" uid="uid://d2ujxbpm7aahn" path="res://Sprites/Orb/BlueOrb/BlueOrb1.png" id="4_8ptee"]
-[ext_resource type="Texture2D" uid="uid://d1n7ggyd5wibs" path="res://Sprites/Orb/BlueOrb/BlueOrb2.png" id="5_48kb2"]
-[ext_resource type="Texture2D" uid="uid://5387fsjs8bxg" path="res://Sprites/Orb/BlueOrb/BlueOrb3.png" id="6_0k50b"]
-[ext_resource type="Texture2D" uid="uid://8trh4k67pob8" path="res://Sprites/Orb/BlueOrb/BlueOrb4.png" id="7_0knkq"]
-[ext_resource type="Texture2D" uid="uid://cobxao7hn8xk3" path="res://Sprites/Orb/BlueOrb/BlueOrb5.png" id="8_sspny"]
-[ext_resource type="Texture2D" uid="uid://du5jk2j0rrmql" path="res://Sprites/Orb/BlueOrb/BlueOrb6.png" id="9_wjbpu"]
-[ext_resource type="Texture2D" uid="uid://b2l2hyefrp2us" path="res://Sprites/Orb/BlueOrb/BlueOrb7.png" id="10_6hk6l"]
-[ext_resource type="Texture2D" uid="uid://hcoxpf8vert8" path="res://Sprites/Orb/BlueOrb/BlueOrb8.png" id="11_vtc4y"]
-[ext_resource type="Texture2D" uid="uid://cixn3nm730u5s" path="res://Sprites/Orb/BlueOrb/BlueOrb9.png" id="12_mbdhf"]
-[ext_resource type="Texture2D" uid="uid://cqm78aba7bthx" path="res://Sprites/Orb/BlueOrb/BlueOrb10.png" id="13_ugfif"]
-[ext_resource type="Texture2D" uid="uid://8sa2u1nhjfbm" path="res://Sprites/Orb/BlueOrb/BlueOrb11.png" id="14_gm87g"]
-[ext_resource type="Texture2D" uid="uid://bli8fq7oubips" path="res://Sprites/Orb/BlueOrb/BlueOrb12.png" id="15_av7t7"]
-[ext_resource type="Texture2D" uid="uid://dg3as083rn1lg" path="res://Sprites/Orb/BlueOrb/BlueOrb13.png" id="16_02soy"]
-[ext_resource type="Texture2D" uid="uid://bbp7o6xudicwt" path="res://Sprites/Orb/BlueOrb/BlueOrb14.png" id="17_x2pte"]
-[ext_resource type="Texture2D" uid="uid://hv2i0msyyu3d" path="res://Sprites/Orb/BlueOrb/BlueOrb15.png" id="18_me6bt"]
-[ext_resource type="Texture2D" uid="uid://cllfahsusb41w" path="res://Sprites/Orb/BlueOrb/BlueOrb16.png" id="19_sbuov"]
-[ext_resource type="Texture2D" uid="uid://c1r6omxhdcy40" path="res://Sprites/Orb/BlueOrb/BlueOrb17.png" id="20_ymwru"]
-[ext_resource type="Texture2D" uid="uid://bnul7jrgtcms3" path="res://Sprites/Orb/BlueOrb/BlueOrb18.png" id="21_txg37"]
-[ext_resource type="Texture2D" uid="uid://csj8y4wh6wg0j" path="res://Sprites/Orb/BlueOrb/BlueOrb19.png" id="22_w48dl"]
-[ext_resource type="Texture2D" uid="uid://wk6bx0xj4nui" path="res://Sprites/Orb/BlueOrb/BlueOrb20.png" id="23_lg2px"]
-[ext_resource type="Texture2D" uid="uid://ky45nph6j0qb" path="res://Sprites/Orb/BlueOrb/BlueOrb21.png" id="24_21ct2"]
-[ext_resource type="Texture2D" uid="uid://d1mr0wi2okaj3" path="res://Sprites/Orb/BlueOrb/BlueOrb22.png" id="25_kv4vh"]
-[ext_resource type="Texture2D" uid="uid://12f4vf8qsqxp" path="res://Sprites/Orb/BlueOrb/BlueOrb23.png" id="26_8pnna"]
-[ext_resource type="Texture2D" uid="uid://bwgveq4mwaf6a" path="res://Sprites/Orb/BlueOrb/BlueOrb24.png" id="27_wlvh1"]
-[ext_resource type="Texture2D" uid="uid://cog0u6bvvxta4" path="res://Sprites/Orb/BlueOrb/BlueOrb25.png" id="28_xqik3"]
-[ext_resource type="Texture2D" uid="uid://b6t53jy4etjom" path="res://Sprites/Orb/BlueOrb/BlueOrb26.png" id="29_lqo2a"]
-[ext_resource type="Texture2D" uid="uid://ogurfb0pds7p" path="res://Sprites/Orb/BlueOrb/BlueOrb27.png" id="30_mboc3"]
-[ext_resource type="Texture2D" uid="uid://qphx8enbrb10" path="res://Sprites/Orb/BlueOrb/BlueOrb28.png" id="31_e0tlq"]
+[ext_resource type="Shader" uid="uid://cjtp4ktcddpfk" path="res://Scenes&Scripts/Shaders/fire.gdshader" id="3_48kb2"]
+[ext_resource type="Texture2D" uid="uid://dmxfgivbxe3ka" path="res://Sprites/Orb/GlowingBall Blue 22frames RPG.png" id="3_gspqd"]
+[ext_resource type="Texture2D" uid="uid://h2i5tb72tipu" path="res://Sprites/Orb/BlueOrb/BlueOrb1.png" id="4_8ptee"]
+[ext_resource type="Texture2D" uid="uid://c5e8uoi8cdxac" path="res://Sprites/Orb/BlueOrb/BlueOrb2.png" id="5_48kb2"]
+[ext_resource type="Texture2D" uid="uid://ba83uy76ebbi1" path="res://Sprites/Orb/BlueOrb/BlueOrb3.png" id="6_0k50b"]
+[ext_resource type="Texture2D" uid="uid://blnx6h4d4xdxk" path="res://Sprites/Orb/BlueOrb/BlueOrb4.png" id="7_0knkq"]
+[ext_resource type="Texture2D" uid="uid://bwsyjvvliv77p" path="res://Sprites/Orb/BlueOrb/BlueOrb5.png" id="8_sspny"]
+[ext_resource type="Texture2D" uid="uid://dk4tkt1jkejfj" path="res://Sprites/Orb/BlueOrb/BlueOrb6.png" id="9_wjbpu"]
+[ext_resource type="Texture2D" uid="uid://d1hioxltpuv1i" path="res://Sprites/Orb/BlueOrb/BlueOrb7.png" id="10_6hk6l"]
+[ext_resource type="Texture2D" uid="uid://cwsht2esi4en" path="res://Sprites/Orb/BlueOrb/BlueOrb8.png" id="11_vtc4y"]
+[ext_resource type="Texture2D" uid="uid://bw7ru7bwidhiw" path="res://Sprites/Orb/BlueOrb/BlueOrb9.png" id="12_mbdhf"]
+[ext_resource type="Texture2D" uid="uid://cmltvlcxxjc25" path="res://Sprites/Orb/BlueOrb/BlueOrb10.png" id="13_ugfif"]
+[ext_resource type="Texture2D" uid="uid://bvvxpllsvu3m0" path="res://Sprites/Orb/BlueOrb/BlueOrb11.png" id="14_gm87g"]
+[ext_resource type="Texture2D" uid="uid://btvcuq1da8lo" path="res://Sprites/Orb/BlueOrb/BlueOrb12.png" id="15_av7t7"]
+[ext_resource type="Texture2D" uid="uid://cwdcnu10cnuof" path="res://Sprites/Orb/BlueOrb/BlueOrb13.png" id="16_02soy"]
+[ext_resource type="Texture2D" uid="uid://b4t5i8y24ntha" path="res://Sprites/Orb/BlueOrb/BlueOrb14.png" id="17_x2pte"]
+[ext_resource type="Texture2D" uid="uid://ch0uksup5widj" path="res://Sprites/Orb/BlueOrb/BlueOrb15.png" id="18_me6bt"]
+[ext_resource type="Texture2D" uid="uid://dye8iqocq28u6" path="res://Sprites/Orb/BlueOrb/BlueOrb16.png" id="19_sbuov"]
+[ext_resource type="Texture2D" uid="uid://c0u18ir2u3eyx" path="res://Sprites/Orb/BlueOrb/BlueOrb17.png" id="20_ymwru"]
+[ext_resource type="Texture2D" uid="uid://cib8as15kvax2" path="res://Sprites/Orb/BlueOrb/BlueOrb18.png" id="21_txg37"]
+[ext_resource type="Texture2D" uid="uid://ej2o6lvu8l58" path="res://Sprites/Orb/BlueOrb/BlueOrb19.png" id="22_w48dl"]
+[ext_resource type="Texture2D" uid="uid://hso8s4j11yxs" path="res://Sprites/Orb/BlueOrb/BlueOrb20.png" id="23_lg2px"]
+[ext_resource type="Texture2D" uid="uid://bpw8gw31p80t1" path="res://Sprites/Orb/BlueOrb/BlueOrb21.png" id="24_21ct2"]
+[ext_resource type="Texture2D" uid="uid://c40d76mn1e1t7" path="res://Sprites/Orb/BlueOrb/BlueOrb22.png" id="25_kv4vh"]
+[ext_resource type="Texture2D" uid="uid://ddnfkuwolugo0" path="res://Sprites/Orb/BlueOrb/BlueOrb23.png" id="26_8pnna"]
+[ext_resource type="Texture2D" uid="uid://dgedbe3qvtkoq" path="res://Sprites/Orb/BlueOrb/BlueOrb24.png" id="27_wlvh1"]
+[ext_resource type="Texture2D" uid="uid://s1ls0o8s0b50" path="res://Sprites/Orb/BlueOrb/BlueOrb25.png" id="28_xqik3"]
+[ext_resource type="Texture2D" uid="uid://bput37j0boww8" path="res://Sprites/Orb/BlueOrb/BlueOrb26.png" id="29_lqo2a"]
+[ext_resource type="Texture2D" uid="uid://dpfe1dysou776" path="res://Sprites/Orb/BlueOrb/BlueOrb27.png" id="30_mboc3"]
+[ext_resource type="Texture2D" uid="uid://be562h3tngpcu" path="res://Sprites/Orb/BlueOrb/BlueOrb28.png" id="31_e0tlq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gspqd"]
 
@@ -299,6 +299,14 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8ptee"]
+shader = ExtResource("3_48kb2")
+shader_parameter/flame_height = 1.5
+shader_parameter/flicker_speed = 1.0
+shader_parameter/intensity = 1.0
+shader_parameter/fire_color_low = Color(0.8, 0.2, 0, 1)
+shader_parameter/fire_color_high = Color(1, 0.9, 0.2, 1)
+
 [node name="Ball" type="CharacterBody2D" groups=["Ball", "Damage"]]
 texture_filter = 1
 collision_layer = 3
@@ -320,13 +328,6 @@ collision_mask = 3
 shape = SubResource("CircleShape2D_yeoai")
 debug_color = Color(0.845326, 0.336928, 0.455054, 0.42)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
-texture_filter = 1
-texture = ExtResource("2_gspqd")
-region_enabled = true
-region_rect = Rect2(17, 33, 14.3132, 14.107)
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_2q42d")
 
@@ -334,3 +335,9 @@ shape = SubResource("CircleShape2D_2q42d")
 sprite_frames = SubResource("SpriteFrames_v0gkh")
 animation = &"Yellow_Orb"
 autoplay = "Yellow_Orb"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_8ptee")
+position = Vector2(0, 1)
+rotation = 3.14159
+texture = ExtResource("5_48kb2")

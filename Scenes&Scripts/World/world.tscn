@@ -1,23 +1,24 @@
-[gd_scene load_steps=39 format=3 uid="uid://dpqkxlaa6c4o3"]
+[gd_scene load_steps=43 format=3 uid="uid://dpqkxlaa6c4o3"]
 
 [ext_resource type="Script" uid="uid://b054o1j18drrq" path="res://Scenes&Scripts/World/world.gd" id="1_1eef5"]
 [ext_resource type="PackedScene" uid="uid://ni1fdvifit6o" path="res://Scenes&Scripts/Player/player.tscn" id="1_3mgr3"]
 [ext_resource type="PackedScene" uid="uid://c62fikdpk3nl6" path="res://Scenes&Scripts/Ball/ball.tscn" id="2_lo3b5"]
 [ext_resource type="Shader" uid="uid://b2rn3ywxht7te" path="res://Scenes&Scripts/Shaders/Lightning.gdshader" id="3_175jr"]
 [ext_resource type="Script" uid="uid://p04n620wdjmb" path="res://Scenes&Scripts/Ball/BallStartPos/ball_start_pos.gd" id="3_cehqr"]
+[ext_resource type="Texture2D" uid="uid://bput37j0boww8" path="res://Sprites/Orb/BlueOrb/BlueOrb26.png" id="3_egh5v"]
 [ext_resource type="PackedScene" uid="uid://b3e0j2mnr5tpy" path="res://Scenes&Scripts/Wall/wall.tscn" id="3_senvn"]
-[ext_resource type="AudioStream" uid="uid://8pu1nl2hxmr3" path="res://Assets/Music/Castle Quest/Castle Quest.mp3" id="3_xdxaw"]
+[ext_resource type="AudioStream" uid="uid://07qbpp7o0h4s" path="res://Assets/Music/Castle Quest/Castle Quest.mp3" id="3_xdxaw"]
 [ext_resource type="PackedScene" uid="uid://bpm76d0d2pyqt" path="res://Scenes&Scripts/Wall/playerboundry.tscn" id="5_qhwu4"]
 [ext_resource type="PackedScene" uid="uid://dikdtfgtdq853" path="res://Managers/brick_grid_manager.tscn" id="5_r6fjf"]
-[ext_resource type="Texture2D" uid="uid://c83wg2su386px" path="res://Sprites/Walls/EdgeContainers/DottedLine.png" id="6_dfhr7"]
+[ext_resource type="Texture2D" uid="uid://3ct3mp5duq0d" path="res://Sprites/Walls/EdgeContainers/DottedLine.png" id="6_dfhr7"]
 [ext_resource type="Script" uid="uid://b014s4dhbqfjp" path="res://UI/score_label.gd" id="7_4r4ay"]
 [ext_resource type="PackedScene" uid="uid://dfsa2vp4gs2ev" path="res://Scenes&Scripts/Wall/shop_entry_trigger.tscn" id="7_ehnaw"]
-[ext_resource type="FontFile" uid="uid://c8x1ul0g5boh8" path="res://Assets/Fonts/Kenney Mini.ttf" id="7_q0lgp"]
+[ext_resource type="FontFile" uid="uid://bknm7a27q0gcm" path="res://Assets/Fonts/Kenney Mini.ttf" id="7_q0lgp"]
 [ext_resource type="PackedScene" uid="uid://by4di14icoly0" path="res://UI/lifebar.tscn" id="7_qhwu4"]
 [ext_resource type="PackedScene" uid="uid://gl0bfm437qih" path="res://Scenes&Scripts/Wall/freeze_area.tscn" id="7_u0km0"]
 [ext_resource type="PackedScene" uid="uid://df1s48lmtbsn1" path="res://Scenes&Scripts/Tilemaps/BaseTerrainTilemap.tscn" id="10_h8k3j"]
-[ext_resource type="Texture2D" uid="uid://bhse1kp22lqby" path="res://Sprites/Pixel_Icons/Alchemy_Alembic_Crafting_Brewing_Station_Full.png" id="12_a2x15"]
-[ext_resource type="Texture2D" uid="uid://swg7857q0bhs" path="res://Sprites/Coins/Coin Sheet.png" id="12_poia6"]
+[ext_resource type="Texture2D" uid="uid://dl554x05ut85g" path="res://Sprites/Pixel_Icons/Alchemy_Alembic_Crafting_Brewing_Station_Full.png" id="12_a2x15"]
+[ext_resource type="Texture2D" uid="uid://x6jgaekig2rr" path="res://Sprites/Coins/Coin Sheet.png" id="12_poia6"]
 [ext_resource type="PackedScene" uid="uid://btpwt2gtkjdwk" path="res://Scenes&Scripts/Inspector/info_inspect.tscn" id="12_rtdyl"]
 [ext_resource type="PackedScene" uid="uid://cyg4ueel6i320" path="res://UI/ItemPopup/item_popup.tscn" id="16_a2x15"]
 [ext_resource type="PackedScene" uid="uid://d0b56ttynlexk" path="res://Scenes&Scripts/Wall/pickup_rescue_zone.tscn" id="18_rqldd"]
@@ -26,10 +27,19 @@
 [ext_resource type="PackedScene" uid="uid://vfe8l7oos0kv" path="res://UI/PauseMenu/pause_menu.tscn" id="21_lo6en"]
 [ext_resource type="PackedScene" uid="uid://cik0nai0mwfa8" path="res://UI/EffectUI/effect_manager.tscn" id="23_1jj4f"]
 [ext_resource type="PackedScene" uid="uid://bsknlsxfgt1b4" path="res://UI/Inspector/info_overlay.tscn" id="24_rsyaa"]
-[ext_resource type="Texture2D" uid="uid://cvpoycb5wti7o" path="res://icon.svg" id="27_175jr"]
+[ext_resource type="Texture2D" uid="uid://cr6j5vdpnbvnf" path="res://icon.svg" id="27_175jr"]
 [ext_resource type="PackedScene" uid="uid://csra3lfqieqnb" path="res://Scenes&Scripts/Pickups/battle_pickup.tscn" id="28_175jr"]
 [ext_resource type="PackedScene" uid="uid://bm7ch5n4dhkt4" path="res://UI/ActiveItemUI/active_item_ui.tscn" id="28_jiiag"]
-[ext_resource type="Texture2D" uid="uid://bs4aw651gs2qd" path="res://Sprites/PlayerOverlay/PlayerOverlay.png" id="29_hknge"]
+[ext_resource type="Texture2D" uid="uid://dg52x4n8n023q" path="res://Sprites/PlayerOverlay/PlayerOverlay.png" id="29_hknge"]
+[ext_resource type="Shader" uid="uid://e8kyxghiw2tm" path="res://Scenes&Scripts/Shaders/Zap.gdshader" id="31_cy038"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_egh5v"]
+shader = ExtResource("31_cy038")
+shader_parameter/flicker_speed = 3.5
+shader_parameter/glow_strength = 1.2
+shader_parameter/arc_thickness = 0.4
+shader_parameter/lightning_core = Color(0.9, 0.95, 1, 1)
+shader_parameter/lightning_glow = Color(0.2, 0.7, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hknge"]
 shader = ExtResource("3_175jr")
@@ -62,10 +72,18 @@ gradient = SubResource("Gradient_ht257")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xbyuq"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c2feq"]
+
 [node name="World" type="Node2D" groups=["World"]]
 texture_filter = 1
 script = ExtResource("1_1eef5")
 ball_scene = ExtResource("2_lo3b5")
+
+[node name="BlueOrb26" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_egh5v")
+position = Vector2(46, 126)
+texture = ExtResource("3_egh5v")
 
 [node name="Icon" type="Sprite2D" parent="."]
 texture_repeat = 2
@@ -237,6 +255,7 @@ texture = ExtResource("12_a2x15")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="PlayerOverlay" type="Sprite2D" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0.466667)
 texture_filter = 1
 position = Vector2(32, -75)
 texture = ExtResource("29_hknge")
@@ -325,6 +344,7 @@ visible = false
 visible = false
 
 [node name="ActiveItemUI" parent="CanvasLayer" instance=ExtResource("28_jiiag")]
+material = SubResource("ShaderMaterial_c2feq")
 
 [node name="BattlePickup" parent="." instance=ExtResource("28_175jr")]
 position = Vector2(104, 44)
