@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://bm7ch5n4dhkt4"]
+[gd_scene load_steps=8 format=3 uid="uid://bm7ch5n4dhkt4"]
 
 [ext_resource type="Script" uid="uid://xkrbpvbwhyxr" path="res://UI/ActiveItemUI/active_item_ui.gd" id="1_jpfpp"]
 [ext_resource type="Texture2D" uid="uid://osg83qjmlir7" path="res://Sprites/Healthbar/Over-Knotches.png" id="2_bbxjc"]
 [ext_resource type="Texture2D" uid="uid://cjanenumhu4tj" path="res://Sprites/Pixel_Icons/Tools_Crafting_Graphic_Design_Shapes_Square_Outlined.png" id="2_y8wdj"]
 [ext_resource type="Texture2D" uid="uid://dakssfdoe71nx" path="res://Sprites/Items/Active&Passive/CustomItemSprite01.png" id="3_bbxjc"]
-[ext_resource type="Texture2D" uid="uid://drplp4oui8lq1" path="res://Sprites/Healthbar/Under.png" id="4_gd8ds"]
+[ext_resource type="Texture2D" uid="uid://1sjc41rtbing" path="res://Sprites/Healthbar/RedUnder.png" id="5_y8wdj"]
 [ext_resource type="Texture2D" uid="uid://cmp7up2rbtoti" path="res://Sprites/Healthbar/GreenUnder.png" id="6_5fwb3"]
+[ext_resource type="Texture2D" uid="uid://dfuudpu6h3a7r" path="res://Sprites/Healthbar/Over - Larger.png" id="6_y8wdj"]
 
 [node name="ActiveItemUI" type="Control" groups=["ActiveItemUI"]]
 texture_filter = 1
@@ -20,24 +21,26 @@ script = ExtResource("1_jpfpp")
 notch_texture = ExtResource("2_bbxjc")
 
 [node name="Boarder" type="Sprite2D" parent="."]
-position = Vector2(18, 18)
-scale = Vector2(2, 2)
+position = Vector2(8, 172)
 texture = ExtResource("2_y8wdj")
 
 [node name="ItemIcon" type="Sprite2D" parent="."]
-position = Vector2(18, 18)
-scale = Vector2(2, 2)
+position = Vector2(8, 172)
 texture = ExtResource("3_bbxjc")
 
 [node name="ChargeBar" type="TextureProgressBar" parent="."]
 layout_mode = 0
-offset_left = 3.0
-offset_top = 33.0
-offset_right = 33.0
-offset_bottom = 41.0
+offset_left = 16.0
+offset_top = 168.0
+offset_right = 46.0
+offset_bottom = 176.0
 value = 75.0
-texture_under = ExtResource("4_gd8ds")
+texture_under = ExtResource("5_y8wdj")
 texture_progress = ExtResource("6_5fwb3")
 
 [node name="NotchHolder" type="Node2D" parent="."]
-position = Vector2(3, 37)
+position = Vector2(16, 172)
+
+[node name="Over-Larger" type="Sprite2D" parent="."]
+position = Vector2(31, 172)
+texture = ExtResource("6_y8wdj")

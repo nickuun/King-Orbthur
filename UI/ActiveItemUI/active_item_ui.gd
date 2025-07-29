@@ -40,18 +40,23 @@ func update_charge_display():
 		charge_bar.value = held_item.current_charges
 
 func create_notches(count: int):
-	# ⚠️ Skip if only 1 charge — no need for notches
 	if count <= 1:
 		return
 
-	var bar_width = $ChargeBar.size.x
+	await get_tree().process_frame  # Wait for bar sizing to settle if freshly assigned
+
+	var bar_width = charge_bar.get_size().x
+	var fill_start = charge_bar.get_global_position().x
+	var fill_end = fill_start + bar_width
+	var fill_range = fill_end - fill_start
+
 	var notch_width = notch_texture.get_width()
 
-	for i in range(1, count):  # We want NOTCHES BETWEEN values
-		var progress_fraction = float(i) / float(count)  # e.g. 1/3, 2/3 for 3 charges
-		var x_position = progress_fraction * bar_width - (notch_width / 2)
+	for i in range(1, count):  # Create n-1 notches
+		var progress_fraction = float(i) / float(count)
+		var x_position = progress_fraction * fill_range - (notch_width / 2)
 
 		var notch = Sprite2D.new()
 		notch.texture = notch_texture
 		notch.position = Vector2(x_position, 0)
-		$NotchHolder.add_child(notch)
+		notch_holder.add_child(notch)

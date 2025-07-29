@@ -8,6 +8,9 @@ func update_health_bar(current: int, max: int):
 	var percent := float(current) / max * 100.0
 	value = percent
 
+	# Update label text
+	$HealthLabel.text = "%d/%d" % [current, max]
+
 	# Change bar color
 	if percent <= 33:
 		texture_progress = red_texture

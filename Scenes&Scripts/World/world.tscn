@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://dpqkxlaa6c4o3"]
+[gd_scene load_steps=39 format=3 uid="uid://dpqkxlaa6c4o3"]
 
 [ext_resource type="Script" uid="uid://b054o1j18drrq" path="res://Scenes&Scripts/World/world.gd" id="1_1eef5"]
 [ext_resource type="PackedScene" uid="uid://ni1fdvifit6o" path="res://Scenes&Scripts/Player/player.tscn" id="1_3mgr3"]
@@ -29,6 +29,7 @@
 [ext_resource type="Texture2D" uid="uid://cvpoycb5wti7o" path="res://icon.svg" id="27_175jr"]
 [ext_resource type="PackedScene" uid="uid://csra3lfqieqnb" path="res://Scenes&Scripts/Pickups/battle_pickup.tscn" id="28_175jr"]
 [ext_resource type="PackedScene" uid="uid://bm7ch5n4dhkt4" path="res://UI/ActiveItemUI/active_item_ui.tscn" id="28_jiiag"]
+[ext_resource type="Texture2D" uid="uid://bs4aw651gs2qd" path="res://Sprites/PlayerOverlay/PlayerOverlay.png" id="29_hknge"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hknge"]
 shader = ExtResource("3_175jr")
@@ -235,11 +236,16 @@ texture = ExtResource("12_a2x15")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="PlayerOverlay" type="Sprite2D" parent="CanvasLayer"]
+texture_filter = 1
+position = Vector2(32, -75)
+texture = ExtResource("29_hknge")
+
 [node name="Lifebar" parent="CanvasLayer" instance=ExtResource("7_qhwu4")]
-offset_left = 3.0
-offset_top = 5.0
-offset_right = 33.0
-offset_bottom = 13.0
+offset_left = 19.0
+offset_top = 2.0
+offset_right = 49.0
+offset_bottom = 10.0
 
 [node name="ScoreUI" type="Node" parent="CanvasLayer"]
 
@@ -247,9 +253,9 @@ offset_bottom = 13.0
 modulate = Color(1, 1, 1, 0.517647)
 texture_filter = 1
 offset_left = 155.0
-offset_top = 4.0
+offset_top = 165.0
 offset_right = 191.0
-offset_bottom = 17.0
+offset_bottom = 178.0
 pivot_offset = Vector2(18, 8)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("7_q0lgp")
@@ -264,9 +270,9 @@ metadata/_edit_use_anchors_ = true
 modulate = Color(1, 1, 1, 0.517647)
 texture_filter = 1
 offset_left = 131.0
-offset_top = 4.0
+offset_top = 165.0
 offset_right = 167.0
-offset_bottom = 17.0
+offset_bottom = 178.0
 pivot_offset = Vector2(18, 8)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("7_q0lgp")
@@ -279,22 +285,24 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Coin" type="Sprite2D" parent="CanvasLayer/CoinUI"]
 texture_filter = 1
-position = Vector2(12, 174)
+position = Vector2(6, 21)
 texture = ExtResource("12_poia6")
 region_enabled = true
 region_rect = Rect2(3, 1, 10, 10)
 
 [node name="CoinLabel" type="Label" parent="CanvasLayer/CoinUI" groups=["CoinLabel"]]
-modulate = Color(0.968627, 0.462745, 0.133333, 1)
 texture_filter = 1
-offset_left = 18.0
-offset_top = 169.0
-offset_right = 37.0
-offset_bottom = 182.0
+anchors_preset = -1
+anchor_left = -0.00625
+anchor_right = -0.00625
+offset_left = 13.0
+offset_top = 12.0
+offset_right = 32.0
+offset_bottom = 30.0
 pivot_offset = Vector2(18, 8)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0.0941176, 0.0784314, 0.145098, 1)
 theme_override_fonts/font = ExtResource("7_q0lgp")
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 14
 text = "0"
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
@@ -314,6 +322,7 @@ process_mode = 3
 visible = false
 
 [node name="InfoOverlay" parent="CanvasLayer" instance=ExtResource("24_rsyaa")]
+visible = false
 
 [node name="ActiveItemUI" parent="CanvasLayer" instance=ExtResource("28_jiiag")]
 
