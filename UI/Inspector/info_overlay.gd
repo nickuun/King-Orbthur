@@ -75,14 +75,33 @@ func _process(_delta: float) -> void:
 		show_tooltip(hovered_inspectors[0].description, hovered_inspectors[0])
 
 	# Tooltip follow mouse
-	var offset: Vector2 = Vector2(16, 16)
+	var offset: Vector2 = Vector2(8, 8)
 	var tooltip_size: Vector2 = tooltip.size
 	if tooltip_size == Vector2.ZERO:
 		tooltip_size = tooltip.get_combined_minimum_size()
 
 		# UI tooltip at screen_mouse_pos
 	var new_pos: Vector2 = screen_mouse_pos + offset
+
+	# Get the screen size
+	var screen_size: Vector2 = get_viewport().get_visible_rect().size
+
+	# Calculate final tooltip size (accounting for it not being updated yet)
+	if tooltip_size == Vector2.ZERO:
+		tooltip_size = tooltip.get_combined_minimum_size()
+
+	# Clamp the position so the tooltip stays on-screen
+	if new_pos.x + tooltip_size.x > screen_size.x:
+		new_pos.x = screen_size.x - tooltip_size.x
+	if new_pos.y + tooltip_size.y > screen_size.y:
+		new_pos.y = screen_size.y - tooltip_size.y
+
+	# Make sure it doesn't go off the top/left either
+	new_pos.x = max(0, new_pos.x)
+	new_pos.y = max(0, new_pos.y)
+
 	tooltip.global_position = new_pos
+
 
 func show_tooltip(text: String, source_node: Node) -> void:
 	tooltip_label.text = text
