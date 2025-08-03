@@ -54,6 +54,8 @@ func return_to_player():
 
 func _on_coin_area_entered(area: Area2D):
 	if area.is_in_group("pickup") and not area.held_by_ball and state == BallState.NORMAL:
+		if "skip_launch" in area:
+			area.skip_launch = false
 		area.held_by_ball = true
 		area.has_been_held = true
 		held_coins.append(area)

@@ -329,3 +329,4 @@ animation = &"Yellow_Orb"
 autoplay = "Yellow_Orb"
 
 [node name="BallFire" parent="." instance=ExtResource("31_8ptee")]
+visible = false

@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://xegjltac8qmm"]
 
 [ext_resource type="Script" uid="uid://csikbw4edtgb2" path="res://Scenes&Scripts/Player/Dust/dust_trail.gd" id="1_ectlk"]
-[ext_resource type="Texture2D" uid="uid://bea5rcjbukmfl" path="res://Sprites/camelot_ [version 1.0]/camelot_ [version 1.0]/dust_.png" id="1_eo188"]
+[ext_resource type="Texture2D" uid="uid://beklmqhwk3n1n" path="res://Sprites/camelot_ [version 1.0]/camelot_ [version 1.0]/dust_.png" id="1_eo188"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ectlk"]
 atlas = ExtResource("1_eo188")

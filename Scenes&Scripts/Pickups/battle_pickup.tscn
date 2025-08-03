@@ -1,13 +1,13 @@
 [gd_scene load_steps=20 format=3 uid="uid://csra3lfqieqnb"]
 
 [ext_resource type="Script" uid="uid://bhr37xyvlk4hu" path="res://Scenes&Scripts/Pickups/battle_pickup.gd" id="1_h0cc5"]
-[ext_resource type="Texture2D" uid="uid://c6aeo2eki3t2s" path="res://Sprites/Pixel_Icons/RPG_Skill_Strike_Attack_Sword_Slash_Cleave.png" id="2_m0mje"]
-[ext_resource type="Texture2D" uid="uid://bde4dj0ch312x" path="res://Sprites/Items/IconSpritesheet.png" id="3_d38nb"]
-[ext_resource type="Texture2D" uid="uid://w3xauwda2lm3" path="res://Sprites/Items/Active&Passive/CustomItemSprite03.png" id="4_xn20l"]
+[ext_resource type="Texture2D" uid="uid://dcheotk15a1ue" path="res://Sprites/Pixel_Icons/RPG_Skill_Strike_Attack_Sword_Slash_Cleave.png" id="2_m0mje"]
+[ext_resource type="Texture2D" uid="uid://dkt4ttqhq1oco" path="res://Sprites/Items/IconSpritesheet.png" id="3_d38nb"]
+[ext_resource type="Texture2D" uid="uid://qtx5gaahfscs" path="res://Sprites/Items/Active&Passive/CustomItemSprite03.png" id="4_xn20l"]
 [ext_resource type="PackedScene" uid="uid://btpwt2gtkjdwk" path="res://Scenes&Scripts/Inspector/info_inspect.tscn" id="6_d38nb"]
-[ext_resource type="Texture2D" uid="uid://cion5ceumjitw" path="res://Sprites/Items/Active&Passive/CustomItemSprite02.png" id="6_m0mje"]
-[ext_resource type="Texture2D" uid="uid://eeht3na6bv7h" path="res://Sprites/Pixel_Icons/Food_Fruit_Apple.png" id="7_f13at"]
-[ext_resource type="Texture2D" uid="uid://c063guf437mrs" path="res://Sprites/Pixel_Icons/Hats_Astronaut_Helm_Space_Suit.png" id="8_yk4yx"]
+[ext_resource type="Texture2D" uid="uid://c86rpo248a7or" path="res://Sprites/Items/Active&Passive/CustomItemSprite02.png" id="6_m0mje"]
+[ext_resource type="Texture2D" uid="uid://b1l7ktf6kwb7w" path="res://Sprites/Pixel_Icons/Food_Fruit_Apple.png" id="7_f13at"]
+[ext_resource type="Texture2D" uid="uid://baemshsq88853" path="res://Sprites/Pixel_Icons/Hats_Astronaut_Helm_Space_Suit.png" id="8_yk4yx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7gh4m"]
 atlas = ExtResource("3_d38nb")
