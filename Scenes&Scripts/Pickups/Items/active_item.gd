@@ -36,6 +36,7 @@ func try_activate():
 		return
 
 	current_charges = 0
+	Game.active_item_ui.update_charge_display()
 	print("✅ Activated:", item_name)
 
 	# UI effect manager call
@@ -44,6 +45,7 @@ func try_activate():
 
 	# Run effect logic
 	_on_activate()
+	
 
 	if cooldown > 0:
 		is_on_cooldown = true

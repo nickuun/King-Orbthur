@@ -73,6 +73,7 @@ func _on_hit():
 		Game.show_floating_text("+5", global_position, Color.GOLD, 16, 1.4)
 		if Game.player.active_item:
 			Game.player.active_item.add_charge()
+			Game.active_item_ui.update_charge_display()
 
 		await get_tree().create_timer(0.05).timeout  # ⏳ Tiny delay before cleanup
 		queue_free()

@@ -1,6 +1,16 @@
 extends Node
 
 var shop_items := [
+		{
+		"name": "Super Mushroom",
+		"price": 8,
+		"type": "battle",
+		"texture": preload("res://Sprites/Items/CustomIcons6.png"),
+		"effect": "temp_player_grow",
+		"available_for_sale": false,
+		"scene": preload("res://Scenes&Scripts/Pickups/battle_pickup.tscn"),
+		"flavour": "Temporarily increases player size."
+	},
 	{
 		"name": "Speed Boots",
 		"price": 8,

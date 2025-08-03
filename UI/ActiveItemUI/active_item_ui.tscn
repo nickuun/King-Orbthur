@@ -1,12 +1,12 @@
 [gd_scene load_steps=8 format=3 uid="uid://bm7ch5n4dhkt4"]
 
 [ext_resource type="Script" uid="uid://xkrbpvbwhyxr" path="res://UI/ActiveItemUI/active_item_ui.gd" id="1_jpfpp"]
-[ext_resource type="Texture2D" uid="uid://osg83qjmlir7" path="res://Sprites/Healthbar/Over-Knotches.png" id="2_bbxjc"]
-[ext_resource type="Texture2D" uid="uid://cjanenumhu4tj" path="res://Sprites/Pixel_Icons/Tools_Crafting_Graphic_Design_Shapes_Square_Outlined.png" id="2_y8wdj"]
-[ext_resource type="Texture2D" uid="uid://dakssfdoe71nx" path="res://Sprites/Items/Active&Passive/CustomItemSprite01.png" id="3_bbxjc"]
-[ext_resource type="Texture2D" uid="uid://1sjc41rtbing" path="res://Sprites/Healthbar/RedUnder.png" id="5_y8wdj"]
-[ext_resource type="Texture2D" uid="uid://cmp7up2rbtoti" path="res://Sprites/Healthbar/GreenUnder.png" id="6_5fwb3"]
-[ext_resource type="Texture2D" uid="uid://dfuudpu6h3a7r" path="res://Sprites/Healthbar/Over - Larger.png" id="6_y8wdj"]
+[ext_resource type="Texture2D" uid="uid://c1c2tomrw7dck" path="res://Sprites/Healthbar/Over-Knotches.png" id="2_bbxjc"]
+[ext_resource type="Texture2D" uid="uid://cnthqduy6pr75" path="res://Sprites/Pixel_Icons/Tools_Crafting_Graphic_Design_Shapes_Square_Outlined.png" id="2_y8wdj"]
+[ext_resource type="Texture2D" uid="uid://cd66qvaw6ejpx" path="res://Sprites/Items/Active&Passive/CustomItemSprite01.png" id="3_bbxjc"]
+[ext_resource type="Texture2D" uid="uid://crn5ufwhwt0oq" path="res://Sprites/Healthbar/RedUnder.png" id="5_y8wdj"]
+[ext_resource type="Texture2D" uid="uid://bh4tl8xvdm1ao" path="res://Sprites/Healthbar/GreenUnder.png" id="6_5fwb3"]
+[ext_resource type="Texture2D" uid="uid://dch2tmlkef4kp" path="res://Sprites/Healthbar/Over - Larger.png" id="6_y8wdj"]
 
 [node name="ActiveItemUI" type="Control" groups=["ActiveItemUI"]]
 texture_filter = 1
