@@ -1,7 +1,6 @@
-[gd_scene load_steps=59 format=3 uid="uid://c62fikdpk3nl6"]
+[gd_scene load_steps=57 format=3 uid="uid://c62fikdpk3nl6"]
 
 [ext_resource type="Script" uid="uid://b3axbr44eor2c" path="res://Scenes&Scripts/Ball/ball.gd" id="1_jgbud"]
-[ext_resource type="Shader" uid="uid://cjtp4ktcddpfk" path="res://Scenes&Scripts/Shaders/fire.gdshader" id="3_48kb2"]
 [ext_resource type="Texture2D" uid="uid://dmxfgivbxe3ka" path="res://Sprites/Orb/GlowingBall Blue 22frames RPG.png" id="3_gspqd"]
 [ext_resource type="Texture2D" uid="uid://h2i5tb72tipu" path="res://Sprites/Orb/BlueOrb/BlueOrb1.png" id="4_8ptee"]
 [ext_resource type="Texture2D" uid="uid://c5e8uoi8cdxac" path="res://Sprites/Orb/BlueOrb/BlueOrb2.png" id="5_48kb2"]
@@ -299,14 +298,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8ptee"]
-shader = ExtResource("3_48kb2")
-shader_parameter/flame_height = 1.5
-shader_parameter/flicker_speed = 1.0
-shader_parameter/intensity = 1.0
-shader_parameter/fire_color_low = Color(0.8, 0.2, 0, 1)
-shader_parameter/fire_color_high = Color(1, 0.9, 0.2, 1)
-
 [node name="Ball" type="CharacterBody2D" groups=["Ball", "Damage"]]
 texture_filter = 1
 collision_layer = 3
@@ -335,9 +326,3 @@ shape = SubResource("CircleShape2D_2q42d")
 sprite_frames = SubResource("SpriteFrames_v0gkh")
 animation = &"Yellow_Orb"
 autoplay = "Yellow_Orb"
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_8ptee")
-position = Vector2(0, 1)
-rotation = 3.14159
-texture = ExtResource("5_48kb2")

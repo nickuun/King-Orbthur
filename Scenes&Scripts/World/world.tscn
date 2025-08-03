@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://dpqkxlaa6c4o3"]
+[gd_scene load_steps=48 format=3 uid="uid://dpqkxlaa6c4o3"]
 
 [ext_resource type="Script" uid="uid://b054o1j18drrq" path="res://Scenes&Scripts/World/world.gd" id="1_1eef5"]
 [ext_resource type="PackedScene" uid="uid://ni1fdvifit6o" path="res://Scenes&Scripts/Player/player.tscn" id="1_3mgr3"]
@@ -21,7 +21,9 @@
 [ext_resource type="Texture2D" uid="uid://x6jgaekig2rr" path="res://Sprites/Coins/Coin Sheet.png" id="12_poia6"]
 [ext_resource type="PackedScene" uid="uid://btpwt2gtkjdwk" path="res://Scenes&Scripts/Inspector/info_inspect.tscn" id="12_rtdyl"]
 [ext_resource type="PackedScene" uid="uid://cyg4ueel6i320" path="res://UI/ItemPopup/item_popup.tscn" id="16_a2x15"]
+[ext_resource type="Shader" uid="uid://cjtp4ktcddpfk" path="res://Scenes&Scripts/Shaders/fire.gdshader" id="18_c2feq"]
 [ext_resource type="PackedScene" uid="uid://d0b56ttynlexk" path="res://Scenes&Scripts/Wall/pickup_rescue_zone.tscn" id="18_rqldd"]
+[ext_resource type="Texture2D" uid="uid://c5e8uoi8cdxac" path="res://Sprites/Orb/BlueOrb/BlueOrb2.png" id="19_1b204"]
 [ext_resource type="PackedScene" uid="uid://bsatq3tfmwtcv" path="res://UI/cheat_window.tscn" id="19_iads3"]
 [ext_resource type="PackedScene" uid="uid://bbggl2ochu7ya" path="res://UI/GameOver/game_over_screen.tscn" id="20_rp57k"]
 [ext_resource type="PackedScene" uid="uid://vfe8l7oos0kv" path="res://UI/PauseMenu/pause_menu.tscn" id="21_lo6en"]
@@ -32,6 +34,7 @@
 [ext_resource type="PackedScene" uid="uid://bm7ch5n4dhkt4" path="res://UI/ActiveItemUI/active_item_ui.tscn" id="28_jiiag"]
 [ext_resource type="Texture2D" uid="uid://dg52x4n8n023q" path="res://Sprites/PlayerOverlay/PlayerOverlay.png" id="29_hknge"]
 [ext_resource type="Shader" uid="uid://e8kyxghiw2tm" path="res://Scenes&Scripts/Shaders/Zap.gdshader" id="31_cy038"]
+[ext_resource type="Shader" uid="uid://dmyddvvrkxxch" path="res://Scenes&Scripts/Shaders/Trail.gdshader" id="35_1b204"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_egh5v"]
 shader = ExtResource("31_cy038")
@@ -72,6 +75,30 @@ gradient = SubResource("Gradient_ht257")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xbyuq"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ljjgx"]
+shader = ExtResource("18_c2feq")
+shader_parameter/fire_color = Color(1, 0.33, 0.068, 1)
+shader_parameter/fire_power_factor = 4.125
+shader_parameter/fire_intensity = 3.49
+shader_parameter/fire_start = 0.825
+shader_parameter/ball_size = 0.97
+shader_parameter/smoke_length = 1.025
+shader_parameter/roughness = 0.71
+shader_parameter/detail = 6
+shader_parameter/scale = 4.0
+shader_parameter/lacunarity = 2.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vuj58"]
+render_priority = 0
+shader = ExtResource("35_1b204")
+shader_parameter/gradientRemap = Vector4(0.708, -2.683, 0, 0.264)
+shader_parameter/beamRemap = Vector4(0.404, 1.12, 1, 200)
+shader_parameter/color1 = Color(0, 0, 0, 1)
+shader_parameter/color2 = Color(0, 0, 0, 1)
+shader_parameter/scale = Vector3(1, 50, 0)
+shader_parameter/threshold = 0.993
+shader_parameter/offset = 1.5
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c2feq"]
 
 [node name="World" type="Node2D" groups=["World"]]
@@ -82,7 +109,7 @@ ball_scene = ExtResource("2_lo3b5")
 [node name="BlueOrb26" type="Sprite2D" parent="."]
 texture_filter = 1
 material = SubResource("ShaderMaterial_egh5v")
-position = Vector2(46, 126)
+position = Vector2(298, 66)
 texture = ExtResource("3_egh5v")
 
 [node name="Icon" type="Sprite2D" parent="."]
@@ -241,8 +268,22 @@ description = "This is an orb."
 shape = SubResource("CircleShape2D_xbyuq")
 debug_color = Color(0.931656, 2.63757e-05, 0.651898, 0.42)
 
+[node name="Sprite2D" type="Sprite2D" parent="Ball"]
+material = SubResource("ShaderMaterial_ljjgx")
+position = Vector2(46.43, 0.9)
+rotation = 3.14159
+scale = Vector2(6.98253, 5)
+texture = ExtResource("19_1b204")
+
 [node name="Player" parent="." instance=ExtResource("1_3mgr3")]
 position = Vector2(42, 88)
+
+[node name="Icon2" type="Sprite2D" parent="Player"]
+visible = false
+material = SubResource("ShaderMaterial_vuj58")
+position = Vector2(126, 54)
+scale = Vector2(0.375, 0.359375)
+texture = ExtResource("27_175jr")
 
 [node name="BrickGridManager" parent="." instance=ExtResource("5_r6fjf")]
 position = Vector2(301, 28)
@@ -341,7 +382,6 @@ process_mode = 3
 visible = false
 
 [node name="InfoOverlay" parent="CanvasLayer" instance=ExtResource("24_rsyaa")]
-visible = false
 
 [node name="ActiveItemUI" parent="CanvasLayer" instance=ExtResource("28_jiiag")]
 material = SubResource("ShaderMaterial_c2feq")

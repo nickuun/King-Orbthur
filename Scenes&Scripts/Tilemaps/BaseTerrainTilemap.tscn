@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://df1s48lmtbsn1"]
+[gd_scene load_steps=6 format=3 uid="uid://df1s48lmtbsn1"]
 
-[ext_resource type="Texture2D" uid="uid://bghcct4f435gg" path="res://Sprites/Tilesets/spr_tileset_sunnysideworld_16px.png" id="1_1p53h"]
+[ext_resource type="Texture2D" uid="uid://bwv6ctljkeomv" path="res://Sprites/Tilesets/spr_tileset_sunnysideworld_16px.png" id="1_1p53h"]
 [ext_resource type="Script" uid="uid://cjy5jwryjeadk" path="res://Scenes&Scripts/Tilemaps/base_terrain_tilemap.gd" id="2_swwwh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ol2y4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_swwwh"]
 texture = ExtResource("1_1p53h")
@@ -1754,6 +1756,7 @@ script = ExtResource("2_swwwh")
 
 [node name="GrassLayer" type="TileMapLayer" parent="."]
 z_index = -1
+material = SubResource("ShaderMaterial_ol2y4")
 tile_set = SubResource("TileSet_7cl4k")
 
 [node name="FlowerLayer" type="TileMapLayer" parent="."]

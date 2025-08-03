@@ -1,54 +1,105 @@
 shader_type canvas_item;
 
-#define iResolution 1.0 / SCREEN_PIXEL_SIZE
-#define iTime TIME
+// FIREBALL SHADER – PIXEL-PERFECT, WITH SMOKE LENGTH CONTROL
 
-uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_nearest;
+uniform vec3 fire_color: source_color = vec3(1.0, 0.33, 0.068);
+uniform float fire_power_factor = 2.0;
+uniform float fire_intensity = 3.0;
+uniform float fire_start = 1.0;
+uniform float ball_size = 1.0;
+uniform float smoke_length : hint_range(0.0, 2.0) = 1.0; // NEW
 
-uniform float flame_height : hint_range(0.5, 3.0) = 1.5;
-uniform float flicker_speed : hint_range(0.1, 5.0) = 1.0;
-uniform float intensity : hint_range(0.0, 1.0) = 1.0;
-uniform vec3 fire_color_low : source_color = vec3(0.8, 0.2, 0.0);
-uniform vec3 fire_color_high : source_color = vec3(1.0, 0.9, 0.2);
+uniform float roughness = 0.675;
+uniform int detail = 6;
+uniform float scale = 4.0;
+uniform float lacunarity = 2.0;
 
-// Hash-based noise
-float hash(vec2 p) {
-    return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+vec2 random2(vec2 st, float seed) {
+    st = vec2(dot(st, vec2(127.1, 311.7)),
+              dot(st, vec2(269.5, 183.3)));
+    return -1.0 + 2.0 * fract(sin(st) * 43758.5453123 * seed * 0.753421);
 }
 
-float noise(vec2 p) {
-    vec2 i = floor(p);
-    vec2 f = fract(p);
-    f = f * f * (3.0 - 2.0 * f);
-    float a = hash(i);
-    float b = hash(i + vec2(1.0, 0.0));
-    float c = hash(i + vec2(0.0, 1.0));
-    float d = hash(i + vec2(1.0, 1.0));
-    return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
+float map(float value, float from_min, float from_max, float to_min, float to_max) {
+    value = (value - from_min) / (from_max - from_min);
+    return to_min + value * (to_max - to_min);
+}
+
+vec3 linear_light(in vec3 a, in vec3 b, in float factor) {
+    return a + factor * (2.0 * b - 1.0);
+}
+
+float noise(vec2 st, float seed) {
+    vec2 i = floor(st);
+    vec2 f = fract(st);
+
+    vec2 u = f * f * (3.0 - 2.0 * f);
+
+    return mix(mix(dot(random2(i + vec2(0.0, 0.0), seed), f - vec2(0.0, 0.0)),
+                   dot(random2(i + vec2(1.0, 0.0), seed), f - vec2(1.0, 0.0)), u.x),
+               mix(dot(random2(i + vec2(0.0, 1.0), seed), f - vec2(0.0, 1.0)),
+                   dot(random2(i + vec2(1.0, 1.0), seed), f - vec2(1.0, 1.0)), u.x), u.y);
+}
+
+float fbm(in float seed, in vec2 st, in float _scale, in int octaves, in float _roughness, in float _lacunarity) {
+    float amplitude = 0.5;
+    float value = 0.0;
+    st *= _scale;
+    for (int i = 1; i < octaves; i++) {
+        value += amplitude * noise(st, seed);
+        st *= _lacunarity;
+        amplitude *= _roughness;
+    }
+    return value * 0.5 + 0.5;
+}
+
+vec3 neon(float val, vec3 color) {
+    float ramp = clamp(val, 0.0, 1.0);
+    vec3 outp = vec3(0.0);
+    ramp = ramp * ramp;
+    outp += pow(color, vec3(4.0)) * ramp;
+    ramp = ramp * ramp;
+    outp += color * ramp;
+    ramp = ramp * ramp;
+    outp += vec3(1.0) * ramp;
+    return outp;
 }
 
 void fragment() {
-    vec2 uv = UV;
+    // Pixel-perfect UV snapping
+    vec2 resolution = vec2(320.0, 180.0);
+    vec2 uv = floor(UV * (resolution / 4.0)) / (resolution / 4.0);
 
-    // Pixelated look
-    vec2 pixel_uv = floor(uv * iResolution / 4.0) / (iResolution / 4.0);
+    float uv_x = uv.x;
+    vec2 uv_centered = (uv * 2.0 - 1.0);
+    vec2 uv_flame = uv_centered + vec2(TIME * 2.0, 0.0);
 
-    // Vertical flame flickering
-    float t = iTime * flicker_speed;
-    vec2 flame_uv = vec2(pixel_uv.x, pixel_uv.y * flame_height - t);
+    float noise_1d = fbm(24.0, uv_flame, scale, detail, roughness, lacunarity);
+    vec3 noise_3d = vec3(
+        fbm(24.0, uv_flame, scale, detail, roughness, lacunarity),
+        fbm(12.0, uv_flame, scale, detail, roughness, lacunarity),
+        fbm(33.0, uv_flame, scale, detail, roughness, lacunarity)
+    );
 
-    float n = noise(flame_uv * 6.0);
-    float flicker = smoothstep(0.2, 1.0, 1.0 - pixel_uv.y + n * 0.5);
+    float light_factor = clamp(map(uv_x, 0.13, 0.87, 1.0, 0.06), 0.06, 1.0);
+    vec3 light = linear_light(vec3(uv_centered, 0.0), noise_3d, light_factor);
+    light = max(abs(light) - vec3(0.75, 0.0, 0.0), vec3(0.0));
 
-    // Color blend based on intensity
-    vec3 flame_color = mix(fire_color_low, fire_color_high, pow(flicker, 1.5)) * intensity;
+    float light_length = length(light) / ball_size;
+    float fireball_grad = clamp(map(uv_x, -0.24, 0.82, 0.0, 0.27), 0.0, 0.27);
+    light_length -= fireball_grad;
+    light_length = smoothstep(0.0, -0.09, light_length);
 
-    // Optional flame shimmer
-    float shimmer = sin(uv.y * 30.0 + t * 5.0) * 0.05;
-    flame_color += shimmer;
+    // Apply smoke length cutoff (fade or hard cutoff)
+    float smoke_fade = smoothstep(0.0, smoke_length, uv_x);
+    light_length *= smoke_fade;
+    noise_1d *= smoke_fade;
 
-    // Apply texture alpha as mask
-    float alpha = texture(TEXTURE, UV).a;
+    noise_1d *= uv_x * fire_start;
+    noise_1d *= pow(uv_x, fire_power_factor);
 
-    COLOR = vec4(flame_color, alpha * flicker);
+    vec3 color = mix(vec3(0.0), fire_color * noise_1d * 4.0, light_length);
+    float alpha = mix(0.0, noise_1d * fire_intensity, light_length);
+
+    COLOR = vec4(neon(alpha * uv_x + 0.2, color), alpha);
 }

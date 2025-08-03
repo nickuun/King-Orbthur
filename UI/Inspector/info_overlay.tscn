@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bsknlsxfgt1b4"]
 
 [ext_resource type="Script" uid="uid://c2ab4mrjpuioi" path="res://UI/Inspector/info_overlay.gd" id="1_vmwxc"]
-[ext_resource type="FontFile" uid="uid://c8x1ul0g5boh8" path="res://Assets/Fonts/Kenney Mini.ttf" id="2_vmwxc"]
+[ext_resource type="FontFile" uid="uid://bknm7a27q0gcm" path="res://Assets/Fonts/Kenney Mini.ttf" id="2_vmwxc"]
 
 [node name="InfoOverlay" type="CanvasLayer" groups=["InfoOverlay"]]
 process_mode = 3

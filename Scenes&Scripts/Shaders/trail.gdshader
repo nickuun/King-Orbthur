@@ -1,34 +1,37 @@
-shader_type canvas_item;
-render_mode unshaded, blend_mix;
+shader_type spatial;
 
-// — your uniforms —    
-uniform vec2   velocity;      // in pixels per second: your script fills this each frame
-uniform vec2   screen_size;   // your script fills this once (viewport size)
-uniform int    segments    : hint_range(1, 32)   = 8;    // how many ghost‐copies
-uniform float  length      : hint_range(0.0, 1.0) = 0.3;  // how far back in UV‐space they go
-uniform float  falloff     : hint_range(0.1, 5.0) = 1.5;  // power curve for fading
-uniform bool   pixel_snap  = true;                       // keep it crisp / nearest‐filtered
+uniform sampler2D noise:source_color,repeat_enable;
+uniform vec4 gradientRemap = vec4(0.708, -2.683, 0, 0.264);
+uniform vec4 beamRemap = vec4(0.404, 1.12, 1, 200.0);
+uniform vec4 color1:source_color;
+uniform vec4 color2:source_color;
+uniform vec3 scale = vec3(1.0, 50.0, 0);
+uniform float threshold = 0.993;
+uniform float offset = 1.5;
+
+
+vec3 blend_linear_light(vec3 base, vec3 blend, float opacity) {
+	blend.r = base.r > 0.5 ? blend.r + opacity * ((2.0 * base.r) - 0.5) : blend.r + opacity * ((2.0 * base.r) - 1.0);
+	blend.g = base.g > 0.5 ? blend.g + opacity * ((2.0 * base.g) - 0.5) : blend.g + opacity * ((2.0 * base.g) - 1.0);
+	blend.b = base.b > 0.5 ? blend.b + opacity * ((2.0 * base.b) - 0.5) : blend.b + opacity * ((2.0 * base.b) - 1.0);
+	return blend;
+}
+float map(float value, float from_min, float from_max, float to_min, float to_max) {
+	return abs(from_max - from_min) > 0.0001 ? 
+		to_min + (from_min > from_max ? 1.0 - smoothstep(from_max, from_min, value) : smoothstep(from_min, from_max, value)) * (to_max - to_min) : 
+		0.0;
+}
 
 void fragment() {
-    vec2 base_uv = UV;
-    vec2 uv_off  = velocity / screen_size;  // convert px→UV units    
-
-    vec4 accum   = vec4(0.0);
-    float totalW = 0.0;
-
-    // sample current + trailing ghosts
-    for (int i = 0; i <= segments; i++) {
-        float t = float(i) / float(segments);
-        vec2 u = base_uv - uv_off * length * t;
-        if (pixel_snap) {
-            u = floor(u * screen_size) / screen_size;
-        }
-        float w = pow(1.0 - t, falloff);
-        accum   += texture(TEXTURE, u) * w;
-        totalW  += w;
-    }
-
-    // normalize, output
-    vec4 col = accum / totalW;
-    COLOR = col;
+	vec2 uv = vec2((UV.x*2.0)-1.0, (UV.y*2.0)-1.0);
+	vec3 n = texture(noise, uv+vec2(TIME*offset, 0)).rgb;
+	float remap = map(uv.x, gradientRemap.x, gradientRemap.y, gradientRemap.z, gradientRemap.w);
+	vec3 col = (blend_linear_light(n, vec3(uv.xy, 1), remap));
+	vec3 scaled_col = col * scale;
+	float len = length(scaled_col);
+	float clamped = len < threshold ? 1.0 : 0.0;
+	vec3 color = mix(color1, color2, clamped).rgb;
+	float scale_factor = map(uv.x, beamRemap.x, beamRemap.y, beamRemap.z, beamRemap.w);
+	EMISSION = color * scale_factor;
+	ALBEDO = color;
 }
