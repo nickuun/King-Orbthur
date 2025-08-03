@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://c62fikdpk3nl6"]
+[gd_scene load_steps=58 format=3 uid="uid://c62fikdpk3nl6"]
 
 [ext_resource type="Script" uid="uid://b3axbr44eor2c" path="res://Scenes&Scripts/Ball/ball.gd" id="1_jgbud"]
 [ext_resource type="Texture2D" uid="uid://dmxfgivbxe3ka" path="res://Sprites/Orb/GlowingBall Blue 22frames RPG.png" id="3_gspqd"]
@@ -29,6 +29,7 @@
 [ext_resource type="Texture2D" uid="uid://s1ls0o8s0b50" path="res://Sprites/Orb/BlueOrb/BlueOrb25.png" id="28_xqik3"]
 [ext_resource type="Texture2D" uid="uid://bput37j0boww8" path="res://Sprites/Orb/BlueOrb/BlueOrb26.png" id="29_lqo2a"]
 [ext_resource type="Texture2D" uid="uid://dpfe1dysou776" path="res://Sprites/Orb/BlueOrb/BlueOrb27.png" id="30_mboc3"]
+[ext_resource type="PackedScene" uid="uid://c4o8i7s58arbf" path="res://Scenes&Scripts/Ball/BallFire/ball_fire.tscn" id="31_8ptee"]
 [ext_resource type="Texture2D" uid="uid://be562h3tngpcu" path="res://Sprites/Orb/BlueOrb/BlueOrb28.png" id="31_e0tlq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gspqd"]
@@ -326,3 +327,5 @@ shape = SubResource("CircleShape2D_2q42d")
 sprite_frames = SubResource("SpriteFrames_v0gkh")
 animation = &"Yellow_Orb"
 autoplay = "Yellow_Orb"
+
+[node name="BallFire" parent="." instance=ExtResource("31_8ptee")]

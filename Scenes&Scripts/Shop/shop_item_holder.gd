@@ -18,6 +18,7 @@ func setup(item: Dictionary):
 		sprite_node.texture = item.texture
 	if label_node:
 		label_node.text = str(item.price)
+	$InfoInspect.description = item.flavour
 
 func _process(_delta):
 	if ready_for_purchase and Input.is_action_just_pressed("interact"):

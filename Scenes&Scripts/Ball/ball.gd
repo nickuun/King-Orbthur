@@ -108,6 +108,12 @@ func play_squash(direction: Vector2) -> void:
 	VisualEffectManager.play_squash(self, direction)
 
 func _physics_process(delta: float) -> void:
+	# Always point BallFire opposite to the ball’s travel direction
+	if velocity.length() > 0.1:
+		var fire_direction = global_position - (velocity.normalized() * 20)
+		$BallFire.look_at(fire_direction)
+
+	
 	if state == BallState.NORMAL:
 		if velocity.length() == 0:
 			return

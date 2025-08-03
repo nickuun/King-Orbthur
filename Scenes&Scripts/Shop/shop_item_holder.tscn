@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bdv1m7s8thb4a"]
+[gd_scene load_steps=8 format=3 uid="uid://bdv1m7s8thb4a"]
 
 [ext_resource type="Script" uid="uid://dn738fgtkuxw5" path="res://Scenes&Scripts/Shop/shop_item_holder.gd" id="1_atrpp"]
-[ext_resource type="Texture2D" uid="uid://dyx4xm57mhhfd" path="res://Sprites/Pixel_Icons/Tools_Crafting_Graphic_Design_Shapes_Square.png" id="1_cvenq"]
-[ext_resource type="FontFile" uid="uid://co5rjng52g146" path="res://Assets/Fonts/Kenney Rocket Square.ttf" id="2_atrpp"]
+[ext_resource type="Texture2D" uid="uid://w8jc0bhfboh6" path="res://Sprites/Pixel_Icons/Tools_Crafting_Graphic_Design_Shapes_Square.png" id="1_cvenq"]
+[ext_resource type="FontFile" uid="uid://bb2ra01nfpylg" path="res://Assets/Fonts/Kenney Rocket Square.ttf" id="2_atrpp"]
+[ext_resource type="Script" uid="uid://dq67n4tginogn" path="res://Scenes&Scripts/Inspector/info_inspect.gd" id="4_a6wmw"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_a6wmw"]
 animations = [{
@@ -22,6 +23,9 @@ animations = [{
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ok6oc"]
 radius = 20.025
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_spoye"]
+radius = 17.0294
 
 [node name="ShopItemHolder" type="Area2D" groups=["ShopItemHolder"]]
 texture_filter = 1
@@ -60,6 +64,14 @@ theme_override_font_sizes/font_size = 8
 text = "99"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="InfoInspect" type="Area2D" parent="."]
+script = ExtResource("4_a6wmw")
+metadata/_custom_type_script = "uid://dq67n4tginogn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InfoInspect"]
+shape = SubResource("CircleShape2D_spoye")
+debug_color = Color(0.676985, 0.505484, 0, 0.42)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

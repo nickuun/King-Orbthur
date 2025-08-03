@@ -104,16 +104,28 @@ func _on_body_entered(body):
 func _on_activate():
 	match effect_name:
 		"temp_ball_grow":
-			var tween = Game.orb.create_tween()
-			tween.tween_property(Game.orb, "scale", Vector2(2, 2), 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-			await get_tree().create_timer(effect_duration).timeout
-			var tween_out = Game.orb.create_tween()
-			tween_out.tween_property(Game.orb, "scale", Vector2(1, 1), 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+			Game.player.apply_temporary_effect(
+				"temp_ball_grow",
+				effect_duration,
+				func():
+					var tween = Game.orb.create_tween()
+					tween.tween_property(Game.orb, "scale", Vector2(2, 2), 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT),
+				func():
+					var tween = Game.orb.create_tween()
+					tween.tween_property(Game.orb, "scale", Vector2(1, 1), 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN))
 
 		"temp_speed_boost":
-			StatsManager.player_speed_multiplier *= 2.0
-			await get_tree().create_timer(effect_duration).timeout
-			StatsManager.player_speed_multiplier /= 2.0
+			#StatsManager.player_speed_multiplier *= 2.0
+			#await get_tree().create_timer(effect_duration).timeout
+			#StatsManager.player_speed_multiplier /= 2.0
+			#
+			Game.player.apply_temporary_effect(
+				"temp_speed_up",
+				effect_duration,
+				func(): StatsManager.player_speed_multiplier *= 2.0,
+				func(): StatsManager.player_speed_multiplier /= 2.0
+			)
+
 
 		_:
 			print("⚠️ No effect logic defined for:", effect_name)
