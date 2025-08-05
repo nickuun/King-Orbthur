@@ -91,7 +91,15 @@ func _on_proximity_body_entered(body):
 		velocity = knock_dir * actual_speed
 		if !state == BallState.FOLLOWING:
 			play_squash(knock_dir)
-			Game.player.apply_knockback(-knock_dir, 100)
+			# Calculate knockback multiplier based on ball size vs player size
+			var ball_size = max(scale.x, scale.y)
+			var player_size = max(Game.player.scale.x, Game.player.scale.y)
+
+			# Clamp size ratio so giant balls don't send the player flying too far
+			var size_ratio = clamp(ball_size / player_size, 0.5, 1.5)
+
+			# Increase base knockback force and apply size scaling
+			Game.player.apply_knockback(-knock_dir, 180 * size_ratio)
 
 		# Drop off coins...
 		for coin in held_coins:

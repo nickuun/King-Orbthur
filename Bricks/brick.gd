@@ -67,7 +67,6 @@ func _on_hit():
 			var offse = Vector2(randf_range(-16, 16), randf_range(-24, -32))
 			battle_pickup.launch_to(global_position + offse)
 
-
 		emit_signal("brick_destroyed", self)
 		get_tree().get_first_node_in_group("ScoreLabel").add_points(5)
 		Game.show_floating_text("+5", global_position, Color.GOLD, 16, 1.4)
@@ -86,6 +85,6 @@ func _on_hit():
 		$AnimatedSprite2D.play("box%d" % variant)
 
 func pick_random_type() -> String:
-	#var options = ["heal", "temp_speed_up", "temp_ball_slow", "temp_coin_hit", "temp_player_grow", "temp_coin_hit", "temp_ball_grow"]
-	var options = ["temp_player_grow"]
+	var options = ["heal", "temp_speed_up", "temp_ball_slow", "temp_coin_hit", "temp_player_grow", "temp_coin_hit", "temp_ball_grow"]
+	#var options = ["temp_player_grow"]
 	return options[randi() % options.size()]
