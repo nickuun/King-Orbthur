@@ -5,12 +5,17 @@ extends CharacterBody2D
 var should_respawn := false
 var held_coins: Array = []
 enum BallState { NORMAL, FROZEN, RETURNING, RETURNED, FOLLOWING }
+@export var JointB :  Node2D
+
 
 var state: BallState = BallState.NORMAL
 @export var shrink_speed := 2.0
 var previous_velocity = Vector2.ZERO
 
 func _ready():
+	$KeychainPinjoint.node_b = JointB.get_path()
+
+	#$PinJoint2D.node_b = get_tree().get_first_node_in_group("Keychain")
 		# Detect coin contact
 	respawn()
 	var spawn_node = get_tree().get_first_node_in_group("BallStartPos")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://c62fikdpk3nl6"]
+[gd_scene load_steps=59 format=3 uid="uid://c62fikdpk3nl6"]
 
 [ext_resource type="Script" uid="uid://b3axbr44eor2c" path="res://Scenes&Scripts/Ball/ball.gd" id="1_jgbud"]
 [ext_resource type="Texture2D" uid="uid://dmxfgivbxe3ka" path="res://Sprites/Orb/GlowingBall Blue 22frames RPG.png" id="3_gspqd"]
@@ -31,6 +31,7 @@
 [ext_resource type="Texture2D" uid="uid://dpfe1dysou776" path="res://Sprites/Orb/BlueOrb/BlueOrb27.png" id="30_mboc3"]
 [ext_resource type="PackedScene" uid="uid://c4o8i7s58arbf" path="res://Scenes&Scripts/Ball/BallFire/ball_fire.tscn" id="31_8ptee"]
 [ext_resource type="Texture2D" uid="uid://be562h3tngpcu" path="res://Sprites/Orb/BlueOrb/BlueOrb28.png" id="31_e0tlq"]
+[ext_resource type="PackedScene" uid="uid://dos5e68fvscm2" path="res://Scenes&Scripts/Keychain/keychain_pinjoint.tscn" id="32_48kb2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gspqd"]
 
@@ -330,3 +331,5 @@ autoplay = "Yellow_Orb"
 
 [node name="BallFire" parent="." instance=ExtResource("31_8ptee")]
 visible = false
+
+[node name="KeychainPinjoint" parent="." instance=ExtResource("32_48kb2")]

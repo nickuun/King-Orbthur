@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://dos5e68fvscm2"]
+
+[node name="KeychainPinjoint" type="PinJoint2D"]
+node_a = NodePath("..")
